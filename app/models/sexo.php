@@ -1,14 +1,14 @@
 <?php
-class Edital extends AppModel {
-	var $name = 'Edital';
-	var $useTable = 'edital';
+class Sexo extends AppModel {
+	var $name = 'Sexo';
+	var $useTable = 'sexo';
 	var $displayField = 'descricao';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasMany = array(
-		'ProcessoSeletivo' => array(
-			'className' => 'ProcessoSeletivo',
-			'foreignKey' => 'edital_id',
+		'Candidato' => array(
+			'className' => 'Candidato',
+			'foreignKey' => 'sexo_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

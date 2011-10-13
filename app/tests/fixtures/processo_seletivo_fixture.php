@@ -1,5 +1,5 @@
 <?php
-/* ProcessoSeletivo Fixture generated on: 2011-09-27 14:24:05 : 1317144245 */
+/* ProcessoSeletivo Fixture generated on: 2011-10-13 00:17:46 : 1318475866 */
 class ProcessoSeletivoFixture extends CakeTestFixture {
 	var $name = 'ProcessoSeletivo';
 	var $table = 'processo_seletivo';
@@ -20,10 +20,10 @@ class ProcessoSeletivoFixture extends CakeTestFixture {
 		array(
 			'id' => 1,
 			'edital_id' => 1,
-			'data_inicio_inscricoes' => '2011-09-27',
-			'data_fim_inscricoes' => '2011-09-27',
-			'hora_inicio_inscricoes' => '14:24:05',
-			'hora_fim_inscricoes' => '14:24:05',
+			'data_inicio_inscricoes' => '2011-10-13',
+			'data_fim_inscricoes' => '2011-10-13',
+			'hora_inicio_inscricoes' => '00:17:46',
+			'hora_fim_inscricoes' => '00:17:46',
 			'ativo_web' => 1
 		),
 	);

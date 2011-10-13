@@ -1,14 +1,14 @@
 <?php
-class ProcessoSeletivo extends AppModel {
-	var $name = 'ProcessoSeletivo';
-	var $useTable = 'processo_seletivo';
-	var $displayField = 'id';
+class Municipio extends AppModel {
+	var $name = 'Municipio';
+	var $useTable = 'municipio';
+	var $displayField = 'nome';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'Edital' => array(
-			'className' => 'Edital',
-			'foreignKey' => 'edital_id',
+		'UnidadeFederativa' => array(
+			'className' => 'UnidadeFederativa',
+			'foreignKey' => 'unidade_federativa_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -16,9 +16,9 @@ class ProcessoSeletivo extends AppModel {
 	);
 
 	var $hasMany = array(
-		'Selecao' => array(
-			'className' => 'Selecao',
-			'foreignKey' => 'processo_seletivo_id',
+		'Candidato' => array(
+			'className' => 'Candidato',
+			'foreignKey' => 'municipio_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
