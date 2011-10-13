@@ -1,11 +1,11 @@
 <?php
 class Inscricao extends AppModel {
-	var $name = 'Inscricao';
-	var $useTable = 'inscricao';
-	var $displayField = 'id';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
+	public $name = 'Inscricao';
+	public $useTable = 'inscricao';
+	public $displayField = 'id';
+
+	public $belongsTo = array(
 		'Candidato' => array(
 			'className' => 'Candidato',
 			'foreignKey' => 'candidato_id',
@@ -22,7 +22,7 @@ class Inscricao extends AppModel {
 		)
 	);
 
-	var $hasMany = array(
+	public $hasMany = array(
 		'Nota' => array(
 			'className' => 'Nota',
 			'foreignKey' => 'inscricao_id',

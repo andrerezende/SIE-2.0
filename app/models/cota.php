@@ -1,11 +1,11 @@
 <?php
 class Cota extends AppModel {
-	var $name = 'Cota';
-	var $useTable = 'cota';
-	var $displayField = 'descricao';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
+	public $name = 'Cota';
+	public $useTable = 'cota';
+	public $displayField = 'descricao';
+
+	public $belongsTo = array(
 		'Selecao' => array(
 			'className' => 'Selecao',
 			'foreignKey' => 'selecao_id',
@@ -15,7 +15,7 @@ class Cota extends AppModel {
 		)
 	);
 
-	var $hasMany = array(
+	public $hasMany = array(
 		'Classificacao' => array(
 			'className' => 'Classificacao',
 			'foreignKey' => 'cota_id',

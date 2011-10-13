@@ -1,11 +1,11 @@
 <?php
 class Classificacao extends AppModel {
-	var $name = 'Classificacao';
-	var $useTable = 'classificacao';
-	var $displayField = 'id';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
+	public $name = 'Classificacao';
+	public $useTable = 'classificacao';
+	public $displayField = 'id';
+
+	public $belongsTo = array(
 		'Inscricao' => array(
 			'className' => 'Inscricao',
 			'foreignKey' => 'inscricao_id',
@@ -22,7 +22,7 @@ class Classificacao extends AppModel {
 		)
 	);
 
-	var $hasAndBelongsToMany = array(
+	public $hasAndBelongsToMany = array(
 		'Lista' => array(
 			'className' => 'Lista',
 			'joinTable' => 'lista_classificacao',

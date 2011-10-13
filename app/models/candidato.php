@@ -1,9 +1,10 @@
 <?php
 class Candidato extends AppModel {
-	var $name = 'Candidato';
-	var $useTable = 'candidato';
-	var $displayField = 'nome';
-	var $validate = array(
+
+	public $name = 'Candidato';
+	public $useTable = 'candidato';
+	public $displayField = 'nome';
+	public $validate = array(
 		'nome' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -205,9 +206,8 @@ class Candidato extends AppModel {
 			),
 		),
 	);
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
+	public $belongsTo = array(
 		'UnidadeFederativa' => array(
 			'className' => 'UnidadeFederativa',
 			'foreignKey' => 'unidade_federativa_id',
@@ -273,7 +273,7 @@ class Candidato extends AppModel {
 		)
 	);
 
-	var $hasMany = array(
+	public $hasMany = array(
 		'Inscricao' => array(
 			'className' => 'Inscricao',
 			'foreignKey' => 'candidato_id',

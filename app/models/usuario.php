@@ -1,9 +1,11 @@
 <?php
 class Usuario extends AppModel {
-	var $name = 'Usuario';
-	var $useTable = 'usuario';
-	var $displayField = 'nome';
-	var $validate = array(
+
+	public $name = 'Usuario';
+	public $useTable = 'usuario';
+	public$displayField = 'nome';
+
+	public $validate = array(
 		'login' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -15,9 +17,8 @@ class Usuario extends AppModel {
 			),
 		),
 	);
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
+	public $belongsTo = array(
 		'Grupo' => array(
 			'className' => 'Grupo',
 			'foreignKey' => 'grupo_id',

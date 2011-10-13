@@ -1,11 +1,11 @@
 <?php
 class UnidadeFederativa extends AppModel {
-	var $name = 'UnidadeFederativa';
-	var $useTable = 'unidade_federativa';
-	var $displayField = 'descricao';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
+	public $name = 'UnidadeFederativa';
+	public $useTable = 'unidade_federativa';
+	public $displayField = 'descricao';
+
+	public $belongsTo = array(
 		'Pais' => array(
 			'className' => 'Pais',
 			'foreignKey' => 'pais_id',
@@ -15,7 +15,7 @@ class UnidadeFederativa extends AppModel {
 		)
 	);
 
-	var $hasMany = array(
+	public $hasMany = array(
 		'Municipio' => array(
 			'className' => 'Municipio',
 			'foreignKey' => 'unidade_federativa_id',

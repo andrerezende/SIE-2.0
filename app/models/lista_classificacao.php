@@ -1,11 +1,11 @@
 <?php
 class ListaClassificacao extends AppModel {
-	var $name = 'ListaClassificacao';
-	var $useTable = 'lista_classificacao';
-	var $displayField = 'id';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
+	public $name = 'ListaClassificacao';
+	public $useTable = 'lista_classificacao';
+	public $displayField = 'id';
+
+	public $belongsTo = array(
 		'Classificacao' => array(
 			'className' => 'Classificacao',
 			'foreignKey' => 'classificacao_id',

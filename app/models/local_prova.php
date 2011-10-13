@@ -1,11 +1,11 @@
 <?php
 class LocalProva extends AppModel {
-	var $name = 'LocalProva';
-	var $useTable = 'local_prova';
-	var $displayField = 'descricao';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $hasAndBelongsToMany = array(
+	public $name = 'LocalProva';
+	public $useTable = 'local_prova';
+	public $displayField = 'descricao';
+
+	public $hasAndBelongsToMany = array(
 		'Selecao' => array(
 			'className' => 'Selecao',
 			'joinTable' => 'selecao_local_prova',

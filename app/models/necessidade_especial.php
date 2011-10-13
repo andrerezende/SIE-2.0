@@ -1,11 +1,11 @@
 <?php
 class NecessidadeEspecial extends AppModel {
-	var $name = 'NecessidadeEspecial';
-	var $useTable = 'necessidade_especial';
-	var $displayField = 'descricao';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $hasMany = array(
+	public $name = 'NecessidadeEspecial';
+	public $useTable = 'necessidade_especial';
+	public $displayField = 'descricao';
+
+	public $hasMany = array(
 		'Candidato' => array(
 			'className' => 'Candidato',
 			'foreignKey' => 'necessidade_especial_id',

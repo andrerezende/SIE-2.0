@@ -1,11 +1,11 @@
 <?php
 class Curso extends AppModel {
-	var $name = 'Curso';
-	var $useTable = 'curso';
-	var $displayField = 'descricao';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $hasMany = array(
+	public $name = 'Curso';
+	public $useTable = 'curso';
+	public $displayField = 'descricao';
+
+	public $hasMany = array(
 		'Selecao' => array(
 			'className' => 'Selecao',
 			'foreignKey' => 'curso_id',

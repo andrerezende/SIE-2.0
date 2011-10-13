@@ -1,11 +1,11 @@
 <?php
 class Lista extends AppModel {
-	var $name = 'Lista';
-	var $useTable = 'lista';
-	var $displayField = 'descricao';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $hasAndBelongsToMany = array(
+	public $name = 'Lista';
+	public $useTable = 'lista';
+	public $displayField = 'descricao';
+
+	public $hasAndBelongsToMany = array(
 		'Classificacao' => array(
 			'className' => 'Classificacao',
 			'joinTable' => 'lista_classificacao',

@@ -1,11 +1,11 @@
 <?php
 class Prova extends AppModel {
-	var $name = 'Prova';
-	var $useTable = 'prova';
-	var $displayField = 'descricao';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $hasMany = array(
+	public $name = 'Prova';
+	public $useTable = 'prova';
+	public $displayField = 'descricao';
+
+	public $hasMany = array(
 		'Nota' => array(
 			'className' => 'Nota',
 			'foreignKey' => 'prova_id',
@@ -22,7 +22,7 @@ class Prova extends AppModel {
 	);
 
 
-	var $hasAndBelongsToMany = array(
+	public $hasAndBelongsToMany = array(
 		'Local' => array(
 			'className' => 'Local',
 			'joinTable' => 'local_prova',
