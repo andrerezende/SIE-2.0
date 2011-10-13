@@ -1,8 +1,7 @@
 <?php
-/* Municipio Fixture generated on: 2011-10-13 00:09:42 : 1318475382 */
+/* Municipio Fixture generated on: 2011-10-13 11:19:23 : 1318515563 */
 class MunicipioFixture extends CakeTestFixture {
 	var $name = 'Municipio';
-	var $table = 'municipio';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

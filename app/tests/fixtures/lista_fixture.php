@@ -1,8 +1,7 @@
 <?php
-/* Lista Fixture generated on: 2011-10-13 00:13:35 : 1318475615 */
+/* Lista Fixture generated on: 2011-10-13 11:24:28 : 1318515868 */
 class ListaFixture extends CakeTestFixture {
 	var $name = 'Lista';
-	var $table = 'lista';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

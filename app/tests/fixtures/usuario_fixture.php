@@ -1,8 +1,7 @@
 <?php
-/* Usuario Fixture generated on: 2011-10-13 00:07:43 : 1318475263 */
+/* Usuario Fixture generated on: 2011-10-13 11:23:54 : 1318515834 */
 class UsuarioFixture extends CakeTestFixture {
 	var $name = 'Usuario';
-	var $table = 'usuario';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

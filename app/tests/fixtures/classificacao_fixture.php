@@ -1,8 +1,7 @@
 <?php
-/* Classificacao Fixture generated on: 2011-10-13 00:12:47 : 1318475567 */
+/* Classificacao Fixture generated on: 2011-10-13 11:27:24 : 1318516044 */
 class ClassificacaoFixture extends CakeTestFixture {
 	var $name = 'Classificacao';
-	var $table = 'classificacao';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

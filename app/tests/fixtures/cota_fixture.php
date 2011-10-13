@@ -1,8 +1,7 @@
 <?php
-/* Cota Fixture generated on: 2011-10-13 00:05:29 : 1318475129 */
+/* Cota Fixture generated on: 2011-10-13 11:11:52 : 1318515112 */
 class CotaFixture extends CakeTestFixture {
 	var $name = 'Cota';
-	var $table = 'cota';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

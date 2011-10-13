@@ -1,8 +1,7 @@
 <?php
-/* Selecao Fixture generated on: 2011-10-13 00:11:15 : 1318475475 */
+/* Selecao Fixture generated on: 2011-10-13 11:22:52 : 1318515772 */
 class SelecaoFixture extends CakeTestFixture {
 	var $name = 'Selecao';
-	var $table = 'selecao';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),
@@ -11,7 +10,6 @@ class SelecaoFixture extends CakeTestFixture {
 		'processo_seletivo_id' => array('type' => 'integer', 'null' => true),
 		'ativo_web' => array('type' => 'integer', 'null' => true),
 		'vagas' => array('type' => 'integer', 'null' => true),
-		'selecao_local_prova_id' => array('type' => 'integer', 'null' => true),
 		'encerrado' => array('type' => 'integer', 'null' => true),
 		'indexes' => array('PRIMARY' => array('unique' => true, 'column' => 'id')),
 		'tableParameters' => array()
@@ -25,7 +23,6 @@ class SelecaoFixture extends CakeTestFixture {
 			'processo_seletivo_id' => 1,
 			'ativo_web' => 1,
 			'vagas' => 1,
-			'selecao_local_prova_id' => 1,
 			'encerrado' => 1
 		),
 	);

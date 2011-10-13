@@ -1,8 +1,7 @@
 <?php
-/* Prova Fixture generated on: 2011-10-13 00:10:24 : 1318475424 */
+/* Prova Fixture generated on: 2011-10-13 11:18:34 : 1318515514 */
 class ProvaFixture extends CakeTestFixture {
 	var $name = 'Prova';
-	var $table = 'prova';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

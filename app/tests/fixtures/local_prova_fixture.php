@@ -1,8 +1,7 @@
 <?php
-/* LocalProva Fixture generated on: 2011-10-12 23:25:29 : 1318472729 */
+/* LocalProva Fixture generated on: 2011-10-13 11:12:13 : 1318515133 */
 class LocalProvaFixture extends CakeTestFixture {
 	var $name = 'LocalProva';
-	var $table = 'local_prova';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

@@ -1,8 +1,7 @@
 <?php
-/* Inscricao Fixture generated on: 2011-10-13 00:16:59 : 1318475819 */
+/* Inscricao Fixture generated on: 2011-10-13 11:27:45 : 1318516065 */
 class InscricaoFixture extends CakeTestFixture {
 	var $name = 'Inscricao';
-	var $table = 'inscricao';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

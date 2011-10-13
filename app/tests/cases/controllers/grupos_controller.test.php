@@ -1,5 +1,5 @@
 <?php
-/* Grupos Test cases generated on: 2011-09-27 13:53:09 : 1317142389*/
+/* Grupos Test cases generated on: 2011-10-13 11:27:55 : 1318516075*/
 App::import('Controller', 'Grupos');
 
 class TestGruposController extends GruposController {
@@ -21,6 +21,26 @@ class GruposControllerTestCase extends CakeTestCase {
 	function endTest() {
 		unset($this->Grupos);
 		ClassRegistry::flush();
+	}
+
+	function testIndex() {
+
+	}
+
+	function testView() {
+
+	}
+
+	function testAdd() {
+
+	}
+
+	function testEdit() {
+
+	}
+
+	function testDelete() {
+
 	}
 
 }

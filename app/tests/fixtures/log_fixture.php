@@ -1,8 +1,7 @@
 <?php
-/* Log Fixture generated on: 2011-10-13 00:00:56 : 1318474856 */
+/* Log Fixture generated on: 2011-10-13 11:12:16 : 1318515136 */
 class LogFixture extends CakeTestFixture {
 	var $name = 'Log';
-	var $table = 'log';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),
@@ -20,7 +19,7 @@ class LogFixture extends CakeTestFixture {
 			'id' => 1,
 			'tabela' => 'Lorem ipsum dolor sit amet',
 			'campo' => 'Lorem ipsum dolor sit amet',
-			'data' => '2011-10-13 00:00:56',
+			'data' => '2011-10-13 11:12:16',
 			'valor_anterior' => 'Lorem ipsum dolor sit amet',
 			'valor_atual' => 'Lorem ipsum dolor sit amet'
 		),

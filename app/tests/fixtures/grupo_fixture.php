@@ -1,8 +1,7 @@
 <?php
-/* Grupo Fixture generated on: 2011-10-13 00:03:48 : 1318475028 */
+/* Grupo Fixture generated on: 2011-10-13 11:12:02 : 1318515122 */
 class GrupoFixture extends CakeTestFixture {
 	var $name = 'Grupo';
-	var $table = 'grupo';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

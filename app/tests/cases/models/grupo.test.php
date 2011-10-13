@@ -1,5 +1,5 @@
 <?php
-/* Grupo Test cases generated on: 2011-10-13 00:03:48 : 1318475028*/
+/* Grupo Test cases generated on: 2011-10-13 11:12:02 : 1318515122*/
 App::import('Model', 'Grupo');
 
 class GrupoTestCase extends CakeTestCase {

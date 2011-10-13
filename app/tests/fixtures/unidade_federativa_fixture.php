@@ -1,8 +1,7 @@
 <?php
-/* UnidadeFederativa Fixture generated on: 2011-10-13 00:12:03 : 1318475523 */
+/* UnidadeFederativa Fixture generated on: 2011-10-13 11:19:04 : 1318515544 */
 class UnidadeFederativaFixture extends CakeTestFixture {
 	var $name = 'UnidadeFederativa';
-	var $table = 'unidade_federativa';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

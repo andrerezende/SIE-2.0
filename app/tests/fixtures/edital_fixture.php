@@ -1,8 +1,7 @@
 <?php
-/* Edital Fixture generated on: 2011-10-13 00:01:59 : 1318474919 */
+/* Edital Fixture generated on: 2011-10-13 11:11:55 : 1318515115 */
 class EditalFixture extends CakeTestFixture {
 	var $name = 'Edital';
-	var $table = 'edital';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

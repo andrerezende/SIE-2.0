@@ -1,8 +1,7 @@
 <?php
-/* Sexo Fixture generated on: 2011-10-13 00:08:19 : 1318475299 */
+/* Sexo Fixture generated on: 2011-10-13 11:23:33 : 1318515813 */
 class SexoFixture extends CakeTestFixture {
 	var $name = 'Sexo';
-	var $table = 'sexo';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

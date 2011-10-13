@@ -23,7 +23,7 @@
 		<td><?php echo $usuario['Usuario']['login']; ?>&nbsp;</td>
 		<td><?php echo $usuario['Usuario']['senha']; ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($usuario['Grupo']['descricao'], array('controller' => 'grupos', 'action' => 'view', $usuario['Grupo']['id'])); ?>
+			<?php echo $this->Html->link($usuario['Grupo']['id'], array('controller' => 'grupos', 'action' => 'view', $usuario['Grupo']['id'])); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $usuario['Usuario']['id'])); ?>

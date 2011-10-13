@@ -1,8 +1,7 @@
 <?php
-/* Curso Fixture generated on: 2011-10-12 23:38:06 : 1318473486 */
+/* Curso Fixture generated on: 2011-10-13 11:12:09 : 1318515129 */
 class CursoFixture extends CakeTestFixture {
 	var $name = 'Curso';
-	var $table = 'curso';
 
 	var $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),

@@ -1,8 +1,7 @@
 <?php
-/* Candidato Fixture generated on: 2011-10-13 00:19:31 : 1318475971 */
+/* Candidato Fixture generated on: 2011-10-13 11:27:04 : 1318516024 */
 class CandidatoFixture extends CakeTestFixture {
 	var $name = 'Candidato';
-	var $table = 'candidato';
 
 	var $fields = array(
 		'nome' => array('type' => 'string', 'null' => false, 'length' => 100),

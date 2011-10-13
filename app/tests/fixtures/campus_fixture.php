@@ -1,5 +1,5 @@
 <?php
-/* Campus Fixture generated on: 2011-10-12 23:33:06 : 1318473186 */
+/* Campus Fixture generated on: 2011-10-13 11:24:13 : 1318515853 */
 class CampusFixture extends CakeTestFixture {
 	var $name = 'Campus';
 

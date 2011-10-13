@@ -1,5 +1,5 @@
 <?php
-/* Pais Fixture generated on: 2011-10-13 00:16:09 : 1318475769 */
+/* Pais Fixture generated on: 2011-10-13 11:39:01 : 1318516741 */
 class PaisFixture extends CakeTestFixture {
 	var $name = 'Pais';
 

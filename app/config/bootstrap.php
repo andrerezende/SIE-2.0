@@ -49,4 +49,4 @@
  *
  */
 
-require APP . 'plugins' . DS . 'cake_ptbr' . DS . 'config' . DS . 'inflections.php';
+require APP . 'plugins' . DS . 'cake_ptbr' . DS . 'config' . DS . 'bootstrap.php';

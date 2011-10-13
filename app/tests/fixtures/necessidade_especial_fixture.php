@@ -1,8 +1,7 @@
 <?php
-/* NecessidadeEspecial Fixture generated on: 2011-10-13 00:09:03 : 1318475343 */
+/* NecessidadeEspecial Fixture generated on: 2011-10-13 11:19:45 : 1318515585 */
 class NecessidadeEspecialFixture extends CakeTestFixture {
 	var $name = 'NecessidadeEspecial';
-	var $table = 'necessidade_especial';
 
 	var $fields = array(
 		'descricao' => array('type' => 'string', 'null' => true, 'length' => 40),

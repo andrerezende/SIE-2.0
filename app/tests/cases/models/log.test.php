@@ -1,5 +1,5 @@
 <?php
-/* Log Test cases generated on: 2011-10-13 00:00:56 : 1318474856*/
+/* Log Test cases generated on: 2011-10-13 11:12:16 : 1318515136*/
 App::import('Model', 'Log');
 
 class LogTestCase extends CakeTestCase {
