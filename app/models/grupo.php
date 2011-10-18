@@ -2,6 +2,7 @@
 class Grupo extends AppModel {
 
 	public $name = 'Grupo';
+	public $useTable = 'grupo';
 
 	public $hasMany = array(
 		'Usuario' => array(

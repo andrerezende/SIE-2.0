@@ -2,6 +2,7 @@
 class Inscricao extends AppModel {
 
 	public $name = 'Inscricao';
+	public $useTable = 'inscricao';
 	public $displayField = 'id';
 
 	public $belongsTo = array(

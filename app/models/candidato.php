@@ -2,6 +2,7 @@
 class Candidato extends AppModel {
 
 	public $name = 'Candidato';
+	public $useTable = 'candidato';
 	public $displayField = 'nome';
 	public $validate = array(
 		'nome' => array(
@@ -205,7 +206,6 @@ class Candidato extends AppModel {
 			),
 		),
 	);
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	public $belongsTo = array(
 		'UnidadeFederativa' => array(

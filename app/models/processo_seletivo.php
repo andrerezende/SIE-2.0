@@ -2,6 +2,7 @@
 class ProcessoSeletivo extends AppModel {
 
 	public $name = 'ProcessoSeletivo';
+	public $useTable = 'processo_seletivo';
 	public $displayField = 'id';
 
 	public $belongsTo = array(

@@ -2,6 +2,7 @@
 class Classificacao extends AppModel {
 
 	public $name = 'Classificacao';
+	public $useTable = 'classificacao';
 	public $displayField = 'id';
 
 	public $belongsTo = array(
@@ -24,7 +25,7 @@ class Classificacao extends AppModel {
 	public $hasAndBelongsToMany = array(
 		'Lista' => array(
 			'className' => 'Lista',
-			'joinTable' => 'classificacoes_listas',
+			'joinTable' => 'classificacao_lista',
 			'foreignKey' => 'classificacao_id',
 			'associationForeignKey' => 'lista_id',
 			'unique' => true,

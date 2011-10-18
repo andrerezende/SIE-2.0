@@ -2,6 +2,7 @@
 class NecessidadeEspecial extends AppModel {
 
 	public $name = 'NecessidadeEspecial';
+	public $useTable = 'necessidade_especial';
 	public $displayField = 'descricao';
 
 	public $hasMany = array(

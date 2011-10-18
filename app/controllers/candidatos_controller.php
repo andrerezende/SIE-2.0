@@ -28,11 +28,11 @@ class CandidatosController extends AppController {
 		}
 		$unidadeFederativas = $this->Candidato->UnidadeFederativa->find('list');
 		$municipios = $this->Candidato->Municipio->find('list');
-		$paises = $this->Candidato->Pai->find('list');
+		$paises = $this->Candidato->Pais->find('list');
 		$naturalidadeMunicipios = $this->Candidato->NaturalidadeMunicipio->find('list');
 		$orgaoExpedidorUnidadeFederativas = $this->Candidato->OrgaoExpedidorUnidadeFederativa->find('list');
 		$sexos = $this->Candidato->Sexo->find('list');
-		$nacionalidadePaises = $this->Candidato->NacionalidadePal->find('list');
+		$nacionalidadePaises = $this->Candidato->NacionalidadePais->find('list');
 		$necessidadeEspeciais = $this->Candidato->NecessidadeEspecial->find('list');
 		$estadoCivis = $this->Candidato->EstadoCivil->find('list');
 		$this->set(compact('unidadeFederativas', 'municipios', 'paises', 'naturalidadeMunicipios', 'orgaoExpedidorUnidadeFederativas', 'sexos', 'nacionalidadePaises', 'necessidadeEspeciais', 'estadoCivis'));

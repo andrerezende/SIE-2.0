@@ -2,6 +2,7 @@
 class Cota extends AppModel {
 
 	public $name = 'Cota';
+	public $useTable = 'cota';
 
 	public $belongsTo = array(
 		'Selecao' => array(

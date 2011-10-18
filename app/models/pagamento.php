@@ -1,13 +1,12 @@
 <?php
-class Usuario extends AppModel {
-
-	public $name = 'Usuario';
-	public $useTable = 'usuario';
-	public $displayField = 'nome';
+class Pagamento extends AppModel {
+	public $name = 'Pagamento';
+	public $useTable = 'pagamento';
+	public $displayField = 'arqretorno';
 	public $validate = array(
-		'login' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+		'inscricao_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -18,9 +17,9 @@ class Usuario extends AppModel {
 	);
 
 	public $belongsTo = array(
-		'Grupo' => array(
-			'className' => 'Grupo',
-			'foreignKey' => 'grupo_id',
+		'Inscricao' => array(
+			'className' => 'Inscricao',
+			'foreignKey' => 'inscricao_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

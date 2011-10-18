@@ -1,7 +1,8 @@
 <?php
 class ClassificacoesListasController extends AppController {
 
-	var $name = 'ClassificacoesListas';
+	public $name = 'ClassificacoesListas';
+	public $uses = array('ClassificacaoLista');
 
 	function index() {
 		$this->ClassificacoesLista->recursive = 0;

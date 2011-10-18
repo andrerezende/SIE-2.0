@@ -2,6 +2,7 @@
 class Pais extends AppModel {
 
 	public $name = 'Pais';
+	public $useTable = 'pais';
 	public $displayField = 'nome';
 
 	public $hasMany = array(

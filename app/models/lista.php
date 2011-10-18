@@ -2,12 +2,13 @@
 class Lista extends AppModel {
 
 	public $name = 'Lista';
+	public $useTable = 'lista';
 	public $displayField = 'descricao';
 
 	public $hasAndBelongsToMany = array(
 		'Classificacao' => array(
 			'className' => 'Classificacao',
-			'joinTable' => 'classificacoes_listas',
+			'joinTable' => 'classificacao_lista',
 			'foreignKey' => 'lista_id',
 			'associationForeignKey' => 'classificacao_id',
 			'unique' => true,

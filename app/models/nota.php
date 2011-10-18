@@ -2,6 +2,7 @@
 class Nota extends AppModel {
 
 	public $name = 'Nota';
+	public $useTable = 'nota';
 	public $displayField = 'id';
 
 	public $belongsTo = array(

@@ -2,6 +2,7 @@
 class Selecao extends AppModel {
 
 	public $name = 'Selecao';
+	public $useTable = 'selecao';
 	public $displayField = 'id';
 
 	public $belongsTo = array(
@@ -61,7 +62,7 @@ class Selecao extends AppModel {
 	public $hasAndBelongsToMany = array(
 		'LocalProva' => array(
 			'className' => 'LocalProva',
-			'joinTable' => 'local_provas_selecoes',
+			'joinTable' => 'local_prova_selecao',
 			'foreignKey' => 'selecao_id',
 			'associationForeignKey' => 'local_prova_id',
 			'unique' => true,

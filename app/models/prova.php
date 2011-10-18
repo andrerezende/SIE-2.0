@@ -2,6 +2,7 @@
 class Prova extends AppModel {
 
 	public $name = 'Prova';
+	public $useTable = 'prova';
 
 	public $hasMany = array(
 		'Nota' => array(

@@ -2,6 +2,7 @@
 class Municipio extends AppModel {
 
 	public $name = 'Municipio';
+	public $useTable = 'municipio';
 	public $displayField = 'nome';
 
 	public $belongsTo = array(

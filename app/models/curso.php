@@ -2,6 +2,7 @@
 class Curso extends AppModel {
 
 	public $name = 'Curso';
+	public $useTable = 'curso';
 
 	public $hasMany = array(
 		'Selecao' => array(

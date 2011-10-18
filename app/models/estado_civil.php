@@ -2,6 +2,7 @@
 class EstadoCivil extends AppModel {
 
 	public $name = 'EstadoCivil';
+	public $useTable = 'estado_civil';
 
 	public $hasMany = array(
 		'Candidato' => array(

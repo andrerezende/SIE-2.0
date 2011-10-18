@@ -2,6 +2,7 @@
 class UnidadeFederativa extends AppModel {
 
 	public $name = 'UnidadeFederativa';
+	public $useTable = 'unidade_federativa';
 	public $displayField = 'descricao';
 
 	public $belongsTo = array(

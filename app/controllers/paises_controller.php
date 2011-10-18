@@ -2,6 +2,7 @@
 class PaisesController extends AppController {
 
 	var $name = 'Paises';
+	public $uses = array('Pais');
 
 	function index() {
 		$this->Pais->recursive = 0;
