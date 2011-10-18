@@ -23,7 +23,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Grupo'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($usuario['Grupo']['descricao'], array('controller' => 'grupos', 'action' => 'view', $usuario['Grupo']['id'])); ?>
+			<?php echo $this->Html->link($usuario['Grupo']['id'], array('controller' => 'grupos', 'action' => 'view', $usuario['Grupo']['id'])); ?>
 			&nbsp;
 		</dd>
 	</dl>

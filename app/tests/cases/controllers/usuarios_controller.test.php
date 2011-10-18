@@ -1,5 +1,5 @@
 <?php
-/* Usuarios Test cases generated on: 2011-09-27 13:52:24 : 1317142344*/
+/* Usuarios Test cases generated on: 2011-10-13 11:28:02 : 1318516082*/
 App::import('Controller', 'Usuarios');
 
 class TestUsuariosController extends UsuariosController {
@@ -21,6 +21,26 @@ class UsuariosControllerTestCase extends CakeTestCase {
 	function endTest() {
 		unset($this->Usuarios);
 		ClassRegistry::flush();
+	}
+
+	function testIndex() {
+
+	}
+
+	function testView() {
+
+	}
+
+	function testAdd() {
+
+	}
+
+	function testEdit() {
+
+	}
+
+	function testDelete() {
+
 	}
 
 }

@@ -28,7 +28,14 @@
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
+		echo $this->Html->css(array(
+			'cake.generic',
+			'grid',
+		));
+
+		echo $this->Html->script(array(
+			'jquery'
+		));
 
 		echo $scripts_for_layout;
 	?>
@@ -39,6 +46,7 @@
 			<h1><?php echo $this->Html->link(__('CakePHP: the rapid development php framework', true), 'http://cakephp.org'); ?></h1>
 		</div>
 		<div id="content">
+			<h4><?php echo $this->Html->link("Home", '/'); ?></h4>
 
 			<?php echo $this->Session->flash(); ?>
 
@@ -54,6 +62,5 @@
 			?>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

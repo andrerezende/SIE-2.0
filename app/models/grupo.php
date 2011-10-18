@@ -1,11 +1,10 @@
 <?php
 class Grupo extends AppModel {
-	var $name = 'Grupo';
-	var $useTable = 'grupo';
-	var $displayField = 'descricao';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $hasMany = array(
+	public $name = 'Grupo';
+	public $useTable = 'grupo';
+
+	public $hasMany = array(
 		'Usuario' => array(
 			'className' => 'Usuario',
 			'foreignKey' => 'grupo_id',
