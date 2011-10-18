@@ -1,10 +1,11 @@
 <div class="campus index">
+	<h4><?php echo $this->Html->link(__('Adicionar Campus', true), array('action' => 'add')); ?></h4>
 	<h2><?php __('Campus');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('nome');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+		<th><?php echo $this->Paginator->sort('id');?></th>
+		<th><?php echo $this->Paginator->sort('nome');?></th>
+		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -18,7 +19,6 @@
 		<td><?php echo $campus['Campus']['id']; ?>&nbsp;</td>
 		<td><?php echo $campus['Campus']['nome']; ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $campus['Campus']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $campus['Campus']['id'])); ?>
 			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $campus['Campus']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $campus['Campus']['id'])); ?>
 		</td>
@@ -32,18 +32,11 @@
 	));
 	?>	</p>
 
+<?php if ($this->Paginator->numbers()):?>
 	<div class="paging">
 		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
-	 | 	<?php echo $this->Paginator->numbers();?>
- |
+		<?php echo $this->Paginator->numbers();?>
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Campus', true), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Selecoes', true), array('controller' => 'selecoes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Selecao', true), array('controller' => 'selecoes', 'action' => 'add')); ?> </li>
-	</ul>
+<?php endif;?>
 </div>

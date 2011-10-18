@@ -26,6 +26,11 @@
 			<?php echo $inscricao['Inscricao']['especial_prova']; ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Isento'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $inscricao['Inscricao']['isento']; ?>
+			&nbsp;
+		</dd>
 	</dl>
 </div>
 <div class="actions">

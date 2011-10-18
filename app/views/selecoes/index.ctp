@@ -1,15 +1,16 @@
 <div class="selecoes index">
-	<h2><?php __('Selecoes');?></h2>
+	<h4><?php echo $this->Html->link(__('Adicionar Seleção', true), array('action' => 'add')); ?></h4>
+	<h2><?php __('Seleções');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('campus_id');?></th>
-			<th><?php echo $this->Paginator->sort('curso_id');?></th>
-			<th><?php echo $this->Paginator->sort('processo_seletivo_id');?></th>
-			<th><?php echo $this->Paginator->sort('ativo_web');?></th>
-			<th><?php echo $this->Paginator->sort('vagas');?></th>
-			<th><?php echo $this->Paginator->sort('encerrado');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+		<th><?php echo $this->Paginator->sort('id');?></th>
+		<th><?php echo $this->Paginator->sort('campus_id');?></th>
+		<th><?php echo $this->Paginator->sort('curso_id');?></th>
+		<th><?php echo $this->Paginator->sort('processo_seletivo_id');?></th>
+		<th><?php echo $this->Paginator->sort('ativo_web');?></th>
+		<th><?php echo $this->Paginator->sort('vagas');?></th>
+		<th><?php echo $this->Paginator->sort('encerrado');?></th>
+		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -48,28 +49,11 @@
 	));
 	?>	</p>
 
+<?php if ($this->Paginator->numbers()):?>
 	<div class="paging">
 		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
-	 | 	<?php echo $this->Paginator->numbers();?>
- |
+		<?php echo $this->Paginator->numbers();?>
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Selecao', true), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Campus', true), array('controller' => 'campus', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Campus', true), array('controller' => 'campus', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Cursos', true), array('controller' => 'cursos', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Curso', true), array('controller' => 'cursos', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Processo Seletivos', true), array('controller' => 'processo_seletivos', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Processo Seletivo', true), array('controller' => 'processo_seletivos', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Cotas', true), array('controller' => 'cotas', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cota', true), array('controller' => 'cotas', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Inscricoes', true), array('controller' => 'inscricoes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Inscricao', true), array('controller' => 'inscricoes', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Local Provas', true), array('controller' => 'local_provas', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Local Prova', true), array('controller' => 'local_provas', 'action' => 'add')); ?> </li>
-	</ul>
+<?php endif;?>
 </div>

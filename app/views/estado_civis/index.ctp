@@ -1,10 +1,11 @@
 <div class="estadoCivis index">
-	<h2><?php __('Estado Civis');?></h2>
+	<h4><?php echo $this->Html->link(__('Adicionar Estado Civil', true), array('action' => 'add')); ?></h4>
+	<h2><?php __('Estados Civil');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('descricao');?></th>
-			<th class="actions"><?php __('Actions');?></th>
+		<th><?php echo $this->Paginator->sort('id');?></th>
+		<th><?php echo $this->Paginator->sort('descricao');?></th>
+		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -32,18 +33,11 @@
 	));
 	?>	</p>
 
+<?php if ($this->Paginator->numbers()):?>
 	<div class="paging">
 		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
-	 | 	<?php echo $this->Paginator->numbers();?>
- |
+		<?php echo $this->Paginator->numbers();?>
 		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Estado Civil', true), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Candidatos', true), array('controller' => 'candidatos', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Candidato', true), array('controller' => 'candidatos', 'action' => 'add')); ?> </li>
-	</ul>
+<?php endif;?>
 </div>
