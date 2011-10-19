@@ -1,7 +1,7 @@
 <div class="classificacoesListas form">
 <?php echo $this->Form->create('ClassificacoesLista');?>
 	<fieldset>
-		<legend><?php __('Adicionar Classificacoes/Lista'); ?></legend>
+		<legend><?php __('Adicionar Classificações/Lista'); ?></legend>
 	<?php
 		echo $this->Form->input('classificacao_id');
 		echo $this->Form->input('lista_id');
