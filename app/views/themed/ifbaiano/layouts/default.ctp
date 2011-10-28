@@ -6,7 +6,12 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>Instituto Federal Baiano</title>
 		<?php
-		echo $this->Html->css('style', null, array('media' => 'screen'));
+		echo $this->Html->css(
+			array(
+				'grid',
+				'style',
+			), null, array('media' => 'screen'
+		));
 
 		echo $this->Html->script(array(
 			'jquery'
@@ -73,9 +78,5 @@
 			</div>
 			<!-- end #page -->
 		</div>
-		<div id="footer">
-			<p>Copyright (c) 2008 Sitename.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
-		</div>
-		<!-- end #footer -->
 	</body>
 </html>
