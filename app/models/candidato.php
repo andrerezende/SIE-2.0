@@ -115,6 +115,16 @@ class Candidato extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'naturalidade_unidade_federativa_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 		'orgao_expedidor_unidade_federativa_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -169,7 +179,7 @@ class Candidato extends AppModel {
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
+				'allowEmpty' => true,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
@@ -179,7 +189,7 @@ class Candidato extends AppModel {
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
+				'allowEmpty' => true,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
@@ -189,7 +199,7 @@ class Candidato extends AppModel {
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
+				'allowEmpty' => true,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
@@ -232,6 +242,13 @@ class Candidato extends AppModel {
 		'NaturalidadeMunicipio' => array(
 			'className' => 'Municipio',
 			'foreignKey' => 'naturalidade_municipio_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'NaturalidadeUF' => array(
+			'className' => 'UnidadeFederativa',
+			'foreignKey' => 'naturalidade_unidade_federativa_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
