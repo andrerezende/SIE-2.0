@@ -26,6 +26,7 @@ class AppModel extends LazyModel {
 	 * @access public
 	 */
 	public $actsAs = array(
+		'Containable',
 		'Search.Searchable',
 	);
 
