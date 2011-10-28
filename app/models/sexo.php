@@ -3,7 +3,7 @@ class Sexo extends AppModel {
 
 	public $name = 'Sexo';
 	public $useTable = 'sexo';
-	public $displayField = 'id';
+	public $displayField = 'descricao';
 
 	public $hasMany = array(
 		'Candidato' => array(
