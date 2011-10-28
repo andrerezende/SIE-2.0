@@ -7,6 +7,7 @@
  * @package       cake
  * @subpackage    cake.app
  *
+ * @property RequestHandlerComponent $RequestHandler
  * @property PrgComponent $Prg
  * @property SessionComponent $Session
  */
@@ -16,6 +17,21 @@ class AppController extends Controller {
 
 	public $theme = 'ifbaiano';
 
+    /**
+	 * Helpers globais.
+	 *
+	 * @see http://book.cakephp.org/view/1096/Using-Helpers
+	 * @access public
+	 * @var array
+	 */
+	public $helpers = array(
+		'Form',
+		'Html',
+		'Js' => 'Jquery',
+		'Session',
+		'Text',
+	);
+
 	/**
 	 * Array contendo os nomes dos componentes que este controller utiliza.
 	 * Os nomes não devem conter a parte "Component" do nome da classe.
@@ -24,6 +40,7 @@ class AppController extends Controller {
 	 * @access public
 	 */
 	public $components = array(
+		'RequestHandler',
 		'Search.Prg',
 		'Session',
 	);
