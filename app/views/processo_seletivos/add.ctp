@@ -8,7 +8,7 @@
 		echo $this->Form->input('data_fim_inscricoes');
 		echo $this->Form->input('hora_inicio_inscricoes');
 		echo $this->Form->input('hora_fim_inscricoes');
-		echo $this->Form->input('ativo_web');
+		echo $this->Form->input('ativo_web', array('type' => 'checkbox'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
