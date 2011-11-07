@@ -3,6 +3,7 @@ class LocalProva extends AppModel {
 
 	public $name = 'LocalProva';
 	public $useTable = 'local_prova';
+	public $displayField = 'descricao';
 
 	public $hasAndBelongsToMany = array(
 		'Selecao' => array(

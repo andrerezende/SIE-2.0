@@ -19,6 +19,13 @@ class Inscricao extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'LocalProva' => array(
+			'className' => 'LocalProva',
+			'foreignKey' => 'local_prova_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 

@@ -3,6 +3,7 @@ class Edital extends AppModel {
 
 	public $name = 'Edital';
 	public $useTable = 'edital';
+	public $displayField = 'numero';
 
 	public $hasMany = array(
 		'ProcessoSeletivo' => array(

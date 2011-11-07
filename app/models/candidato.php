@@ -306,4 +306,17 @@ class Candidato extends AppModel {
 		)
 	);
 
+	public function beforeSave($options = array()) {
+		if (isset($this->data['Candidato']['cep'])) {
+			$this->data['Candidato']['cep'] = str_replace('-', '', $this->data['Candidato']['cep']);
+		}
+		if (isset($this->data['Candidato']['telefone'])) {
+			$this->data['Candidato']['telefone'] = str_replace(array('(', ')', '-', ' '), '', $this->data['Candidato']['telefone']);
+		}
+		if (isset($this->data['Candidato']['celular'])) {
+			$this->data['Candidato']['celular'] = str_replace(array('(', ')', '-', ' '), '', $this->data['Candidato']['celular']);
+		}
+		return true;
+	}
+
 }
