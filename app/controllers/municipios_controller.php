@@ -1,14 +1,14 @@
 <?php
 class MunicipiosController extends AppController {
 
-	var $name = 'Municipios';
+	public $name = 'Municipios';
 
-	function index() {
+	public function index() {
 		$this->Municipio->recursive = 0;
 		$this->set('municipios', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid municipio', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class MunicipiosController extends AppController {
 		$this->set('municipio', $this->Municipio->read(null, $id));
 	}
 
-	function add() {
+	public function add() {
 		if (!empty($this->data)) {
 			$this->Municipio->create();
 			if ($this->Municipio->save($this->data)) {
@@ -30,7 +30,7 @@ class MunicipiosController extends AppController {
 		$this->set(compact('unidadeFederativas'));
 	}
 
-	function edit($id = null) {
+	public function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid municipio', true));
 			$this->redirect(array('action' => 'index'));
@@ -50,7 +50,7 @@ class MunicipiosController extends AppController {
 		$this->set(compact('unidadeFederativas'));
 	}
 
-	function delete($id = null) {
+	public function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for municipio', true));
 			$this->redirect(array('action'=>'index'));
@@ -61,5 +61,17 @@ class MunicipiosController extends AppController {
 		}
 		$this->Session->setFlash(__('Municipio was not deleted', true));
 		$this->redirect(array('action' => 'index'));
+	}
+
+	public function ajax_get_municipios() {
+		//Configure::write('debug', 0);
+		$this->layout = 'ajax';
+		if ($this->RequestHandler->isAjax()) {
+			FireCake::dump('data', $this->data);
+			$this->Municipio->contain();
+			$municipios = $this->Municipio->find('list', array('conditions' => array('unidade_federativa_id' => $this->data['Candidato']['unidade_federativa_id'])));
+			FireCake::dump('minucipios', $municipios);
+			$this->set(compact('municipios'));
+		}
 	}
 }

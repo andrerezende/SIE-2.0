@@ -28,7 +28,8 @@ class InscricoesController extends AppController {
 		}
 		$candidatos = $this->Inscricao->Candidato->find('list');
 		$selecoes = $this->Inscricao->Selecao->find('list');
-		$this->set(compact('candidatos', 'selecoes'));
+		$localProvas = $this->Inscricao->LocalProva->find('list');
+		$this->set(compact('candidatos', 'selecoes', 'localProvas'));
 	}
 
 	function edit($id = null) {
@@ -49,7 +50,8 @@ class InscricoesController extends AppController {
 		}
 		$candidatos = $this->Inscricao->Candidato->find('list');
 		$selecoes = $this->Inscricao->Selecao->find('list');
-		$this->set(compact('candidatos', 'selecoes'));
+		$localProvas = $this->Inscricao->LocalProva->find('list');
+		$this->set(compact('candidatos', 'selecoes', 'localProvas'));
 	}
 
 	function delete($id = null) {

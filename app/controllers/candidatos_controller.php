@@ -1,14 +1,26 @@
 <?php
+/**
+ * Candidatos controller.
+ * 
+ * @property Candidato $Candidato
+ */
 class CandidatosController extends AppController {
 
-	var $name = 'Candidatos';
+	public $name = 'Candidatos';
 
-	function index() {
+	public $components = array(
+		'CakePdf.CakePdf' => array(
+//			'debug' => true,
+			'orientation' => 'landscape',
+		),
+	);
+
+	public function index() {
 		$this->Candidato->recursive = 0;
 		$this->set('candidatos', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid candidato', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +28,7 @@ class CandidatosController extends AppController {
 		$this->set('candidato', $this->Candidato->read(null, $id));
 	}
 
-	function add() {
+	public function add() {
 		if (!empty($this->data)) {
 			$this->Candidato->create();
 			if ($this->Candidato->save($this->data)) {
@@ -27,18 +39,18 @@ class CandidatosController extends AppController {
 			}
 		}
 		$unidadeFederativas = $this->Candidato->UnidadeFederativa->find('list');
-		$municipios = $this->Candidato->Municipio->find('list');
+		//$municipios = $this->Candidato->Municipio->find('list');
 		$paises = $this->Candidato->Pais->find('list');
-		$naturalidadeMunicipios = $this->Candidato->NaturalidadeMunicipio->find('list');
-		$orgaoExpedidorUnidadeFederativas = $this->Candidato->OrgaoExpedidorUnidadeFederativa->find('list');
+		//$naturalidadeMunicipios = $this->Candidato->NaturalidadeMunicipio->find('list');
+		//$orgaoExpedidorUnidadeFederativas = $this->Candidato->OrgaoExpedidorUnidadeFederativa->find('list');
 		$sexos = $this->Candidato->Sexo->find('list');
 		$nacionalidadePaises = $this->Candidato->NacionalidadePais->find('list');
 		$necessidadeEspeciais = $this->Candidato->NecessidadeEspecial->find('list');
 		$estadoCivis = $this->Candidato->EstadoCivil->find('list');
-		$this->set(compact('unidadeFederativas', 'municipios', 'paises', 'naturalidadeMunicipios', 'orgaoExpedidorUnidadeFederativas', 'sexos', 'nacionalidadePaises', 'necessidadeEspeciais', 'estadoCivis'));
+		$this->set(compact('unidadeFederativas', 'paises', 'sexos', 'nacionalidadePaises', 'necessidadeEspeciais', 'estadoCivis'));
 	}
 
-	function edit($id = null) {
+	public function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid candidato', true));
 			$this->redirect(array('action' => 'index'));
@@ -66,7 +78,7 @@ class CandidatosController extends AppController {
 		$this->set(compact('unidadeFederativas', 'municipios', 'paises', 'naturalidadeMunicipios', 'orgaoExpedidorUnidadeFederativas', 'sexos', 'nacionalidadePaises', 'necessidadeEspeciais', 'estadoCivis'));
 	}
 
-	function delete($id = null) {
+	public function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for candidato', true));
 			$this->redirect(array('action'=>'index'));
@@ -77,5 +89,26 @@ class CandidatosController extends AppController {
 		}
 		$this->Session->setFlash(__('Candidato was not deleted', true));
 		$this->redirect(array('action' => 'index'));
+	}
+
+	public function pdf_relatorio_geral() {
+		$this->layout = 'pdf';
+		Configure::write('debug', 0);
+		$this->Candidato->recursive = -1;
+		$this->Candidato->Behaviors->attach('Containable');
+		$candidatos = $this->Candidato->find('all', array(
+			'contain' => array(
+				'Sexo',
+				'NecessidadeEspecial',
+				'Inscricao' => array(
+					'Selecao' => array(
+						'Campus',
+						'Curso',
+					),
+					'LocalProva',
+				),
+			)
+		));
+		$this->set(compact('candidatos'));
 	}
 }
