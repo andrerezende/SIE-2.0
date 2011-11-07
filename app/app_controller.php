@@ -25,6 +25,7 @@ class AppController extends Controller {
 	 * @var array
 	 */
 	public $helpers = array(
+		'CakePtbr.Formatacao',
 		'Form',
 		'Html',
 		'Js' => 'Jquery',
