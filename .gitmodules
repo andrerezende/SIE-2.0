@@ -1,0 +1,6 @@
+[submodule "app/plugins/cake_pdf"]
+	path = app/plugins/cake_pdf
+	url = git@github.com:vitorpc/cake_pdf.git
+[submodule "app/plugins/cake_ptbr"]
+	path = app/plugins/cake_ptbr
+	url = http://github.com/jrbasso/cake_ptbr.git
