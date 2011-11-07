@@ -30,7 +30,7 @@
 		<td><?php echo $candidato['Candidato']['rg']; ?>&nbsp;</td>
 		<td><?php echo $candidato['Candidato']['data_nascimento']; ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($candidato['Sexo']['id'], array('controller' => 'sexos', 'action' => 'view', $candidato['Sexo']['id'])); ?>
+			<?php echo $this->Html->link($candidato['Sexo']['descricao'], array('controller' => 'sexos', 'action' => 'view', $candidato['Sexo']['id'])); ?>
 		</td>
 		<td><?php echo $candidato['Candidato']['telefone']; ?>&nbsp;</td>
 		<td><?php echo $candidato['Candidato']['celular']; ?>&nbsp;</td>
