@@ -1,14 +1,26 @@
 <?php
 class InscricoesController extends AppController {
 
-	var $name = 'Inscricoes';
+	public $name = 'Inscricoes';
 
-	function index() {
+	public $paginate = array(
+		'contain' => array(
+			'Candidato',
+			'Selecao',
+			'LocalProva',
+			'Nota' => array(
+				'Prova'
+			),
+		)
+	);
+
+	public function index() {
 		$this->Inscricao->recursive = 0;
+		$this->set('provas', $this->Inscricao->Nota->Prova->find('list'));
 		$this->set('inscricoes', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid inscricao', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +28,7 @@ class InscricoesController extends AppController {
 		$this->set('inscricao', $this->Inscricao->read(null, $id));
 	}
 
-	function add() {
+	public function add() {
 		if (!empty($this->data)) {
 			$this->Inscricao->create();
 			if ($this->Inscricao->save($this->data)) {
@@ -32,7 +44,7 @@ class InscricoesController extends AppController {
 		$this->set(compact('candidatos', 'selecoes', 'localProvas'));
 	}
 
-	function edit($id = null) {
+	public function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid inscricao', true));
 			$this->redirect(array('action' => 'index'));
@@ -54,7 +66,7 @@ class InscricoesController extends AppController {
 		$this->set(compact('candidatos', 'selecoes', 'localProvas'));
 	}
 
-	function delete($id = null) {
+	public function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for inscricao', true));
 			$this->redirect(array('action'=>'index'));
