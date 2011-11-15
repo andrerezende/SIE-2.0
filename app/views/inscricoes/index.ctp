@@ -1,3 +1,40 @@
+<?php echo $this->Html->script('jquery.price_format');?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("input[name^='data[nota']").priceFormat({
+			prefix: '',
+			thousandsSeparator: '',
+			limit: 4
+		});
+		var focusables = $(":input").not("[type='image']").not("[type='submit']");
+		$(":input").not("[type='image']").not("[type='submit']").bind("keydown", function(e) {
+			if (e.keyCode == 13) {
+				e.preventDefault();
+				var postData = {
+					"data[Nota][id]": $(this).attr("id").substr(5),
+					"data[Nota][valor]": $(this).val()
+				};
+				var inputAtual = $(this);
+				$.ajax({
+					type: "POST",
+					url: "/notas/ajax_update_nota",
+					data: postData,
+					success: function(data) {
+						$(inputAtual).next("img").remove();
+						if (data == "success") {
+							$(inputAtual).parent().append('<?php echo $this->Html->image('icons/accept.png');?>');
+						} else {
+							$(inputAtual).parent().append('<?php echo $this->Html->image('icons/exclamation.png');?>');
+						}
+					}
+				});
+				var current = focusables.index(this),
+				next = focusables.eq(current + 1).length ? focusables.eq(current + 1) : focusables.eq(0);
+				next.focus();
+			}
+		});
+	});
+</script>
 <div class="inscricoes index">
 	<h4><?php echo $this->Html->link(__('Adicionar Inscrição', true), array('action' => 'add')); ?></h4>
 	<h2><?php __('Inscrições');?></h2>
@@ -5,10 +42,12 @@
 	<tr>
 		<th><?php echo $this->Paginator->sort('id');?></th>
 		<th><?php echo $this->Paginator->sort('candidato_id');?></th>
-		<th><?php echo $this->Paginator->sort('selecao_id');?></th>
 		<th><?php echo $this->Paginator->sort('data');?></th>
 		<th><?php echo $this->Paginator->sort('especial_prova');?></th>
 		<th><?php echo $this->Paginator->sort('isento');?></th>
+		<?php foreach ($provas as $prova):?>
+			<th class="actions"><?php echo $prova;?></th>
+		<?php endforeach;?>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -24,12 +63,16 @@
 		<td>
 			<?php echo $this->Html->link($inscricao['Candidato']['nome'], array('controller' => 'candidatos', 'action' => 'view', $inscricao['Candidato']['id'])); ?>
 		</td>
-		<td>
-			<?php echo $this->Html->link($inscricao['Selecao']['id'], array('controller' => 'selecoes', 'action' => 'view', $inscricao['Selecao']['id'])); ?>
-		</td>
-		<td><?php echo $inscricao['Inscricao']['data']; ?>&nbsp;</td>
+		<td><?php echo $this->Formatacao->data($inscricao['Inscricao']['data']); ?>&nbsp;</td>
 		<td><?php echo $inscricao['Inscricao']['especial_prova']; ?>&nbsp;</td>
 		<td><?php echo $inscricao['Inscricao']['isento']; ?>&nbsp;</td>
+		<?php foreach ($inscricao['Nota'] as $nota): ?>
+		<td class="actions">
+			<div class="nota">
+				<?php echo $this->Form->input('nota_' .$nota['id'], array('label' => false, 'value' => $nota['valor'], 'class' => 'notas'));?>
+			</div>
+		</td>
+		<?php endforeach;?>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $inscricao['Inscricao']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $inscricao['Inscricao']['id'])); ?>
