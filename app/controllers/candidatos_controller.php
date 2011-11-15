@@ -95,7 +95,6 @@ class CandidatosController extends AppController {
 		$this->layout = 'pdf';
 		Configure::write('debug', 0);
 		$this->Candidato->recursive = -1;
-		$this->Candidato->Behaviors->attach('Containable');
 		$candidatos = $this->Candidato->find('all', array(
 			'contain' => array(
 				'Sexo',
