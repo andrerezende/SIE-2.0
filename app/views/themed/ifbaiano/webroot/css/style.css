@@ -4,7 +4,10 @@ Design by Free CSS Templates
 http://www.freecsstemplates.org
 Released for free under a Creative Commons Attribution 2.5 License
 */
-
+* {
+	margin:0;
+	padding:0;
+}
 body {
 	margin: 0;
 	padding: 0;
@@ -50,7 +53,7 @@ a:hover {
 }
 
 #wrapper {
-	width: 980px;
+	width: 1024px;
 	margin: 0 auto;
 	padding: 0;
 }
@@ -59,7 +62,7 @@ a:hover {
 
 #header {
 	clear: both;
-	width: 980px;
+	width: 1024px;
 	height: 330px;
 	margin: 0 auto;
 	padding: 0px;
@@ -107,7 +110,7 @@ a:hover {
 	float: right;
 	width: 280px;
 	height: 60px;
-	padding: 20px 0px 0px 0px;
+	padding: 10px 0px 0px 0px;
 	background: #E2E2E2;
 	border-bottom: 4px solid #FFFFFF;
 }
@@ -122,6 +125,7 @@ table {
 	width: 100%;
 }
 th {
+	min-width: 70px;
 	border:0;
 	border-bottom:2px solid #555;
 	text-align: left;
@@ -174,7 +178,7 @@ fieldset {
 	border: none;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
 	width: 170px;
 	border: 1px solid #DEDEDE;
 	background: #FFFFFF;
@@ -331,7 +335,7 @@ input[type=submit] {
 /* Page */
 
 #page {
-	width: 940px;
+	width: 1024px;
 	margin: 0 auto;
 	padding: 0px 0px 0px 0px;
 }
@@ -347,7 +351,7 @@ input[type=submit] {
 
 #content {
 	float: right;
-	width: 580px;
+	width: 744px;
 	padding: 30px 0px 0px 0px;
 }
 
@@ -529,4 +533,23 @@ div.paging span.disabled {
 }
 div.paging span.current {
 	color: #000;
+}
+
+div.nota {
+	padding-bottom: 10px;
+	text-align: left;
+}
+
+div.nota label {
+	display: inline;
+}
+
+div.nota input {
+	width: 40px;
+	padding-top: 7px;
+	margin-top: 3px;
+}
+
+div.nota img {
+	padding-left: 7px;
 }
