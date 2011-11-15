@@ -7,6 +7,7 @@
  * @package       cake
  * @subpackage    cake.app
  *
+ * @property AuthComponent $Auth
  * @property RequestHandlerComponent $RequestHandler
  * @property PrgComponent $Prg
  * @property SessionComponent $Session
@@ -41,6 +42,7 @@ class AppController extends Controller {
 	 * @access public
 	 */
 	public $components = array(
+		'Auth',
 		'RequestHandler',
 		'Search.Prg',
 		'Session',
@@ -57,6 +59,51 @@ class AppController extends Controller {
 			App::import('Vendor', 'DebugKit.FireCake');
 		}
 		parent::__construct();
+	}
+
+	public function beforeFilter() {
+		$this->_setUpAuth();
+		$this->_setUpUser();
+	}
+
+	protected function _setUpAuth() {
+//		$this->Auth->authorize = 'actions';
+//		$this->Auth->actionPath = 'controllers/';
+		$this->_setUpAuthModel();
+		$this->_setUpAuthActions();
+	}
+
+	protected function _setUpUser() {
+		if ($this->Auth->user()) {
+			$this->set('userData', $this->Auth->user());
+		}
+	}
+
+	protected function _setUpAuthModel() {
+		$this->Auth->userModel = 'Usuario';
+		$this->Auth->fields = array(
+			'username' => 'login',
+			'password' => 'senha',
+		);
+	}
+
+	protected function _setUpAuthActions() {
+		$this->Auth->allowedActions = array('display');
+		$this->Auth->loginAction = array(
+			'admin' => false,
+			'controller' => 'usuarios',
+			'action' => 'login',
+		);
+		$this->Auth->logoutRedirect = array(
+			'admin' => false,
+			'controller' => 'usuarios',
+			'action' => 'login',
+		);
+//		$this->Auth->loginRedirect = array(
+//			'admin' => false,
+//			'controller' => 'usuarios',
+//			'action' => 'dashboard',
+//		);
 	}
 
 }
