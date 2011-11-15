@@ -1,14 +1,19 @@
 <?php
 class UsuariosController extends AppController {
 
-	var $name = 'Usuarios';
+	public $name = 'Usuarios';
 
-	function index() {
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('add');
+	}
+
+	public function index() {
 		$this->Usuario->recursive = 0;
 		$this->set('usuarios', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid usuario', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +21,7 @@ class UsuariosController extends AppController {
 		$this->set('usuario', $this->Usuario->read(null, $id));
 	}
 
-	function add() {
+	public function add() {
 		if (!empty($this->data)) {
 			$this->Usuario->create();
 			if ($this->Usuario->save($this->data)) {
@@ -30,7 +35,7 @@ class UsuariosController extends AppController {
 		$this->set(compact('grupos'));
 	}
 
-	function edit($id = null) {
+	public function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid usuario', true));
 			$this->redirect(array('action' => 'index'));
@@ -50,7 +55,7 @@ class UsuariosController extends AppController {
 		$this->set(compact('grupos'));
 	}
 
-	function delete($id = null) {
+	public function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for usuario', true));
 			$this->redirect(array('action'=>'index'));
@@ -62,4 +67,14 @@ class UsuariosController extends AppController {
 		$this->Session->setFlash(__('Usuario was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+
+	public function login() {
+
+	}
+
+	public function logout() {
+		$this->Session->setFlash('Logout.');
+		$this->redirect($this->Auth->logout());
+	}
+
 }
