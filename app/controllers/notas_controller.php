@@ -1,14 +1,20 @@
 <?php
 class NotasController extends AppController {
 
-	var $name = 'Notas';
+	public $name = 'Notas';
+	public $paginate = array(
+		'contain' => array(
+			'Prova',
+			'Inscricao',
+		)
+	);
 
-	function index() {
-		$this->Nota->recursive = 0;
+	public function index() {
+		$this->Nota->recursive = -1;
 		$this->set('notas', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid nota', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +22,7 @@ class NotasController extends AppController {
 		$this->set('nota', $this->Nota->read(null, $id));
 	}
 
-	function add() {
+	public function add() {
 		if (!empty($this->data)) {
 			$this->Nota->create();
 			if ($this->Nota->save($this->data)) {
@@ -27,11 +33,13 @@ class NotasController extends AppController {
 			}
 		}
 		$provas = $this->Nota->Prova->find('list');
-		$inscricoes = $this->Nota->Inscricao->find('list');
+		$inscricoes = $this->Nota->Inscricao->find('all', array('fields' => array('Inscricao.id', 'Inscricao.nome'), 'recursive' => 0));
+		$inscricoes = Set::combine($inscricoes, '{n}.Inscricao.id', '{n}.Inscricao.nome');
+	
 		$this->set(compact('provas', 'inscricoes'));
 	}
 
-	function edit($id = null) {
+	public function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid nota', true));
 			$this->redirect(array('action' => 'index'));
@@ -52,7 +60,7 @@ class NotasController extends AppController {
 		$this->set(compact('provas', 'inscricoes'));
 	}
 
-	function delete($id = null) {
+	public function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for nota', true));
 			$this->redirect(array('action'=>'index'));
@@ -64,4 +72,19 @@ class NotasController extends AppController {
 		$this->Session->setFlash(__('Nota was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+
+	public function ajax_update_nota() {
+		Configure::write('debug', 0);
+		$this->layout = 'ajax';
+		$this->autoRender = false;
+		if ($this->RequestHandler->isAjax()) {
+			FireCake::dump('data', $this->data);
+			if ($this->Nota->save($this->data)) {
+				return 'success';
+			} else {
+				return 'failure';
+			}
+		}
+	}
+
 }
