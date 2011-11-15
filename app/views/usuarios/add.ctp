@@ -5,7 +5,7 @@
 	<?php
 		echo $this->Form->input('nome');
 		echo $this->Form->input('login');
-		echo $this->Form->input('senha');
+		echo $this->Form->input('senha', array('type' => 'password'));
 		echo $this->Form->input('grupo_id');
 	?>
 	</fieldset>
