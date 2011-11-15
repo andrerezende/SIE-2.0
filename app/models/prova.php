@@ -3,6 +3,7 @@ class Prova extends AppModel {
 
 	public $name = 'Prova';
 	public $useTable = 'prova';
+	public $displayField = 'descricao';
 
 	public $hasMany = array(
 		'Nota' => array(
