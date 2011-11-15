@@ -3,6 +3,9 @@ class Inscricao extends AppModel {
 
 	public $name = 'Inscricao';
 	public $useTable = 'inscricao';
+	public $virtualFields = array(
+		'nome' => 'Candidato.nome',
+	);
 	public $displayField = 'id';
 
 	public $belongsTo = array(
