@@ -9,7 +9,7 @@
 		echo $this->Html->css(
 			array(
 				'grid',
-				'style',
+				'publico',
 			), null, array('media' => 'screen'
 		));
 
@@ -25,7 +25,15 @@
 			<div id="menu">
 				<ul>
 					<li class="current_page_item"><?php echo $this->Html->link("Home", '/'); ?></li>
+					<li><?php echo $this->Html->link('Login', array(
+							'admin' => false,
+							'controller' => 'usuarios',
+							'action' => 'login'));
+					?></li>
 				</ul>
+			</div>
+			<div id="header">
+				<h1><?php echo $this->Html->image('topo-ifbaiano.png');?></h1>
 			</div>
 			<!-- end #menu -->
 			<div id="page">
@@ -38,6 +46,20 @@
 							<div style="clear: both;">&nbsp;</div>
 						</div>
 						<!-- end #content -->
+						<div id="sidebar">
+							<ul>
+								<li>
+									<ul>
+										<li><?php echo $this->Html->link('Página Inicial', '/'); ?></li>
+										<li><?php echo $this->Html->link('Instruções', '/'); ?></li>
+										<li><?php echo $this->Html->link('Inscrição', '/'); ?></li>
+										<li><?php echo $this->Html->link('Perguntas Frequentes', '/'); ?></li>
+										<li><?php echo $this->Html->link('Contato', '/'); ?></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<!-- end #sidebar -->
 						<div style="clear: both;">&nbsp;</div>
 					</div>
 				</div>
