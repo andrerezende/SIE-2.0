@@ -95,20 +95,15 @@ class AppController extends Controller {
 			'controller' => 'usuarios',
 			'action' => 'login',
 		);
-		$this->Auth->logoutRedirect = array(
-			'admin' => false,
+		$this->Auth->logoutRedirect = '/';
+		$this->Auth->loginRedirect = array(
+			'admin' => true,
 			'controller' => 'usuarios',
-			'action' => 'login',
+			'action' => 'index',
 		);
-//		$this->Auth->loginRedirect = array(
-//			'admin' => false,
-//			'controller' => 'usuarios',
-//			'action' => 'dashboard',
-//		);
 	}
 
 	protected function _chageLayout() {
-		debug($this->params);
 		if (isset($this->params['prefix'])
 				&& $this->params['prefix'] == 'admin') {
 			$this->layout = 'admin';
