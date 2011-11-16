@@ -64,6 +64,7 @@ class AppController extends Controller {
 	public function beforeFilter() {
 		$this->_setUpAuth();
 		$this->_setUpUser();
+		$this->_chageLayout();
 	}
 
 	protected function _setUpAuth() {
@@ -104,6 +105,16 @@ class AppController extends Controller {
 //			'controller' => 'usuarios',
 //			'action' => 'dashboard',
 //		);
+	}
+
+	protected function _chageLayout() {
+		debug($this->params);
+		if (isset($this->params['prefix'])
+				&& $this->params['prefix'] == 'admin') {
+			$this->layout = 'admin';
+		} else {
+			$this->layout = 'default';
+		}
 	}
 
 }
