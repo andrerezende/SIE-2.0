@@ -232,8 +232,9 @@ form .required {
 	font-weight: bold;
 }
 form .required label:after {
-	content: '*';
+	content: ' *';
 	display:inline;
+	color: red;
 }
 form div.submit {
 	border: 0;
@@ -244,6 +245,7 @@ label {
 	display: block;
 	font-size: 110%;
 	margin-bottom:3px;
+	text-transform: uppercase;
 }
 input, textarea {
 	clear: both;
