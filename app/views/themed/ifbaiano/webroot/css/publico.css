@@ -66,7 +66,10 @@ a:hover {
 	height: 178px;
 	margin: 0 auto;
 	padding: 0px;
-	background: url(../img/img06.jpg) no-repeat left top;
+	border: 2px solid #BDCC94;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 
 /* Logo */
@@ -354,7 +357,7 @@ input[type=submit] {
 #content {
 	float: right;
 	width: 744px;
-	padding: 30px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 }
 
 .post {
@@ -554,4 +557,8 @@ div.nota input {
 
 div.nota img {
 	padding-left: 7px;
+}
+
+div.page {
+	width: 700px;
 }
