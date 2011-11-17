@@ -9,7 +9,7 @@
 		echo $this->Html->css(
 			array(
 				'grid',
-				'style',
+				'admin',
 			), null, array('media' => 'screen'
 		));
 
@@ -24,7 +24,8 @@
 		<div id="wrapper">
 			<div id="menu">
 				<ul>
-					<li class="current_page_item"><?php echo $this->Html->link("Home", '/'); ?></li>
+					<li class="current_page_item"><?php echo $this->Html->link('Home', '/'); ?></li>
+					<li><?php echo $this->Html->link('Logout', array('admin' => true, 'controller' => 'usuarios', 'action' => 'logout')); ?></li>
 				</ul>
 			</div>
 			<!-- end #menu -->
