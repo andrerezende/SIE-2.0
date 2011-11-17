@@ -19,12 +19,46 @@
 
 		echo $scripts_for_layout;
 		?>
+		<script type="text/javascript">
+			/*
+			 *  jquery.currentpage.js
+			 *  Adds a class to current page for navigation links.
+			 *  Chad Jolly http://www.jollycomputers.com/
+			 */
+			jQuery.fn.currentPage = function(){
+
+				/* Default Settings */
+				var settings = {
+					loc : location.pathname,
+					sel : '',
+					currentClass : 'current_page_item'
+				}
+
+				/* break location down to the controller, no trailing slash */
+				if (settings.loc != '/') {
+					controller = settings.loc.split('/',2);
+					settings.loc = '/'+ controller[1];
+					settings.sel = '^';
+				}
+
+				var selector = 'a[href'+settings.sel+'="'+settings.loc+'"]';
+
+				/* attach settings.currentClass to appropriate link */
+				return this.each(function(){
+					jQuery(this).find(selector).parent().addClass(settings.currentClass);
+				});
+			};
+
+			$(document).ready(function() {
+				$('#menu').currentPage();
+			})
+		</script>
 	</head>
 	<body>
 		<div id="wrapper">
 			<div id="menu">
 				<ul>
-					<li class="current_page_item"><?php echo $this->Html->link("Home", '/'); ?></li>
+					<li><?php echo $this->Html->link("Home", '/'); ?></li>
 					<li><?php echo $this->Html->link('Login', array(
 							'admin' => false,
 							'controller' => 'usuarios',
@@ -50,11 +84,12 @@
 							<ul>
 								<li>
 									<ul>
-										<li><?php echo $this->Html->link('Página Inicial', '/'); ?></li>
-										<li><?php echo $this->Html->link('Instruções', '/'); ?></li>
-										<li><?php echo $this->Html->link('Inscrição', '/'); ?></li>
-										<li><?php echo $this->Html->link('Perguntas Frequentes', '/'); ?></li>
-										<li><?php echo $this->Html->link('Contato', '/'); ?></li>
+										<li><?php echo $this->Html->link('Página Inicial', '#'); ?></li>
+										<li><?php echo $this->Html->link('Nova Inscrição', array('controller' => 'candidatos', 'action' => 'cadastro')); ?></li>
+										<li><?php echo $this->Html->link('Alterar / Imprimir Inscrição', '#'); ?></li>
+										<li><?php echo $this->Html->link('Recuperar Senha', '#'); ?></li>
+										<li><?php echo $this->Html->link('2ª Via Boleto', '#'); ?></li>
+										<li><?php echo $this->Html->link('Página do Concurso', '#'); ?></li>
 									</ul>
 								</li>
 							</ul>
