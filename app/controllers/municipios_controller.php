@@ -3,6 +3,11 @@ class MunicipiosController extends AppController {
 
 	public $name = 'Municipios';
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('ajax_get_municipios');
+	}
+
 	public function index() {
 		$this->Municipio->recursive = 0;
 		$this->set('municipios', $this->paginate());
