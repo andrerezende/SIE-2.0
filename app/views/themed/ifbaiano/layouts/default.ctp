@@ -74,6 +74,7 @@
 				<div id="page-bgtop">
 					<div id="page-bgbtm">
 						<div id="content">
+							<?php echo $this->Session->flash();?>
 							<div class="post">
 								<?php echo $content_for_layout; ?>
 							</div>
