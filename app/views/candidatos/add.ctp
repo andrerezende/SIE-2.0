@@ -55,7 +55,7 @@
 		echo $this->Form->input('naturalidade_unidade_federativa_id', array('empty' => 'Selecione o estado', 'options' => $unidadeFederativas));
 		echo $this->Form->input('naturalidade_municipio_id', array('empty' => 'Escolha um estado primeiro', 'disabled' => true));
 		echo $this->Form->input('sexo_id');
-		echo $this->Form->input('pais_id');
+		echo $this->Form->input('pais_id', array('label' => 'País'));
 		echo $this->Form->input('unidade_federativa_id', array('empty' => 'Selecione o estado'));
 		echo $this->Form->input('municipio_id', array('empty' => 'Escolha um estado primeiro', 'disabled' => true));
 		echo $this->Form->input('bairro');
