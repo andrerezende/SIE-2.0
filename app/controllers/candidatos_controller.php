@@ -10,10 +10,15 @@ class CandidatosController extends AppController {
 
 	public $components = array(
 		'CakePdf.CakePdf' => array(
-//			'debug' => true,
+			'debug' => false,
 			'orientation' => 'landscape',
 		),
 	);
+
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('cadastro');
+	}
 
 	public function index() {
 		$this->Candidato->recursive = 0;
@@ -68,7 +73,7 @@ class CandidatosController extends AppController {
 		}
 		$unidadeFederativas = $this->Candidato->UnidadeFederativa->find('list');
 		$municipios = $this->Candidato->Municipio->find('list');
-		$paises = $this->Candidato->Pai->find('list');
+		$paises = $this->Candidato->Pais->find('list');
 		$naturalidadeMunicipios = $this->Candidato->NaturalidadeMunicipio->find('list');
 		$orgaoExpedidorUnidadeFederativas = $this->Candidato->OrgaoExpedidorUnidadeFederativa->find('list');
 		$sexos = $this->Candidato->Sexo->find('list');
@@ -110,4 +115,29 @@ class CandidatosController extends AppController {
 		));
 		$this->set(compact('candidatos'));
 	}
+
+	public function cadastro() {
+		if (!empty($this->data)) {
+			$this->Candidato->create();
+			$this->data['Usuario']['login'] = $this->data['Candidato']['email'];
+			$this->data['Usuario']['nome'] = $this->data['Candidato']['nome'];
+			if ($this->Candidato->save($this->data)) {
+				$this->data['Usuario']['candidato_id'] = $this->Candidato->id;
+				$this->data['Usuario']['grupo_id'] = 1;
+				if ($this->Candidato->Usuario->save($this->data['Usuario'])) {
+					$this->Session->setFlash(__('Inscrição concluída', true));
+					$this->redirect('/');
+				}
+			} else {
+				$this->Session->setFlash(__('A inscrição não pôde ser efetuada. Por favor, tente novamente.', true));
+			}
+		}
+		$sexos = $this->Candidato->Sexo->find('list');
+		$unidadeFederativas = $this->Candidato->UnidadeFederativa->find('list');
+		$paises = $this->Candidato->Pais->find('list');
+		$estadoCivis = $this->Candidato->EstadoCivil->find('list');
+		$necessidadeEspeciais = $this->Candidato->NecessidadeEspecial->find('list');
+		$this->set(compact('unidadeFederativas', 'sexos', 'paises', 'estadoCivis', 'necessidadeEspeciais'));
+	}
+
 }
