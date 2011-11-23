@@ -215,6 +215,23 @@ class Candidato extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'email' => array(
+			'email' => array(
+				'rule' => array('email'),
+				'message' => 'Digite um e-mail válido',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+	);
+
+	public $hasOne = array(
+		'Usuario' => array(
+			'className' => 'Usuario',
+			'foreignKey' => 'candidato_id',
+		)
 	);
 
 	public $belongsTo = array(
