@@ -324,16 +324,28 @@ class Candidato extends AppModel {
 	);
 
 	public function beforeSave($options = array()) {
+		$this->_removeMascaras();
+		return true;
+	}
+
+	protected function _removeMascaras() {
 		if (isset($this->data['Candidato']['cep'])) {
-			$this->data['Candidato']['cep'] = str_replace('-', '', $this->data['Candidato']['cep']);
+			$this->data['Candidato']['cep'] = $this->_removeMascaraCep($this->data['Candidato']['cep']);
 		}
 		if (isset($this->data['Candidato']['telefone'])) {
-			$this->data['Candidato']['telefone'] = str_replace(array('(', ')', '-', ' '), '', $this->data['Candidato']['telefone']);
+			$this->data['Candidato']['telefone'] = $this->_removeMascaraTel($this->data['Candidato']['telefone']);
 		}
 		if (isset($this->data['Candidato']['celular'])) {
-			$this->data['Candidato']['celular'] = str_replace(array('(', ')', '-', ' '), '', $this->data['Candidato']['celular']);
+			$this->data['Candidato']['celular'] = $this->_removeMascaraTel($this->data['Candidato']['celular']);
 		}
-		return true;
+	}
+
+	protected function _removeMascaraCep($cep) {
+		return str_replace('-', '', $cep);
+	}
+
+	protected function _removeMascaraTel($telefone) {
+		return str_replace(array('(', ')', '-', ' '), '', $telefone);
 	}
 
 }
