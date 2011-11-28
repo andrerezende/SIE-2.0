@@ -43,6 +43,7 @@ class AppController extends Controller {
 	 */
 	public $components = array(
 		'Auth',
+		'Email',
 		'RequestHandler',
 		'Search.Prg',
 		'Session',
@@ -65,6 +66,9 @@ class AppController extends Controller {
 		$this->_setUpAuth();
 		$this->_setUpUser();
 		$this->_chageLayout();
+		if ($this->action == 'login') {
+			$this->Auth->autoRedirect = false;
+		}
 	}
 
 	protected function _setUpAuth() {
@@ -86,6 +90,7 @@ class AppController extends Controller {
 			'username' => 'login',
 			'password' => 'senha',
 		);
+		$this->Auth->userScope = array();
 	}
 
 	protected function _setUpAuthActions() {
@@ -110,6 +115,19 @@ class AppController extends Controller {
 		} else {
 			$this->layout = 'default';
 		}
+	}
+
+	public function isAuthorized() {
+		if (strpos($this->action, 'admin_') != false) {
+			if ($this->Auth->role('grupo_id') == 2) {
+				return true;
+			}
+		} elseif (strpos($this->action, 'candidato_') != false) {
+			if ($this->Auth->role('grupo_id') == 1) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
