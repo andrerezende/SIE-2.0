@@ -151,6 +151,17 @@ class UsuariosController extends AppController {
 	}
 
 	private function __resetPassword($token) {
-		// TODO criar método resetPassword
+		$usuario = $this->Usuario->checkPasswordToken($token);
+		if (empty($usuario)) {
+			$this->Session->setFlash('Token inválido. Por favor, tente novamente.');
+			$this->redirect(array('action' => 'reset_password'));
+		}
+		if (!empty($this->data)) {
+			if ($this->Usuario->resetPassword(Set::merge($usuario, $this->data))) {
+				$this->Session->setFlash(__d('users', 'Senha alterada, agora você pode logar com sua nova senha.', true));
+				$this->redirect($this->Auth->loginAction);
+			}
+		}
+		$this->set('token', $token);
 	}
 }
