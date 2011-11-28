@@ -119,7 +119,7 @@ class CandidatosController extends AppController {
 	public function cadastro() {
 		if (!empty($this->data)) {
 			$this->Candidato->create();
-			$this->data['Usuario']['login'] = $this->data['Candidato']['email'];
+			$this->data['Usuario']['login'] = $this->data['Candidato']['cpf'];
 			$this->data['Usuario']['nome'] = $this->data['Candidato']['nome'];
 			if ($this->Candidato->save($this->data)) {
 				$this->data['Usuario']['candidato_id'] = $this->Candidato->id;
@@ -138,6 +138,33 @@ class CandidatosController extends AppController {
 		$estadoCivis = $this->Candidato->EstadoCivil->find('list');
 		$necessidadeEspeciais = $this->Candidato->NecessidadeEspecial->find('list');
 		$this->set(compact('unidadeFederativas', 'sexos', 'paises', 'estadoCivis', 'necessidadeEspeciais'));
+	}
+
+	public function candidato_editar($id = null) {
+		if (!$id && empty($this->data)) {
+			$this->Session->setFlash(__('Candidato inválido', true));
+			$this->redirect(array('/'));
+		}
+		if (!empty($this->data)) {
+			if ($this->Candidato->save($this->data)) {
+				$this->Session->setFlash(__('The candidato has been saved', true));
+				$this->redirect(array('/'));
+			} else {
+				$this->Session->setFlash(__('The candidato could not be saved. Please, try again.', true));
+			}
+		}
+		if (empty($this->data)) {
+			$this->Candidato->recursive = -1;
+			$this->data = $this->Candidato->read(null, $id);
+		}
+		$sexos = $this->Candidato->Sexo->find('list');
+		$unidadeFederativas = $this->Candidato->UnidadeFederativa->find('list');
+		$paises = $this->Candidato->Pais->find('list');
+		$estadoCivis = $this->Candidato->EstadoCivil->find('list');
+		$necessidadeEspeciais = $this->Candidato->NecessidadeEspecial->find('list');
+		$municipios = $this->Candidato->Municipio->find('list', array('Municipio.unidade_federativa_id' => $this->data['Candidato']['unidade_federativa_id']));
+		$naturalidadeMunicipios = $this->Candidato->Municipio->find('list', array('Municipio.unidade_federativa_id' => $this->data['Candidato']['naturalidade_unidade_federativa_id']));
+		$this->set(compact('unidadeFederativas', 'sexos', 'paises', 'estadoCivis', 'necessidadeEspeciais', 'municipios', 'naturalidadeMunicipios'));
 	}
 
 }
