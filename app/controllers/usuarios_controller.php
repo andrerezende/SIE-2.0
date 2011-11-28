@@ -1,4 +1,10 @@
 <?php
+/**
+ * Usuarios controller.
+ *
+ * @property Usuario $Usuario
+ * @property AuthComponent $Auth
+ */
 class UsuariosController extends AppController {
 
 	public $name = 'Usuarios';
@@ -69,12 +75,82 @@ class UsuariosController extends AppController {
 	}
 
 	public function login() {
-
+		if ($this->Auth->user()) {
+			if ($this->Auth->user('grupo_id') == 1) {
+				$this->redirect($this->Auth->redirect(array(
+					'candidato' => true,
+					'controller' => 'candidatos',
+					'action' => 'editar',
+					$this->Auth->user('candidato_id')
+				)));
+			} elseif ($this->Auth->user('grupo_id') == 2) {
+				$this->redirect($this->Auth->redirect(array(
+					'admin' => true,
+					'controller' => 'usuarios',
+					'action' => 'index'
+				)));
+			}
+		}
+		if ($this->Session->read('Auth.redirect') == '/candidato/editar') {
+			$this->set('isCandidato', true);
+		} else {
+			$this->set('isCandidato', false);
+		}
 	}
 
 	public function admin_logout() {
-		$this->Session->setFlash('Logout.');
+		$this->Session->setFlash('Logout');
 		$this->redirect($this->Auth->logout());
 	}
 
+	public function recuperar_senha($token = null, $usuario = null) {
+		if (empty($token)) {
+			$admin = false;
+			if ($usuario) {
+				$this->data = $usuario;
+				$admin = true;
+			}
+			$this->_sendPasswordReset($admin);
+		} else {
+			$this->__resetPassword($token);
+		}
+	}
+
+	public function _sendPasswordReset($admin = null, $options = array()) {
+		$defaults = array(
+			'from' => 'noreply@' . env('HTTP_HOST'),
+			'subject' => 'Recuperação de Senha',
+			'template' => 'password_reset_request',
+		);
+		$options = array_merge($defaults, $options);
+
+		if (!empty($this->data)) {
+			$usuario = $this->Usuario->passwordReset($this->data);
+			if (!empty($usuario)) {
+				$this->set('token', $usuario['Usuario']['password_token']);
+				//TODO buscar o email do candidato
+				$this->Email->from = $options['from'];
+				$this->Email->subject = $options['subject'];
+				$this->Email->template = $options['template'];
+				$this->Email->send();
+
+
+				if ($admin) {
+					$this->Session->setFlash('Um email foi enviado com instruções para a alteração de senha');
+					$this->redirect(array('action' => 'index', 'admin' => true));
+				} else {
+					$this->Session->setFlash('Você deve receber um email com novas instruções em breve');
+					$this->redirect(array('action' => 'login'));
+				}
+			} else {
+				$this->Session->setFlash('Nenhum usuário foi encontrado com esse e-mail');
+				$this->redirect($this->referer('/'));
+			}
+		}
+		$this->render('request_password_change');
+	}
+
+	private function __resetPassword($token) {
+		// TODO criar método resetPassword
+	}
 }
