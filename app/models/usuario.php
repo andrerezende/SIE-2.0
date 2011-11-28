@@ -36,4 +36,11 @@ class Usuario extends AppModel {
 			'order' => ''
 		)
 	);
+
+	public function beforeSave($options = array()) {
+		if (isset($this->data['Usuario']['senha']) && !empty($this->data['Usuario']['senha'])) {
+			$this->data['Usuario']['senha'] = AuthComponent::password($this->data['Usuario']['senha']);
+		}
+		return true;
+	}
 }
