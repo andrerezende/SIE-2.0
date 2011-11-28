@@ -155,7 +155,7 @@ class UsuariosController extends AppController {
 		$usuario = $this->Usuario->checkPasswordToken($token);
 		if (empty($usuario)) {
 			$this->Session->setFlash('Token inválido. Por favor, tente novamente.');
-			$this->redirect(array('action' => 'reset_password'));
+			$this->redirect(array('action' => 'recuperar_senha'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Usuario->resetPassword(Set::merge($usuario, $this->data))) {
