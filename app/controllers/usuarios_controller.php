@@ -129,6 +129,7 @@ class UsuariosController extends AppController {
 			if (!empty($usuario)) {
 				$this->set('token', $usuario['Usuario']['password_token']);
 				//TODO buscar o email do candidato
+				$this->Email->to = $usuario['Usuario']['email'];
 				$this->Email->from = $options['from'];
 				$this->Email->subject = $options['subject'];
 				$this->Email->template = $options['template'];
