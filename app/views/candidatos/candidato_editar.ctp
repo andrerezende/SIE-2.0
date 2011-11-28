@@ -45,6 +45,7 @@
 	<div clas="entry">
 		<?php
 		echo $this->Form->create('Candidato');
+		echo $this->Form->input('id');
 		echo $this->Form->input('nome', array('label' => 'Nome Completo'));
 		echo $this->Form->input('data_nascimento', array('dateFormat' => 'DMY', 'separator' => '', 'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => '', 'value' => ''));
 		echo $this->Form->input('cpf');
@@ -56,11 +57,11 @@
 		echo $this->Form->input('data_expedicao', array('dateFormat' => 'DMY', 'separator' => '', 'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => '', 'value' => ''));
 		echo $this->Form->input('nacionalidade_pais_id', array('empty' => 'Selecione o país', 'options' => $paises));
 		echo $this->Form->input('naturalidade_unidade_federativa_id', array('empty' => 'Selecione o estado', 'options' => $unidadeFederativas));
-		echo $this->Form->input('naturalidade_municipio_id', array('empty' => 'Escolha um estado primeiro', 'disabled' => true));
+		echo $this->Form->input('naturalidade_municipio_id', array('empty' => 'Escolha um estado primeiro'));
 		echo $this->Form->input('sexo_id');
 		echo $this->Form->input('pais_id', array('empty' => 'Selecione o país'));
 		echo $this->Form->input('unidade_federativa_id', array('empty' => 'Selecione o estado'));
-		echo $this->Form->input('municipio_id', array('empty' => 'Escolha um estado primeiro', 'disabled' => true));
+		echo $this->Form->input('municipio_id', array('empty' => 'Escolha um estado primeiro'));
 		echo $this->Form->input('bairro');
 		echo $this->Form->input('cep');
 		echo $this->Form->input('endereco');
