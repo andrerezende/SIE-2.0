@@ -1,7 +1,7 @@
 <?php
 /**
  * Candidatos controller.
- * 
+ *
  * @property Candidato $Candidato
  */
 class CandidatosController extends AppController {
@@ -121,6 +121,7 @@ class CandidatosController extends AppController {
 			$this->Candidato->create();
 			$this->data['Usuario']['login'] = $this->data['Candidato']['cpf'];
 			$this->data['Usuario']['nome'] = $this->data['Candidato']['nome'];
+			$this->data['Usuario']['email'] = $this->data['Candidato']['email'];
 			if ($this->Candidato->save($this->data)) {
 				$this->data['Usuario']['candidato_id'] = $this->Candidato->id;
 				$this->data['Usuario']['grupo_id'] = 1;
