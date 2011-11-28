@@ -56,7 +56,7 @@ class Usuario extends AppModel {
 			$sixtyMins = time() + 43000;
 			$token = $this->generateToken();
 			$usuario[$this->alias]['password_token'] = $token;
-			$usuario[$this->alias]['email_token_expires'] = date('Y-m-d H:i:s', $sixtyMins);
+			$usuario[$this->alias]['token_expires'] = date('Y-m-d H:i:s', $sixtyMins);
 			$usuario = $this->save($usuario, false);
 			return $usuario;
 		} else {
@@ -70,7 +70,7 @@ class Usuario extends AppModel {
 			'contain' => array(),
 			'conditions' => array(
 				$this->alias . '.password_token' => $token,
-				$this->alias . '.email_token_expires >=' => date('Y-m-d H:i:s'))));
+				$this->alias . '.token_expires >=' => date('Y-m-d H:i:s'))));
 		if (empty($usuario)) {
 			return false;
 		}
@@ -81,8 +81,8 @@ class Usuario extends AppModel {
 		$result = false;
 		$tmp = $this->validate;
 		$this->validate = array(
-			'new_password' => $this->validate['passwd'],
-			'confirm_password' => array(
+			'nova_senha' => $this->validate['passwd'],
+			'confirme_senha' => array(
 				'required' => array(
 					'rule' => array('compareFields', 'new_password', 'confirm_password'),
 					'message' => __d('users', 'The passwords are not equal.', true))));
