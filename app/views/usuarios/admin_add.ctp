@@ -4,6 +4,8 @@
 		<legend><?php __('Adicionar Usuário'); ?></legend>
 	<?php
 		echo $this->Form->input('nome');
+		echo $this->Form->input('nome');
+		echo $this->Form->input('email');
 		echo $this->Form->input('login');
 		echo $this->Form->input('senha', array('type' => 'password'));
 		echo $this->Form->input('grupo_id');

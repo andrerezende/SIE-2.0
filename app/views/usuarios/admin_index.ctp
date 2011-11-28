@@ -5,9 +5,11 @@
 	<tr>
 		<th><?php echo $this->Paginator->sort('id');?></th>
 		<th><?php echo $this->Paginator->sort('nome');?></th>
+		<th><?php echo $this->Paginator->sort('email');?></th>
 		<th><?php echo $this->Paginator->sort('login');?></th>
 		<th><?php echo $this->Paginator->sort('senha');?></th>
 		<th><?php echo $this->Paginator->sort('grupo_id');?></th>
+		<th><?php echo $this->Paginator->sort('candidato_id');?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -21,10 +23,14 @@
 	<tr<?php echo $class;?>>
 		<td><?php echo $usuario['Usuario']['id']; ?>&nbsp;</td>
 		<td><?php echo $usuario['Usuario']['nome']; ?>&nbsp;</td>
+		<td><?php echo $usuario['Usuario']['email']; ?>&nbsp;</td>
 		<td><?php echo $usuario['Usuario']['login']; ?>&nbsp;</td>
 		<td><?php echo $usuario['Usuario']['senha']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($usuario['Grupo']['id'], array('controller' => 'grupos', 'action' => 'view', $usuario['Grupo']['id'])); ?>
+		</td>
+		<td>
+			<?php echo $this->Html->link($usuario['Candidato']['id'], array('controller' => 'grupos', 'action' => 'view', $usuario['Candidato']['id'])); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $usuario['Usuario']['id'])); ?>
