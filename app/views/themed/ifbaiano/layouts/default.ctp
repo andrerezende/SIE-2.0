@@ -87,7 +87,7 @@
 									<ul>
 										<li><?php echo $this->Html->link('Página Inicial', '#'); ?></li>
 										<li><?php echo $this->Html->link('Nova Inscrição', array('controller' => 'candidatos', 'action' => 'cadastro')); ?></li>
-										<li><?php echo $this->Html->link('Alterar / Imprimir Inscrição', '#'); ?></li>
+										<li><?php echo $this->Html->link('Alterar / Imprimir Inscrição', array('candidato' => true, 'controller' => 'candidatos', 'action' => 'editar')); ?></li>
 										<li><?php echo $this->Html->link('Recuperar Senha', '#'); ?></li>
 										<li><?php echo $this->Html->link('2ª Via Boleto', '#'); ?></li>
 										<li><?php echo $this->Html->link('Página do Concurso', '#'); ?></li>
