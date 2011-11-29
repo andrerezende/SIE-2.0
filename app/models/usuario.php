@@ -5,16 +5,7 @@ class Usuario extends AppModel {
 	public $useTable = 'usuario';
 	public $displayField = 'nome';
 	public $validate = array(
-		'login' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
+
 		'senha' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -37,13 +28,82 @@ class Usuario extends AppModel {
 		)
 	);
 
-	public function beforeSave($options = array()) {
+	public function __construct($id = false, $table = null, $ds = null) {
+		parent::__construct($id, $table, $ds);
+		$this->validate = array(
+			'login' => array(
+				'required' => array(
+					'rule' => array('notEmpty'),
+					'message' => 'Digite um nome de usuário',
+					'required' => true,
+					'allowEmpty' => false,
+				),
+				'unique_username' => array(
+					'rule' => array('isUnique'),
+					'message' => 'Esse nome de usuário já está em uso.',
+				),
+				'username_min' => array(
+					'rule' => array('minLength', '5'),
+					'message' => 'O nome de usuário deve ter pelo menos 3 caracteres.',
+				),
+			),
+			'email' => array(
+				'isValid' => array(
+					'rule' => 'email',
+					'required' => true,
+					'message' => 'Digite um endereço de e-mail válido.',
+				),
+			),
+			'senha' => array(
+				'to_short' => array(
+					'rule' => array('minLength', '6'),
+					'message' => __d('users', 'The password must have at least 6 characters.', true)
+				),
+				'required' => array(
+					'rule' => 'notEmpty',
+					'message' => __d('users', 'Please enter a password.', true)
+				)
+			),
+			'confirme_senha' => array(
+				'rule' => 'confirmPassword',
+				'message' => __d('users', 'The passwords are not equal, please try again.', true)
+			),
+		);
+
+		$this->validatePasswordChange = array(
+			'nova_senha' => $this->validate['senha'],
+			'confirme_senha' => array(
+				'required' => array('rule' => array('compareFields', 'confirm_password'),
+					'required' => true,
+					'message' => 'As senhas não são iguais.'
+				)
+			),
+			'senha_antiga' => array(
+				'to_short' => array(
+					'rule' => 'validateOldPassword',
+					'required' => true,
+					'message' => 'Senha inválida.',
+				)
+			)
+		);
+	}
+
+	public function afterValidate($options = array()) {
 		if (isset($this->data['Usuario']['candidato_id']) && !empty($this->data['Usuario']['candidato_id'])) {
 			if (isset($this->data['Usuario']['senha']) && !empty($this->data['Usuario']['senha'])) {
 				$this->data['Usuario']['senha'] = AuthComponent::password($this->data['Usuario']['senha']);
 			}
 		}
 		return true;
+	}
+
+	public function confirmPassword($password = null) {
+		if (isset($this->data[$this->alias]['senha']) && isset($this->data[$this->alias]['confirme_senha'])
+				&& !empty($password['confirme_senha'])
+				&& ($this->data[$this->alias]['confirme_senha']) == $password['confirme_senha']) {
+			return true;
+		}
+		return false;
 	}
 
 	public function passwordReset($postData = array()) {
