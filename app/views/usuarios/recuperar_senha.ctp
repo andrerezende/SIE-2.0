@@ -3,7 +3,7 @@
 <?php
 echo $this->Form->create('Usuario', array(
 	'url' => array(
-		'action' => 'reset_password',
+		'action' => 'recuperar_senha',
 		$token
 	)
 ));
