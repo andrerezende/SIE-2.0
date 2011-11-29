@@ -8,6 +8,7 @@
  * @subpackage    cake.app
  *
  * @property AuthComponent $Auth
+ * @property EmailComponent $Email
  * @property RequestHandlerComponent $RequestHandler
  * @property PrgComponent $Prg
  * @property SessionComponent $Session
@@ -66,6 +67,7 @@ class AppController extends Controller {
 		$this->_setUpAuth();
 		$this->_setUpUser();
 		$this->_chageLayout();
+		$this->_configureEmail();
 		if ($this->action == 'login') {
 			$this->Auth->autoRedirect = false;
 		}
@@ -106,6 +108,16 @@ class AppController extends Controller {
 			'controller' => 'usuarios',
 			'action' => 'index',
 		);
+	}
+
+	protected function _configureEmail() {
+		$this->Email->smtpOptions = array(
+			'port' => 25,
+			'timeout' => 30,
+			'host' => 'smtp.ifbaiano.edu.br',
+		);
+		$this->Email->delivery = 'smtp';
+		$this->set('smtp_errors', $this->Email->smtpError);
 	}
 
 	protected function _chageLayout() {
