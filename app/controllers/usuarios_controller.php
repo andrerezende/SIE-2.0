@@ -118,7 +118,7 @@ class UsuariosController extends AppController {
 
 	public function _sendPasswordReset($admin = null, $options = array()) {
 		$defaults = array(
-			'from' => 'noreply@' . env('HTTP_HOST'),
+			'from' => 'noreply@ifbaiano.edu.br',
 			'subject' => 'Recuperação de Senha',
 			'template' => 'password_reset_request',
 		);
