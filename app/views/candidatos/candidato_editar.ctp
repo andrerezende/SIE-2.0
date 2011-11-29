@@ -40,7 +40,9 @@
 	});
 </script>
 <div class="candidatos form container container_2">
-	<h4><?php echo $this->Html->link($this->Html->image('action_print.gif'), '#', array('escape' => false));?> / <?php echo $this->Html->link($this->Html->image('file_acrobat.gif'), '#', array('escape' => false));?></h4>
+	<h4>
+		<?php echo $this->Html->link($this->Html->image('action_print.gif') . ' Imprimir', '#', array('escape' => false));?>
+		/ <?php echo $this->Html->link($this->Html->image('file_acrobat.gif') . 'PDF', '#', array('escape' => false));?></h4>
 	<h2 class="title">Ficha de Inscrição</h2>
 	<div style="clear: both;">&nbsp;</div>
 	<div clas="entry">
