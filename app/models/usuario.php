@@ -141,7 +141,7 @@ class Usuario extends AppModel {
 		$result = false;
 		$tmp = $this->validate;
 		$this->validate = array(
-			'nova_senha' => $this->validate['passwd'],
+			'nova_senha' => $this->validate['senha'],
 			'confirme_senha' => array(
 				'required' => array(
 					'rule' => array('compareFields', 'new_password', 'confirm_password'),
