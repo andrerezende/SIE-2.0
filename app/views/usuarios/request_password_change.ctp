@@ -6,7 +6,7 @@
 echo $this->Form->create('Usuario', array(
 	'url' => array(
 		'admin' => false,
-		'action' => 'reset_password'
+		'action' => 'recuperar_senha'
 	)
 ));
 echo $this->Form->input('email', array('label' => 'Seu email'));

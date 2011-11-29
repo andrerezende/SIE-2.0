@@ -123,19 +123,15 @@ class UsuariosController extends AppController {
 			'template' => 'password_reset_request',
 		);
 		$options = array_merge($defaults, $options);
-
 		if (!empty($this->data)) {
 			$usuario = $this->Usuario->passwordReset($this->data);
 			if (!empty($usuario)) {
 				$this->set('token', $usuario['Usuario']['password_token']);
-				//TODO buscar o email do candidato
 				$this->Email->to = $usuario['Usuario']['email'];
 				$this->Email->from = $options['from'];
 				$this->Email->subject = $options['subject'];
 				$this->Email->template = $options['template'];
 				$this->Email->send();
-
-
 				if ($admin) {
 					$this->Session->setFlash('Um email foi enviado com instruções para a alteração de senha');
 					$this->redirect(array('action' => 'index', 'admin' => true));
