@@ -169,6 +169,7 @@ class CandidatosController extends AppController {
 	}
 
 	public function gerar_boleto() {
+		Configure::write('debug', 0);
 		$this->autoRender = false;
 		$dados = array(
 			'sacado' => 'Fulano de Tal',
