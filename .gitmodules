@@ -1,9 +1,6 @@
 [submodule "app/plugins/cake_pdf"]
 	path = app/plugins/cake_pdf
 	url = git@github.com:vitorpc/cake_pdf.git
-[submodule "app/plugins/cake_ptbr"]
-	path = app/plugins/cake_ptbr
-	url = http://github.com/jrbasso/cake_ptbr.git
 [submodule "app/plugins/lazy_model"]
 	path = app/plugins/lazy_model
 	url = http://github.com/Phally/lazy_model.git
@@ -13,3 +10,6 @@
 [submodule "app/plugins/search"]
 	path = app/plugins/search
 	url = http://github.com/CakeDC/search.git
+[submodule "app/plugins/cake_ptbr"]
+	path = app/plugins/cake_ptbr
+	url = https://github.com/jrbasso/cake_ptbr.git
