@@ -168,4 +168,16 @@ class CandidatosController extends AppController {
 		$this->set(compact('unidadeFederativas', 'sexos', 'paises', 'estadoCivis', 'necessidadeEspeciais', 'municipios', 'naturalidadeMunicipios'));
 	}
 
+	public function gerar_boleto() {
+		$this->autoRender = false;
+		$dados = array(
+			'sacado' => 'Fulano de Tal',
+			'endereco1' => 'Rua do Fulano de Tal, 88',
+			'endereco2' => 'Curitiba/PR',
+			'valor_cobrado' => 100.56,
+			'pedido' => 5,
+		);
+		$this->BoletoBb->render($dados);
+	}
+
 }

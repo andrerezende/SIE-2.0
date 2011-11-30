@@ -8,6 +8,7 @@
  * @subpackage    cake.app
  *
  * @property AuthComponent $Auth
+ * @property BoletoBbComponent $BoletoBb
  * @property EmailComponent $Email
  * @property RequestHandlerComponent $RequestHandler
  * @property PrgComponent $Prg
@@ -44,6 +45,7 @@ class AppController extends Controller {
 	 */
 	public $components = array(
 		'Auth',
+		'Boletos.BoletoBb',
 		'Email',
 		'RequestHandler',
 		'Search.Prg',
