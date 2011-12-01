@@ -181,4 +181,8 @@ class CandidatosController extends AppController {
 		$this->BoletoBb->render($dados);
 	}
 
+	public function imprimir() {
+		debug($this->Auth->user());
+	}
+
 }
