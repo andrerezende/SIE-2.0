@@ -41,7 +41,7 @@
 </script>
 <div class="candidatos form container container_2">
 	<h4>
-		<?php echo $this->Html->link($this->Html->image('action_print.gif') . ' Imprimir', '#', array('escape' => false));?>
+		<?php echo $this->Html->link($this->Html->image('action_print.gif') . ' Imprimir', array('controller' => 'candidato', 'action' => 'imprimir'), array('escape' => false));?>
 		/ <?php echo $this->Html->link($this->Html->image('file_acrobat.gif') . ' PDF', '#', array('escape' => false));?></h4>
 	<h2 class="title">Ficha de Inscrição</h2>
 	<div style="clear: both;">&nbsp;</div>
