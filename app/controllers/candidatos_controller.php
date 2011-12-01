@@ -168,7 +168,7 @@ class CandidatosController extends AppController {
 		$this->set(compact('unidadeFederativas', 'sexos', 'paises', 'estadoCivis', 'necessidadeEspeciais', 'municipios', 'naturalidadeMunicipios'));
 	}
 
-	public function gerar_boleto() {
+	public function candidato_gerar_boleto() {
 		Configure::write('debug', 0);
 		$this->autoRender = false;
 		$dados = array(
@@ -181,7 +181,7 @@ class CandidatosController extends AppController {
 		$this->BoletoBb->render($dados);
 	}
 
-	public function imprimir() {
+	public function candidato_imprimir() {
 		debug($this->Auth->user());
 	}
 
