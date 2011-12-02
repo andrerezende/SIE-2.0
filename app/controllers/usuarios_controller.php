@@ -11,7 +11,7 @@ class UsuariosController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow('login', 'recuperar_senha');
+		$this->Auth->allow('login', 'recuperar_senha', 'logout');
 	}
 
 	public function admin_index() {
@@ -98,7 +98,7 @@ class UsuariosController extends AppController {
 		}
 	}
 
-	public function admin_logout() {
+	public function logout() {
 		$this->Session->setFlash('Logout');
 		$this->redirect($this->Auth->logout());
 	}
