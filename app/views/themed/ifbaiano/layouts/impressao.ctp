@@ -6,66 +6,295 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>Instituto Federal Baiano</title>
 		<?php
-		echo $this->Html->css(
-			array(
-				'grid',
-				'publico',
-			), null, array('media' => 'screen'
-		));
-
-		echo $this->Html->script(array(
-			'jquery'
-		));
-
-		echo $scripts_for_layout;
+//		echo $this->Html->css(
+//			array(
+//				'grid',
+//				'impressao',
+//			), null, array('media' => 'screen')
+//		);
+//		echo $scripts_for_layout;
 		?>
-		<script type="text/javascript">
-			/*
-			 *  jquery.currentpage.js
-			 *  Adds a class to current page for navigation links.
-			 *  Chad Jolly http://www.jollycomputers.com/
-			 */
-			jQuery.fn.currentPage = function(){
+		<style type="text/css">
 
-				/* Default Settings */
-				var settings = {
-					loc : location.pathname,
-					sel : '',
-					currentClass : 'current_page_item'
-				}
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+* {
+	margin:0;
+	padding:0;
+}
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #787878;
+}
 
-				/* break location down to the controller, no trailing slash */
-				if (settings.loc != '/') {
-					controller = settings.loc.split('/',2);
-					settings.loc = '/'+ controller[1];
-					settings.sel = '^';
-				}
+h1, h2, h3 {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	color: #000000;
+}
 
-				var selector = 'a[href'+settings.sel+'="'+settings.loc+'"]';
+h1 {
+	font-size: 2em;
+}
 
-				/* attach settings.currentClass to appropriate link */
-				return this.each(function(){
-					jQuery(this).find(selector).parent().addClass(settings.currentClass);
-				});
-			};
+h2 {
+	font-size: 2.4em;
+}
 
-			$(document).ready(function() {
-				$('#menu').currentPage();
-			})
-		</script>
+h3 {
+	font-size: 1.6em;
+}
+
+p, ul, ol {
+	margin-top: 0;
+	line-height: 180%;
+}
+
+ul, ol {
+}
+
+a {
+	text-decoration: none;
+	color: #7EAD01;
+}
+
+a:hover {
+}
+
+#wrapper {
+	width: 1024px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+/* Header */
+
+#header {
+	clear: both;
+	width: 1024px;
+	height: 178px;
+	margin: 0 auto;
+	padding: 0px;
+	border: 2px solid #BDCC94;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+/* Logo */
+
+#logo {
+	margin: 0;
+	padding: 0px 0px 0px 60px;
+	color: #000000;
+}
+
+#logo h1, #logo p {
+	margin: 0;
+	padding: 0;
+}
+
+#logo h1 {
+	padding-top: 160px;
+	letter-spacing: -1px;
+	text-transform: lowercase;
+	font-size: 3.8em;
+}
+
+#logo p {
+	margin: 0;
+	padding: 0px 0 0 10px;
+	font: normal 14px Georgia, "Times New Roman", Times, serif;
+	font-style: italic;
+	color: #FFFFFF;
+}
+
+#logo a {
+	border: none;
+	background: none;
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+/* Search */
+
+#search {
+	float: right;
+	width: 280px;
+	height: 60px;
+	padding: 10px 0px 0px 0px;
+	background: #E2E2E2;
+	border-bottom: 4px solid #FFFFFF;
+}
+
+/** Tables **/
+table {
+	background: #fff;
+	border-right:0;
+	clear: both;
+	color: #333;
+	margin-bottom: 10px;
+	width: 100%;
+}
+th {
+	min-width: 70px;
+	border:0;
+	border-bottom:2px solid #555;
+	text-align: left;
+	padding:4px;
+}
+th a {
+	display: block;
+	padding: 2px 4px;
+	text-decoration: none;
+}
+th a.asc:after {
+	content: ' ⇣';
+}
+th a.desc:after {
+	content: ' ⇡';
+}
+table tr td {
+	background: #fff;
+	padding: 6px;
+	text-align: left;
+	vertical-align: top;
+	border-bottom:1px solid #ddd;
+}
+table tr:nth-child(2n) td {
+	background: #f5f5f5;
+}
+table .altrow td {
+	background: #f5f5f5;
+}
+td.actions {
+	text-align: center;
+	white-space: nowrap;
+}
+table td.actions a {
+	margin: 0px 6px;
+	padding:2px 5px;
+}
+
+/* Page */
+
+#page {
+	width: 1024px;
+	margin: 0 auto;
+	padding: 0px 0px 0px 0px;
+}
+
+#page-bgtop {
+	padding: 20px 0px;
+}
+
+#page-bgbtm {
+}
+
+/* Content */
+
+#content {
+	float: right;
+	width: 100%;
+	padding: 0px 0px 0px 0px;
+}
+
+.post {
+	margin-bottom: 15px;
+}
+
+.post-bgtop {
+}
+
+.post-bgbtm {
+}
+
+.post h4 {
+	text-align: right;
+}
+
+.post .title {
+	height: 38px;
+	margin-bottom: 10px;
+	padding: 12px 0 0 0px;
+	letter-spacing: -.5px;
+	color: #000000;
+}
+
+.post .title a {
+	color: #000000;
+	border: none;
+}
+
+.post .meta {
+	margin-bottom: 30px;
+	padding: 5px 0px 15px 0px;
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.post .meta .date {
+	float: left;
+}
+
+.post .meta .posted {
+	float: right;
+}
+
+.post .meta a {
+}
+
+.post .entry {
+	padding: 0px 0px 20px 0px;
+	padding-bottom: 20px;
+	text-align: justify;
+}
+
+.links {
+	padding-top: 20px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+
+div.page {
+	width: 700px;
+}
+
+dl {
+	line-height: 2em;
+	margin: 0em 0em;
+	width: 100%;
+}
+dl dd:nth-child(4n+2),
+dl dt:nth-child(4n+1) {
+	background: #f4f4f4;
+}
+
+dt {
+	font-weight: bold;
+	padding-left: 4px;
+	vertical-align: top;
+	width: 15em;
+}
+dd {
+	margin-left: 15em;
+	margin-top: -2em;
+	vertical-align: top;
+}
+		</style>
 	</head>
 	<body>
 		<div id="wrapper">
-			<div id="menu">
-				<ul>
-					<li><?php echo $this->Html->link("Home", '/'); ?></li>
-					<li><?php echo $this->Html->link('Login', array(
-							'admin' => false,
-							'controller' => 'usuarios',
-							'action' => 'login'));
-					?></li>
-				</ul>
-			</div>
 			<div id="header">
 				<h1><?php echo $this->Html->image('topo-ifbaiano.png');?></h1>
 			</div>
@@ -81,21 +310,6 @@
 							<div style="clear: both;">&nbsp;</div>
 						</div>
 						<!-- end #content -->
-						<div id="sidebar">
-							<ul>
-								<li>
-									<ul>
-										<li><?php echo $this->Html->link('Página Inicial', '#'); ?></li>
-										<li><?php echo $this->Html->link('Nova Inscrição', array('controller' => 'candidatos', 'action' => 'cadastro')); ?></li>
-										<li><?php echo $this->Html->link('Alterar / Imprimir Inscrição', array('candidato' => true, 'controller' => 'candidatos', 'action' => 'editar')); ?></li>
-										<li><?php echo $this->Html->link('Recuperar Senha', array('controller' => 'usuarios', 'action' => 'recuperar_senha')); ?></li>
-										<li><?php echo $this->Html->link('2ª Via Boleto', '#'); ?></li>
-										<li><?php echo $this->Html->link('Página do Concurso', '#'); ?></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-						<!-- end #sidebar -->
 						<div style="clear: both;">&nbsp;</div>
 					</div>
 				</div>
