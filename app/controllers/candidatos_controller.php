@@ -182,7 +182,17 @@ class CandidatosController extends AppController {
 	}
 
 	public function candidato_imprimir() {
-		debug($this->Auth->user());
+		$this->layout = 'impressao';
+		$this->Candidato->recursive = 1;
+		$this->set('candidato', $this->Candidato->find('first', array('conditions' => array('Candidato.id' => $this->Auth->user('candidato_id')))));
+	}
+
+	public function candidato_imprimir_pdf() {
+		Configure::write('debug', 0);
+		$this->layout = 'impressao';
+		$this->Candidato->recursive = 1;
+		$this->set('candidato', $this->Candidato->find('first', array('conditions' => array('Candidato.id' => $this->Auth->user('candidato_id')))));
+		
 	}
 
 }
