@@ -62,4 +62,16 @@ class LocalProvasController extends AppController {
 		$this->Session->setFlash(__('Local prova was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+
+	public function ajax_get_local_prova() {
+		Configure::write('debug', 0);
+		$this->layout = 'ajax';
+		if ($this->RequestHandler->isAjax()) {
+			FireCake::dump('data', $this->data);
+			$this->LocalProva->contain();
+			$localProvas = $this->LocalProva->find('list', array('conditions' => array('Selecao.id' => $this->data['Selecao']['id'])));
+			FireCake::dump('localProvas', $municipios);
+			$this->set(compact('localProvas'));
+		}
+	}
 }
