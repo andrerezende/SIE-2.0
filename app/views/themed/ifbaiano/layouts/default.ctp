@@ -56,16 +56,6 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<div id="menu">
-				<ul>
-					<li><?php echo $this->Html->link("Home", '/'); ?></li>
-					<li><?php echo $this->Html->link('Login', array(
-							'admin' => false,
-							'controller' => 'usuarios',
-							'action' => 'login'));
-					?></li>
-				</ul>
-			</div>
 			<div id="header">
 				<h1><?php echo $this->Html->image('topo-ifbaiano.png');?></h1>
 			</div>
@@ -88,6 +78,9 @@
 										<li><?php echo $this->Html->link('Página Inicial', '#'); ?></li>
 										<li><?php echo $this->Html->link('Nova Inscrição', array('candidato' => false, 'prefix' => false, 'controller' => 'candidatos', 'action' => 'cadastro')); ?></li>
 										<li><?php echo $this->Html->link('Alterar / Imprimir Inscrição', array('candidato' => true, 'controller' => 'candidatos', 'action' => 'editar')); ?></li>
+										<?php if (isset($userData) && !empty($userData)):?>
+											<li><?php echo $this->Html->link('Processos Seletivos', array('candidato' => true, 'controller' => 'processo_seletivos', 'action' => 'listar')); ?></li>
+										<?php endif;?>
 										<li><?php echo $this->Html->link('Recuperar Senha', array('controller' => 'usuarios', 'action' => 'recuperar_senha')); ?></li>
 										<li><?php echo $this->Html->link('2ª Via Boleto', '#'); ?></li>
 										<li><?php echo $this->Html->link('Página do Concurso', '#'); ?></li>
