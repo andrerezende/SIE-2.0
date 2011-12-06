@@ -117,28 +117,32 @@ class CandidatosController extends AppController {
 	}
 
 	public function cadastro() {
-		if (!empty($this->data)) {
-			$this->Candidato->create();
-			$this->data['Usuario']['login'] = $this->data['Candidato']['cpf'];
-			$this->data['Usuario']['nome'] = $this->data['Candidato']['nome'];
-			$this->data['Usuario']['email'] = $this->data['Candidato']['email'];
-			if ($this->Candidato->save($this->data)) {
-				$this->data['Usuario']['candidato_id'] = $this->Candidato->id;
-				$this->data['Usuario']['grupo_id'] = 1;
-				if ($this->Candidato->Usuario->save($this->data['Usuario'])) {
-					$this->Session->setFlash(__('Inscrição concluída', true));
-					$this->redirect('/');
+		if (!$this->Auth->user()) {
+			if (!empty($this->data)) {
+				$this->Candidato->create();
+				$this->data['Usuario']['login'] = $this->data['Candidato']['cpf'];
+				$this->data['Usuario']['nome'] = $this->data['Candidato']['nome'];
+				$this->data['Usuario']['email'] = $this->data['Candidato']['email'];
+				if ($this->Candidato->save($this->data)) {
+					$this->data['Usuario']['candidato_id'] = $this->Candidato->id;
+					$this->data['Usuario']['grupo_id'] = 1;
+					if ($this->Candidato->Usuario->save($this->data['Usuario'])) {
+						$this->Session->setFlash(__('Inscrição concluída', true));
+						$this->redirect('/');
+					}
+				} else {
+					$this->Session->setFlash(__('A inscrição não pôde ser efetuada. Por favor, tente novamente.', true));
 				}
-			} else {
-				$this->Session->setFlash(__('A inscrição não pôde ser efetuada. Por favor, tente novamente.', true));
 			}
+			$sexos = $this->Candidato->Sexo->find('list');
+			$unidadeFederativas = $this->Candidato->UnidadeFederativa->find('list');
+			$paises = $this->Candidato->Pais->find('list');
+			$estadoCivis = $this->Candidato->EstadoCivil->find('list');
+			$necessidadeEspeciais = $this->Candidato->NecessidadeEspecial->find('list');
+			$this->set(compact('unidadeFederativas', 'sexos', 'paises', 'estadoCivis', 'necessidadeEspeciais'));
+		} else {
+			$this->redirect(array('controller' => 'inscricoes', 'action' => 'add'));
 		}
-		$sexos = $this->Candidato->Sexo->find('list');
-		$unidadeFederativas = $this->Candidato->UnidadeFederativa->find('list');
-		$paises = $this->Candidato->Pais->find('list');
-		$estadoCivis = $this->Candidato->EstadoCivil->find('list');
-		$necessidadeEspeciais = $this->Candidato->NecessidadeEspecial->find('list');
-		$this->set(compact('unidadeFederativas', 'sexos', 'paises', 'estadoCivis', 'necessidadeEspeciais'));
 	}
 
 	public function candidato_editar($id = null) {

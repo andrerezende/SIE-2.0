@@ -1,86 +1,69 @@
 <div class="candidatos view">
 <h2><?php  __('Ficha do Candidato');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nome'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['Candidato']['nome']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('CPF'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['Candidato']['cpf']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('RG'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['Candidato']['rg']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Orgão Expedidor'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['Candidato']['orgao_expedidor'] . ' - ' . $candidato['OrgaoExpedidorUnidadeFederativa']['descricao'];?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Data de Expedição'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Formatacao->data($candidato['Candidato']['data_expedicao']); ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nacionalidade'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['NacionalidadePais']['nome']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Naturalidade'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['NaturalidadeMunicipio']['nome']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Data de Nascimento'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Formatacao->data($candidato['Candidato']['data_nascimento']); ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Sexo'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['Sexo']['descricao']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Endereço'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['Candidato']['endereco'] . ', ' . $candidato['Candidato']['bairro'] . ', ' . $candidato['Municipio']['nome']; ?>
-			<br />
-			<?php echo $candidato['Candidato']['cep']; ?>
-			<br />
-			<?php echo $candidato['UnidadeFederativa']['descricao'] . ' - ' . $candidato['Pais']['nome']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Estado Civil'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['EstadoCivil']['descricao']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Telefone'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['Candidato']['telefone']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Celular'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['Candidato']['celular']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Email'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['Candidato']['email']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Necessidades Especiais'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $candidato['NecessidadeEspecial']['descricao']; ?>
-			&nbsp;
-		</dd>
-	</dl>
+	<table>
+		<tr>
+			<td class="table-label"><?php __('Nome'); ?></td>
+			<td><?php echo $candidato['Candidato']['nome']; ?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('CPF'); ?></td>
+			<td><?php echo $candidato['Candidato']['cpf']; ?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('RG'); ?></td>
+			<td><?php echo $candidato['Candidato']['rg']; ?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('Orgão Expedidor'); ?></td>
+			<td><?php echo $candidato['Candidato']['orgao_expedidor'] . ' - ' . $candidato['OrgaoExpedidorUnidadeFederativa']['descricao'];?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('Data de Expedição'); ?></td>
+			<td><?php echo $this->Formatacao->data($candidato['Candidato']['data_expedicao']); ?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('Nacionalidade'); ?></td>
+			<td><?php echo $candidato['NacionalidadePais']['nome']; ?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('Data de Nascimento'); ?></td>
+			<td><?php echo $this->Formatacao->data($candidato['Candidato']['data_nascimento']); ?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('Sexo'); ?></td>
+			<td><?php echo $candidato['Sexo']['descricao']; ?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('Endereço'); ?></td>
+			<td>
+				<?php echo $candidato['Candidato']['endereco'] . ', ' . $candidato['Candidato']['bairro'] . ', ' . $candidato['Municipio']['nome']; ?>
+				<br />
+				<?php echo $candidato['Candidato']['cep']; ?>
+				<br />
+				<?php echo $candidato['UnidadeFederativa']['descricao'] . ' - ' . $candidato['Pais']['nome']; ?>
+			</td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('Estado Civil'); ?></td>
+			<td><?php echo $candidato['EstadoCivil']['descricao']; ?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('Telefone'); ?></td>
+			<td><?php echo $candidato['Candidato']['telefone']; ?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('Celular'); ?></td>
+			<td><?php echo $candidato['Candidato']['celular']; ?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('Email'); ?></td>
+			<td><?php echo $candidato['Candidato']['email']; ?></td>
+		</tr>
+		<tr>
+			<td class="table-label"><?php __('Necessidades Especiais'); ?></td>
+			<td><?php echo $candidato['NecessidadeEspecial']['descricao']; ?></td>
+		</tr>
+	</table>
 </div>
 <br />
 <div class="related">
@@ -114,6 +97,6 @@
 	<?php endforeach; ?>
 	</table>
 <?php else: ?>
-	<h3><?php __('Candidato Sem Inscrições');?></h3>
+	<h4><?php __('Candidato Sem Inscrições');?></h4>
 <?php endif; ?>
 </div>

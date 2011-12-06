@@ -270,26 +270,10 @@ div.page {
 	width: 700px;
 }
 
-dl {
-	line-height: 2em;
-	margin: 0em 0em;
-	width: 100%;
-}
-dl dd:nth-child(4n+2),
-dl dt:nth-child(4n+1) {
-	background: #f4f4f4;
-}
-
-dt {
+.table-label {
+	text-transform: uppercase;
 	font-weight: bold;
-	padding-left: 4px;
-	vertical-align: top;
-	width: 15em;
-}
-dd {
-	margin-left: 15em;
-	margin-top: -2em;
-	vertical-align: top;
+	width: 20%;
 }
 		</style>
 	</head>
