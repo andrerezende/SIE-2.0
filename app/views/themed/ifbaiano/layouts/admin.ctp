@@ -25,7 +25,7 @@
 			<div id="menu">
 				<ul>
 					<li class="current_page_item"><?php echo $this->Html->link('Home', '/'); ?></li>
-					<li><?php echo $this->Html->link('Logout', array('admin' => true, 'controller' => 'usuarios', 'action' => 'logout')); ?></li>
+					<li><?php echo $this->Html->link('Logout', array('admin' => false, 'controller' => 'usuarios', 'action' => 'logout')); ?></li>
 				</ul>
 			</div>
 			<!-- end #menu -->
@@ -62,7 +62,7 @@
 										<li><?php echo $this->Html->link('Notas', array('controller' => 'notas', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Pagamentos', array('controller' => 'pagamentos', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Países', array('controller' => 'paises', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Processos Seletivos', array('controller' => 'Processo Seletivos', 'action' => 'index')); ?></li>
+										<li><?php echo $this->Html->link('Processos Seletivos', array('controller' => 'processo_seletivos', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Provas', array('controller' => 'provas', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Seleções', array('controller' => 'selecoes', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Sexos', array('controller' => 'sexos', 'action' => 'index')); ?></li>

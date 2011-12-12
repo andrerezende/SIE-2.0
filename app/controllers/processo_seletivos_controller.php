@@ -1,14 +1,14 @@
 <?php
 class ProcessoSeletivosController extends AppController {
 
-	var $name = 'ProcessoSeletivos';
+	public $name = 'ProcessoSeletivos';
 
-	function index() {
+	public function admin_index() {
 		$this->ProcessoSeletivo->recursive = 0;
 		$this->set('processoSeletivos', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid processo seletivo', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class ProcessoSeletivosController extends AppController {
 		$this->set('processoSeletivo', $this->ProcessoSeletivo->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->ProcessoSeletivo->create();
 			if ($this->ProcessoSeletivo->save($this->data)) {
@@ -30,7 +30,7 @@ class ProcessoSeletivosController extends AppController {
 		$this->set(compact('editais'));
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid processo seletivo', true));
 			$this->redirect(array('action' => 'index'));
@@ -50,7 +50,7 @@ class ProcessoSeletivosController extends AppController {
 		$this->set(compact('editais'));
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for processo seletivo', true));
 			$this->redirect(array('action'=>'index'));
@@ -62,4 +62,19 @@ class ProcessoSeletivosController extends AppController {
 		$this->Session->setFlash(__('Processo seletivo was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+
+	public function candidato_listar() {
+		$this->paginate = array(
+			'conditions' => array(
+				'ProcessoSeletivo.data_inicio_inscricoes <=' => date('Y-m-d H:i:s'),
+				'ProcessoSeletivo.data_fim_inscricoes >=' => date('Y-m-d H:i:s'),
+				'ProcessoSeletivo.ativo_web' => 1,
+			),
+		);
+		$processoSeletivos = $this->paginate();
+		$campus = $this->ProcessoSeletivo->Selecao->Campus->find('list');
+		$cursos = $this->ProcessoSeletivo->Selecao->Curso->find('list');
+		$this->set(compact('processoSeletivos', 'campus', 'cursos'));
+	}
+
 }

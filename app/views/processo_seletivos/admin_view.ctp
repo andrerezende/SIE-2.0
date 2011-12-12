@@ -21,16 +21,6 @@
 			<?php echo $processoSeletivo['ProcessoSeletivo']['data_fim_inscricoes']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Hora Inicio Inscricoes'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $processoSeletivo['ProcessoSeletivo']['hora_inicio_inscricoes']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Hora Fim Inscricoes'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $processoSeletivo['ProcessoSeletivo']['hora_fim_inscricoes']; ?>
-			&nbsp;
-		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Ativo Web'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $processoSeletivo['ProcessoSeletivo']['ativo_web']; ?>
@@ -38,21 +28,9 @@
 		</dd>
 	</dl>
 </div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Processo Seletivo', true), array('action' => 'edit', $processoSeletivo['ProcessoSeletivo']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Delete Processo Seletivo', true), array('action' => 'delete', $processoSeletivo['ProcessoSeletivo']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $processoSeletivo['ProcessoSeletivo']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Processo Seletivos', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Processo Seletivo', true), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Editais', true), array('controller' => 'editais', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Edital', true), array('controller' => 'editais', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Selecoes', true), array('controller' => 'selecoes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Selecao', true), array('controller' => 'selecoes', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
 <div class="related">
-	<h3><?php __('Related Selecoes');?></h3>
+	<h3><?php __('Selecões');?></h3>
+	<h5><?php echo $this->Html->link(__('Adicionar Seleção', true), array('controller' => 'selecoes', 'action' => 'add', $processoSeletivo['ProcessoSeletivo']['id']));?></h5>
 	<?php if (!empty($processoSeletivo['Selecao'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
@@ -93,7 +71,7 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $this->Html->link(__('New Selecao', true), array('controller' => 'selecoes', 'action' => 'add'));?> </li>
+			<li> </li>
 		</ul>
 	</div>
 </div>

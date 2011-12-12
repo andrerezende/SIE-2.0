@@ -75,11 +75,13 @@
 							<ul>
 								<li>
 									<ul>
-										<li><?php echo $this->Html->link('Página Inicial', '#'); ?></li>
-										<li><?php echo $this->Html->link('Nova Inscrição', array('candidato' => false, 'prefix' => false, 'controller' => 'candidatos', 'action' => 'cadastro')); ?></li>
-										<li><?php echo $this->Html->link('Alterar / Imprimir Inscrição', array('candidato' => true, 'controller' => 'candidatos', 'action' => 'editar')); ?></li>
+										<li><?php echo $this->Html->link('Página Inicial', '/'); ?></li>
 										<?php if (isset($userData) && !empty($userData)):?>
+											<li><?php echo $this->Html->link('Alterar / Imprimir Inscrição', array('candidato' => true, 'controller' => 'candidatos', 'action' => 'editar', $userData['Usuario']['candidato_id'])); ?></li>
 											<li><?php echo $this->Html->link('Processos Seletivos', array('candidato' => true, 'controller' => 'processo_seletivos', 'action' => 'listar')); ?></li>
+										<?php else: ?>
+											<li><?php echo $this->Html->link('Nova Inscrição', array('candidato' => false, 'prefix' => false, 'controller' => 'candidatos', 'action' => 'cadastro')); ?></li>
+											<li><?php echo $this->Html->link('Alterar / Imprimir Inscrição', array('candidato' => true, 'controller' => 'candidatos', 'action' => 'editar')); ?></li>
 										<?php endif;?>
 										<li><?php echo $this->Html->link('Recuperar Senha', array('controller' => 'usuarios', 'action' => 'recuperar_senha')); ?></li>
 										<li><?php echo $this->Html->link('2ª Via Boleto', '#'); ?></li>

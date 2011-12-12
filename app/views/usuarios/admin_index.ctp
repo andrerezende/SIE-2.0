@@ -9,7 +9,6 @@
 		<th><?php echo $this->Paginator->sort('login');?></th>
 		<th><?php echo $this->Paginator->sort('senha');?></th>
 		<th><?php echo $this->Paginator->sort('grupo_id');?></th>
-		<th><?php echo $this->Paginator->sort('candidato_id');?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -28,9 +27,6 @@
 		<td><?php echo $usuario['Usuario']['senha']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($usuario['Grupo']['id'], array('controller' => 'grupos', 'action' => 'view', $usuario['Grupo']['id'])); ?>
-		</td>
-		<td>
-			<?php echo $this->Html->link($usuario['Candidato']['id'], array('controller' => 'grupos', 'action' => 'view', $usuario['Candidato']['id'])); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $usuario['Usuario']['id'])); ?>

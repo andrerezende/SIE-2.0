@@ -83,22 +83,24 @@ class UsuariosController extends AppController {
 					'action' => 'editar',
 					$this->Auth->user('candidato_id')
 				)));
+				$this->set('isCandidato', true);
 			} elseif ($this->Auth->user('grupo_id') == 2) {
 				$this->redirect($this->Auth->redirect(array(
 					'admin' => true,
 					'controller' => 'usuarios',
 					'action' => 'index'
 				)));
+				$this->set('isCandidato', false);
 			}
 		}
-		if ($this->Session->read('Auth.redirect') == '/candidato/editar') {
+		$this->set('isCandidato', false);
+		if ($this->Session->read('Auth.redirect') == '/candidato/candidatos/editar') {
 			$this->set('isCandidato', true);
-		} else {
-			$this->set('isCandidato', false);
 		}
 	}
 
 	public function logout() {
+		$this->set('isCandidato', false);
 		$this->Session->setFlash('Logout');
 		$this->redirect($this->Auth->logout());
 	}

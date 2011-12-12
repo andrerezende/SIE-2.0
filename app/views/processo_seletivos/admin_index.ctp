@@ -7,8 +7,6 @@
 		<th><?php echo $this->Paginator->sort('edital_id');?></th>
 		<th><?php echo $this->Paginator->sort('data_inicio_inscricoes');?></th>
 		<th><?php echo $this->Paginator->sort('data_fim_inscricoes');?></th>
-		<th><?php echo $this->Paginator->sort('hora_inicio_inscricoes');?></th>
-		<th><?php echo $this->Paginator->sort('hora_fim_inscricoes');?></th>
 		<th><?php echo $this->Paginator->sort('ativo_web');?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
@@ -27,8 +25,6 @@
 		</td>
 		<td><?php echo $processoSeletivo['ProcessoSeletivo']['data_inicio_inscricoes']; ?>&nbsp;</td>
 		<td><?php echo $processoSeletivo['ProcessoSeletivo']['data_fim_inscricoes']; ?>&nbsp;</td>
-		<td><?php echo $processoSeletivo['ProcessoSeletivo']['hora_inicio_inscricoes']; ?>&nbsp;</td>
-		<td><?php echo $processoSeletivo['ProcessoSeletivo']['hora_fim_inscricoes']; ?>&nbsp;</td>
 		<td><?php echo $processoSeletivo['ProcessoSeletivo']['ativo_web']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $processoSeletivo['ProcessoSeletivo']['id'])); ?>

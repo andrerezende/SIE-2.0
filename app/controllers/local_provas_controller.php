@@ -1,14 +1,14 @@
 <?php
 class LocalProvasController extends AppController {
 
-	var $name = 'LocalProvas';
+	public $name = 'LocalProvas';
 
-	function index() {
+	public function admin_index() {
 		$this->LocalProva->recursive = 0;
 		$this->set('localProvas', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid local prova', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class LocalProvasController extends AppController {
 		$this->set('localProva', $this->LocalProva->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->LocalProva->create();
 			if ($this->LocalProva->save($this->data)) {
@@ -30,7 +30,7 @@ class LocalProvasController extends AppController {
 		$this->set(compact('selecoes'));
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid local prova', true));
 			$this->redirect(array('action' => 'index'));
@@ -50,7 +50,7 @@ class LocalProvasController extends AppController {
 		$this->set(compact('selecoes'));
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for local prova', true));
 			$this->redirect(array('action'=>'index'));
@@ -67,11 +67,15 @@ class LocalProvasController extends AppController {
 		Configure::write('debug', 0);
 		$this->layout = 'ajax';
 		if ($this->RequestHandler->isAjax()) {
-			FireCake::dump('data', $this->data);
-			$this->LocalProva->contain();
-			$localProvas = $this->LocalProva->find('list', array('conditions' => array('Selecao.id' => $this->data['Selecao']['id'])));
-			FireCake::dump('localProvas', $municipios);
+			$this->LocalProva->recursive = 0;
+			$this->LocalProva->bindModel(array('hasOne' => array('LocalProvaSelecao')));
+			$localProvas = $this->LocalProva->find('all', array(
+				'conditions' => array('LocalProvaSelecao.selecao_id' => $this->data['id']),
+				'fields' => array('LocalProva.id', 'LocalProva.descricao'),
+			));
+			$localProvas = Set::combine($localProvas, '{n}.LocalProva.id', '{n}.LocalProva.descricao');
 			$this->set(compact('localProvas'));
 		}
 	}
+
 }
