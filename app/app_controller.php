@@ -34,6 +34,7 @@ class AppController extends Controller {
 		'Js' => 'Jquery',
 		'Session',
 		'Text',
+		'Util',
 	);
 
 	/**
@@ -76,7 +77,7 @@ class AppController extends Controller {
 	}
 
 	protected function _setUpAuth() {
-//		$this->Auth->authorize = 'actions';
+		$this->Auth->authorize = 'controller';
 //		$this->Auth->actionPath = 'controllers/';
 		$this->_setUpAuthModel();
 		$this->_setUpAuthActions();
@@ -132,14 +133,16 @@ class AppController extends Controller {
 	}
 
 	public function isAuthorized() {
-		if (strpos($this->action, 'admin_') != false) {
-			if ($this->Auth->role('grupo_id') == 2) {
+		if (strpos($this->action, 'admin_') !== false) {
+			if ($this->Auth->user('grupo_id') == 2) {
 				return true;
 			}
-		} elseif (strpos($this->action, 'candidato_') != false) {
-			if ($this->Auth->role('grupo_id') == 1) {
+		} elseif (strpos($this->action, 'candidato_') !== false) {
+			if ($this->Auth->user('grupo_id') == 1) {
 				return true;
 			}
+		} elseif (strpos($this->action, 'ajax_') !== false) {
+			return true;
 		}
 		return false;
 	}
