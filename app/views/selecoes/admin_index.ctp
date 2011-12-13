@@ -10,6 +10,7 @@
 		<th><?php echo $this->Paginator->sort('ativo_web');?></th>
 		<th><?php echo $this->Paginator->sort('vagas');?></th>
 		<th><?php echo $this->Paginator->sort('encerrado');?></th>
+		<th><?php echo $this->Paginator->sort('valor_inscricao');?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -34,6 +35,7 @@
 		<td><?php echo $selecao['Selecao']['ativo_web']; ?>&nbsp;</td>
 		<td><?php echo $selecao['Selecao']['vagas']; ?>&nbsp;</td>
 		<td><?php echo $selecao['Selecao']['encerrado']; ?>&nbsp;</td>
+		<td><?php echo $selecao['Selecao']['valor_inscricao']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $selecao['Selecao']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $selecao['Selecao']['id'])); ?>

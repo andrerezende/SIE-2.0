@@ -9,6 +9,7 @@
 		echo $this->Form->input('ativo_web', array('type' => 'checkbox'));
 		echo $this->Form->input('vagas');
 		echo $this->Form->input('encerrado', array('type' => 'hidden', 'value' => 0));
+		echo $this->Form->input('valor_inscricao', array('label' => 'Valor da Inscrição'));
 		echo $this->Form->input('LocalProva', array('multiple' => 'checkbox', 'label' => 'Local de Prova'));
 	?>
 	</fieldset>
