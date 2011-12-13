@@ -27,6 +27,7 @@
  * to use (in this case, /app/views/pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	Router::connect('/login', array('controller' => 'usuarios', 'action' => 'login'));
 	Router::connect('/admin/:controller/:action/*', array('admin' => true));
 	Router::connect('/candidato/:controller/:action/*', array('candidato' => true));
 /**
