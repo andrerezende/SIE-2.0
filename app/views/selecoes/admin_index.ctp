@@ -3,7 +3,6 @@
 	<h2><?php __('Seleções');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-		<th><?php echo $this->Paginator->sort('id');?></th>
 		<th><?php echo $this->Paginator->sort('campus_id');?></th>
 		<th><?php echo $this->Paginator->sort('curso_id');?></th>
 		<th><?php echo $this->Paginator->sort('processo_seletivo_id');?></th>
@@ -22,12 +21,11 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $selecao['Selecao']['id']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($selecao['Campus']['nome'], array('controller' => 'campus', 'action' => 'view', $selecao['Campus']['id'])); ?>
 		</td>
 		<td>
-			<?php echo $this->Html->link($selecao['Curso']['id'], array('controller' => 'cursos', 'action' => 'view', $selecao['Curso']['id'])); ?>
+			<?php echo $this->Html->link($selecao['Curso']['descricao'], array('controller' => 'cursos', 'action' => 'view', $selecao['Curso']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($selecao['ProcessoSeletivo']['id'], array('controller' => 'processo_seletivos', 'action' => 'view', $selecao['ProcessoSeletivo']['id'])); ?>
