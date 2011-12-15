@@ -1,3 +1,12 @@
+<?php echo $this->Html->script('jquery.price_format');?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#SelecaoValorInscricao").priceFormat({
+			prefix: '',
+			thousandsSeparator: '',
+		});
+	});
+</script>
 <div class="selecoes form">
 <?php echo $this->Form->create('Selecao');?>
 	<fieldset>
