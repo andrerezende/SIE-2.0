@@ -18,9 +18,15 @@
 		<td><?php echo $processoSeletivo['ProcessoSeletivo']['data_inicio_inscricoes']; ?>&nbsp;</td>
 		<td><?php echo $processoSeletivo['ProcessoSeletivo']['data_fim_inscricoes']; ?>&nbsp;</td>
 		<td class="actions">
-			<?php foreach ($processoSeletivo['Selecao'] as $selecao):?>
-				<?php echo $this->Html->link('Realizar Inscrição ('. $campus[$selecao['campus_id']] .' - '.$cursos[$selecao['curso_id']].')', array('controller' => 'inscricoes', 'action' => 'inscrever', $processoSeletivo['ProcessoSeletivo']['id'], $selecao['id']));?>
-			<?php endforeach;?>
+			<?php
+			foreach ($processoSeletivo['Selecao'] as $selecao) {
+				if (!in_array($selecao['id'], $inscricoes)) {
+					echo $this->Html->link('Realizar Inscrição ('. $campus[$selecao['campus_id']] .' - '.$cursos[$selecao['curso_id']].')', array('controller' => 'inscricoes', 'action' => 'inscrever', $processoSeletivo['ProcessoSeletivo']['id'], $selecao['id']));
+				} else {
+					echo $this->Html->link('Imprimir Boleto ('. $campus[$selecao['campus_id']] .' - '.$cursos[$selecao['curso_id']].')', array('controller' => 'candidatos', 'action' => 'gerar_boleto', $processoSeletivo['ProcessoSeletivo']['id'], $selecao['id']));
+				}
+			}
+			?>
 		</td>
 	</tr>
 <?php endforeach; ?>

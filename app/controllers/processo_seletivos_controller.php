@@ -64,6 +64,7 @@ class ProcessoSeletivosController extends AppController {
 	}
 
 	public function candidato_listar() {
+		$this->loadModel('Candidato');
 		$this->paginate = array(
 			'conditions' => array(
 				'ProcessoSeletivo.data_inicio_inscricoes <=' => date('Y-m-d H:i:s'),
@@ -74,7 +75,10 @@ class ProcessoSeletivosController extends AppController {
 		$processoSeletivos = $this->paginate();
 		$campus = $this->ProcessoSeletivo->Selecao->Campus->find('list');
 		$cursos = $this->ProcessoSeletivo->Selecao->Curso->find('list');
-		$this->set(compact('processoSeletivos', 'campus', 'cursos'));
+		$this->Candidato->Inscricao->recursive = 0;
+		$inscricoes = $this->Candidato->Inscricao->find('all', array('fields' => array('Inscricao.selecao_id'), 'conditions' => array('Candidato.id' => $this->Auth->user('candidato_id'))));
+		$inscricoes = Set::extract('/Inscricao/selecao_id', $inscricoes);
+		$this->set(compact('processoSeletivos', 'campus', 'cursos', 'inscricoes'));
 	}
 
 }
