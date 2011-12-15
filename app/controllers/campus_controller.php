@@ -1,14 +1,14 @@
 <?php
 class CampusController extends AppController {
 
-	var $name = 'Campus';
+	public $name = 'Campus';
 
-	function index() {
+	public function admin_index() {
 		$this->Campus->recursive = 0;
 		$this->set('campus', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid campus', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class CampusController extends AppController {
 		$this->set('campus', $this->Campus->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->Campus->create();
 			if ($this->Campus->save($this->data)) {
@@ -28,7 +28,7 @@ class CampusController extends AppController {
 		}
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid campus', true));
 			$this->redirect(array('action' => 'index'));
@@ -46,7 +46,7 @@ class CampusController extends AppController {
 		}
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for campus', true));
 			$this->redirect(array('action'=>'index'));
@@ -58,4 +58,5 @@ class CampusController extends AppController {
 		$this->Session->setFlash(__('Campus was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+
 }
