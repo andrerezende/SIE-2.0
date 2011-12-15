@@ -83,10 +83,10 @@ class InscricoesController extends AppController {
 		if (!empty($this->data)) {
 			$this->Inscricao->create();
 			if ($this->Inscricao->save($this->data)) {
-				$this->Session->setFlash(__('The inscricao has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('Inscrição realizada com sucesso', true));
+				$this->redirect(array('controller' => 'processo_seletivos', 'action' => 'listar'));
 			} else {
-				$this->Session->setFlash(__('The inscricao could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('A inscrição não pôde ser realizada. Tente novamente.', true));
 			}
 		}
 		$candidatos = $this->Inscricao->Candidato->find('list');
