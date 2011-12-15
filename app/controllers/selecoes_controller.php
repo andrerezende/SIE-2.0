@@ -20,8 +20,8 @@ class SelecoesController extends AppController {
 		if (!empty($this->data)) {
 			$this->Selecao->create();
 			if ($this->Selecao->save($this->data)) {
-				$this->Session->setFlash(__('The selecao has been saved', true));
-				$this->redirect(array('action' => 'index'));
+				$this->Session->setFlash(__('Seleção salva', true));
+				$this->redirect(array('controller' => 'boletos', 'action' => 'add', $this->Selecao->id));
 			} else {
 				$this->Session->setFlash(__('The selecao could not be saved. Please, try again.', true));
 			}
