@@ -1,5 +1,5 @@
 <?php
-/* Selecoes Test cases generated on: 2011-10-13 11:28:01 : 1318516081*/
+/* Selecoes Test cases generated on: 2011-12-15 00:49:48 : 1323917388*/
 App::import('Controller', 'Selecoes');
 
 class TestSelecoesController extends SelecoesController {
@@ -11,7 +11,7 @@ class TestSelecoesController extends SelecoesController {
 }
 
 class SelecoesControllerTestCase extends CakeTestCase {
-	var $fixtures = array('app.selecao', 'app.campus', 'app.curso', 'app.processo_seletivo', 'app.edital', 'app.cota', 'app.classificacao', 'app.inscricao', 'app.candidato', 'app.unidade_federativa', 'app.pais', 'app.municipio', 'app.sexo', 'app.necessidade_especial', 'app.estado_civil', 'app.nota', 'app.prova', 'app.lista', 'app.classificacoes_lista', 'app.local_prova', 'app.local_provas_selecao');
+	var $fixtures = array('app.selecao', 'app.campus', 'app.curso', 'app.processo_seletivo', 'app.edital', 'app.boleto', 'app.cota', 'app.classificacao', 'app.inscricao', 'app.candidato', 'app.unidade_federativa', 'app.pais', 'app.municipio', 'app.sexo', 'app.necessidade_especial', 'app.estado_civil', 'app.usuario', 'app.grupo', 'app.local_prova', 'app.local_prova_selecao', 'app.nota', 'app.prova', 'app.lista', 'app.classificacao_lista');
 
 	function startTest() {
 		$this->Selecoes =& new TestSelecoesController();
@@ -23,23 +23,23 @@ class SelecoesControllerTestCase extends CakeTestCase {
 		ClassRegistry::flush();
 	}
 
-	function testIndex() {
+	function testAdminIndex() {
 
 	}
 
-	function testView() {
+	function testAdminView() {
 
 	}
 
-	function testAdd() {
+	function testAdminAdd() {
 
 	}
 
-	function testEdit() {
+	function testAdminEdit() {
 
 	}
 
-	function testDelete() {
+	function testAdminDelete() {
 
 	}
 
