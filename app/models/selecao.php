@@ -5,6 +5,8 @@ class Selecao extends AppModel {
 	public $useTable = 'selecao';
 	public $displayField = 'id';
 
+	public $hasOne = 'Boleto';
+
 	public $belongsTo = array(
 		'Campus' => array(
 			'className' => 'Campus',
