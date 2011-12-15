@@ -44,6 +44,7 @@
 								<li>
 									<h2>Menu</h2>
 									<ul>
+										<li><?php echo $this->Html->link('Boletos', array('controller' => 'boletos', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Campus', array('controller' => 'campus', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Candidatos', array('controller' => 'candidatos', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Cassificações', array('controller' => 'classificacoes', 'action' => 'index')); ?></li>
