@@ -1,14 +1,14 @@
 <?php
 class PagamentosController extends AppController {
 
-	var $name = 'Pagamentos';
+	public $name = 'Pagamentos';
 
-	function index() {
+	public function admin_index() {
 		$this->Pagamento->recursive = 0;
 		$this->set('pagamentos', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid pagamento', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class PagamentosController extends AppController {
 		$this->set('pagamento', $this->Pagamento->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->Pagamento->create();
 			if ($this->Pagamento->save($this->data)) {
@@ -30,7 +30,7 @@ class PagamentosController extends AppController {
 		$this->set(compact('inscricoes'));
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid pagamento', true));
 			$this->redirect(array('action' => 'index'));
@@ -50,7 +50,7 @@ class PagamentosController extends AppController {
 		$this->set(compact('inscricoes'));
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for pagamento', true));
 			$this->redirect(array('action'=>'index'));

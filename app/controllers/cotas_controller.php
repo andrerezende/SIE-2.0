@@ -1,14 +1,14 @@
 <?php
 class CotasController extends AppController {
 
-	var $name = 'Cotas';
+	public $name = 'Cotas';
 
-	function index() {
+	public function admin_index() {
 		$this->Cota->recursive = 0;
 		$this->set('cotas', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid cota', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class CotasController extends AppController {
 		$this->set('cota', $this->Cota->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->Cota->create();
 			if ($this->Cota->save($this->data)) {
@@ -30,7 +30,7 @@ class CotasController extends AppController {
 		$this->set(compact('selecoes'));
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid cota', true));
 			$this->redirect(array('action' => 'index'));
@@ -50,7 +50,7 @@ class CotasController extends AppController {
 		$this->set(compact('selecoes'));
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for cota', true));
 			$this->redirect(array('action'=>'index'));
@@ -62,4 +62,5 @@ class CotasController extends AppController {
 		$this->Session->setFlash(__('Cota was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+
 }

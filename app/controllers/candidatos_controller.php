@@ -20,12 +20,12 @@ class CandidatosController extends AppController {
 		$this->Auth->allow('cadastro');
 	}
 
-	public function index() {
+	public function admin_index() {
 		$this->Candidato->recursive = 0;
 		$this->set('candidatos', $this->paginate());
 	}
 
-	public function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid candidato', true));
 			$this->redirect(array('action' => 'index'));
@@ -33,7 +33,7 @@ class CandidatosController extends AppController {
 		$this->set('candidato', $this->Candidato->read(null, $id));
 	}
 
-	public function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->Candidato->create();
 			if ($this->Candidato->save($this->data)) {
@@ -55,7 +55,7 @@ class CandidatosController extends AppController {
 		$this->set(compact('unidadeFederativas', 'paises', 'sexos', 'nacionalidadePaises', 'necessidadeEspeciais', 'estadoCivis'));
 	}
 
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid candidato', true));
 			$this->redirect(array('action' => 'index'));
@@ -83,7 +83,7 @@ class CandidatosController extends AppController {
 		$this->set(compact('unidadeFederativas', 'municipios', 'paises', 'naturalidadeMunicipios', 'orgaoExpedidorUnidadeFederativas', 'sexos', 'nacionalidadePaises', 'necessidadeEspeciais', 'estadoCivis'));
 	}
 
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for candidato', true));
 			$this->redirect(array('action'=>'index'));
@@ -172,17 +172,39 @@ class CandidatosController extends AppController {
 		$this->set(compact('unidadeFederativas', 'sexos', 'paises', 'estadoCivis', 'necessidadeEspeciais', 'municipios', 'naturalidadeMunicipios'));
 	}
 
-	public function candidato_gerar_boleto() {
+	public function candidato_gerar_boleto($processoSeletivo_id = null, $selecao_id = null) {
 		Configure::write('debug', 0);
 		$this->autoRender = false;
-		$dados = array(
-			'sacado' => 'Fulano de Tal',
-			'endereco1' => 'Rua do Fulano de Tal, 88',
-			'endereco2' => 'Curitiba/PR',
-			'valor_cobrado' => 100.56,
-			'pedido' => 5,
-		);
-		$this->BoletoBb->render($dados);
+		$this->Candidato->Inscricao->Selecao->Boleto->recursive = 2;
+		$candidato = $this->Candidato->find('first', array(
+			'contain' => array(
+				'Municipio' => array(
+					'UnidadeFederativa',
+				),
+				'Inscricao' => array(
+					'Selecao' => array(
+						'conditions' => array('Selecao.id' => $selecao_id),
+						'Campus',
+						'Curso',
+						'ProcessoSeletivo' => array(
+							'conditions' => array('ProcessoSeletivo.id' => $processoSeletivo_id),
+						),
+					),
+					'LocalProva',
+				),
+			),
+			'conditions' => array('Candidato.id' => $this->Auth->user('candidato_id')),
+		));
+		$boleto = $this->Candidato->Inscricao->Selecao->Boleto->find('first', array('conditions' => array('Selecao.id' => $selecao_id)));
+		$boleto['Boleto']['sacado'] = $candidato['Candidato']['nome'];
+		$boleto['Boleto']['demonstrativo2'] .= $candidato['Candidato']['cpf'];
+		$boleto['Boleto']['endereco1'] = $candidato['Candidato']['endereco'];
+		$boleto['Boleto']['endereco2'] = $candidato['Municipio']['nome'] . ' / ' . $candidato['Municipio']['UnidadeFederativa']['sigla'];
+		$boleto['Boleto']['valor_cobrado'] = $boleto['Selecao']['valor_inscricao'];
+		$boleto['Boleto']['instrucoes1'] .= $boleto['Selecao']['Curso']['descricao'];
+		$boleto['Boleto']['instrucoes2'] .= $candidato['Inscricao'][0]['LocalProva']['descricao'];
+		$boleto['Boleto']['pedido']	= 5;
+		$this->BoletoBb->render($boleto['Boleto']);
 	}
 
 	public function candidato_imprimir() {

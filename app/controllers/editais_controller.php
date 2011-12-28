@@ -1,14 +1,14 @@
 <?php
 class EditaisController extends AppController {
 
-	var $name = 'Editais';
+	public $name = 'Editais';
 
-	function index() {
+	public function admin_index() {
 		$this->Edital->recursive = 0;
 		$this->set('editais', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid edital', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class EditaisController extends AppController {
 		$this->set('edital', $this->Edital->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->Edital->create();
 			if ($this->Edital->save($this->data)) {
@@ -28,7 +28,7 @@ class EditaisController extends AppController {
 		}
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid edital', true));
 			$this->redirect(array('action' => 'index'));
@@ -46,7 +46,7 @@ class EditaisController extends AppController {
 		}
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for edital', true));
 			$this->redirect(array('action'=>'index'));

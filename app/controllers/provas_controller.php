@@ -1,14 +1,14 @@
 <?php
 class ProvasController extends AppController {
 
-	var $name = 'Provas';
+	public $name = 'Provas';
 
-	function index() {
+	public function admin_index() {
 		$this->Prova->recursive = 0;
 		$this->set('provas', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid prova', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class ProvasController extends AppController {
 		$this->set('prova', $this->Prova->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->Prova->create();
 			if ($this->Prova->save($this->data)) {
@@ -28,7 +28,7 @@ class ProvasController extends AppController {
 		}
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid prova', true));
 			$this->redirect(array('action' => 'index'));
@@ -46,7 +46,7 @@ class ProvasController extends AppController {
 		}
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for prova', true));
 			$this->redirect(array('action'=>'index'));

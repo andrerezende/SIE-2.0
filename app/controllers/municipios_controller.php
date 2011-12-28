@@ -8,12 +8,12 @@ class MunicipiosController extends AppController {
 		$this->Auth->allow('ajax_get_municipios');
 	}
 
-	public function index() {
+	public function admin_index() {
 		$this->Municipio->recursive = 0;
 		$this->set('municipios', $this->paginate());
 	}
 
-	public function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid municipio', true));
 			$this->redirect(array('action' => 'index'));
@@ -21,7 +21,7 @@ class MunicipiosController extends AppController {
 		$this->set('municipio', $this->Municipio->read(null, $id));
 	}
 
-	public function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->Municipio->create();
 			if ($this->Municipio->save($this->data)) {
@@ -35,7 +35,7 @@ class MunicipiosController extends AppController {
 		$this->set(compact('unidadeFederativas'));
 	}
 
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid municipio', true));
 			$this->redirect(array('action' => 'index'));
@@ -55,7 +55,7 @@ class MunicipiosController extends AppController {
 		$this->set(compact('unidadeFederativas'));
 	}
 
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for municipio', true));
 			$this->redirect(array('action'=>'index'));

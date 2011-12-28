@@ -1,14 +1,14 @@
 <?php
 class EstadoCivisController extends AppController {
 
-	var $name = 'EstadoCivis';
+	public $name = 'EstadoCivis';
 
-	function index() {
+	public function admin_index() {
 		$this->EstadoCivil->recursive = 0;
 		$this->set('estadoCivis', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid estado civil', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class EstadoCivisController extends AppController {
 		$this->set('estadoCivil', $this->EstadoCivil->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->EstadoCivil->create();
 			if ($this->EstadoCivil->save($this->data)) {
@@ -28,7 +28,7 @@ class EstadoCivisController extends AppController {
 		}
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid estado civil', true));
 			$this->redirect(array('action' => 'index'));
@@ -46,7 +46,7 @@ class EstadoCivisController extends AppController {
 		}
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for estado civil', true));
 			$this->redirect(array('action'=>'index'));
@@ -58,4 +58,5 @@ class EstadoCivisController extends AppController {
 		$this->Session->setFlash(__('Estado civil was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+
 }

@@ -1,15 +1,15 @@
 <?php
 class PaisesController extends AppController {
 
-	var $name = 'Paises';
+	public $name = 'Paises';
 	public $uses = array('Pais');
 
-	function index() {
+	public function admin_index() {
 		$this->Pais->recursive = 0;
 		$this->set('paises', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid pais', true));
 			$this->redirect(array('action' => 'index'));
@@ -17,7 +17,7 @@ class PaisesController extends AppController {
 		$this->set('pais', $this->Pais->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->Pais->create();
 			if ($this->Pais->save($this->data)) {
@@ -29,7 +29,7 @@ class PaisesController extends AppController {
 		}
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid pais', true));
 			$this->redirect(array('action' => 'index'));
@@ -47,7 +47,7 @@ class PaisesController extends AppController {
 		}
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for pais', true));
 			$this->redirect(array('action'=>'index'));

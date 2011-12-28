@@ -1,14 +1,14 @@
 <?php
 class SexosController extends AppController {
 
-	var $name = 'Sexos';
+	public $name = 'Sexos';
 
-	function index() {
+	public function admin_index() {
 		$this->Sexo->recursive = 0;
 		$this->set('sexos', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid sexo', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class SexosController extends AppController {
 		$this->set('sexo', $this->Sexo->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->Sexo->create();
 			if ($this->Sexo->save($this->data)) {
@@ -28,7 +28,7 @@ class SexosController extends AppController {
 		}
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid sexo', true));
 			$this->redirect(array('action' => 'index'));
@@ -46,7 +46,7 @@ class SexosController extends AppController {
 		}
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for sexo', true));
 			$this->redirect(array('action'=>'index'));
@@ -58,4 +58,5 @@ class SexosController extends AppController {
 		$this->Session->setFlash(__('Sexo was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+
 }

@@ -1,14 +1,14 @@
 <?php
 class ClassificacoesController extends AppController {
 
-	var $name = 'Classificacoes';
+	public $name = 'Classificacoes';
 
-	function index() {
+	public function admin_index() {
 		$this->Classificacao->recursive = 0;
 		$this->set('classificacoes', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid classificacao', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class ClassificacoesController extends AppController {
 		$this->set('classificacao', $this->Classificacao->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->Classificacao->create();
 			if ($this->Classificacao->save($this->data)) {
@@ -32,7 +32,7 @@ class ClassificacoesController extends AppController {
 		$this->set(compact('inscricoes', 'cotas', 'listas'));
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid classificacao', true));
 			$this->redirect(array('action' => 'index'));
@@ -54,7 +54,7 @@ class ClassificacoesController extends AppController {
 		$this->set(compact('inscricoes', 'cotas', 'listas'));
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for classificacao', true));
 			$this->redirect(array('action'=>'index'));

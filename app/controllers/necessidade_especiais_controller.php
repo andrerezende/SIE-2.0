@@ -1,14 +1,14 @@
 <?php
 class NecessidadeEspeciaisController extends AppController {
 
-	var $name = 'NecessidadeEspeciais';
+	public $name = 'NecessidadeEspeciais';
 
-	function index() {
+	public function admin_index() {
 		$this->NecessidadeEspecial->recursive = 0;
 		$this->set('necessidadeEspeciais', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid necessidade especial', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +16,7 @@ class NecessidadeEspeciaisController extends AppController {
 		$this->set('necessidadeEspecial', $this->NecessidadeEspecial->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->NecessidadeEspecial->create();
 			if ($this->NecessidadeEspecial->save($this->data)) {
@@ -28,7 +28,7 @@ class NecessidadeEspeciaisController extends AppController {
 		}
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid necessidade especial', true));
 			$this->redirect(array('action' => 'index'));
@@ -46,7 +46,7 @@ class NecessidadeEspeciaisController extends AppController {
 		}
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for necessidade especial', true));
 			$this->redirect(array('action'=>'index'));
