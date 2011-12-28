@@ -1,7 +1,7 @@
 <div class="boletos form">
 <?php echo $this->Form->create('Boleto');?>
 	<fieldset>
-		<legend><?php __('Adicionar Boleto'); ?></legend>
+		<legend><?php __('Configurações do Boleto'); ?></legend>
 	<?php
 		echo $this->Form->input('agencia', array('label' => 'Agência'));
 		echo $this->Form->input('conta');
@@ -30,15 +30,8 @@
 		echo $this->Form->input('aceite');
 		echo $this->Form->input('especie', array('label' => 'Espécie'));
 		echo $this->Form->input('especie_doc', array('label' => 'Espécie DOC'));
-		echo $this->Form->input('selecao_id', array('label' => 'Seleção'));
+		echo $this->Form->input('selecao_id', array('type' => 'hidden', 'value' => $selecao_id));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Html->link(__('List Boletos', true), array('action' => 'index'));?></li>
-	</ul>
 </div>
