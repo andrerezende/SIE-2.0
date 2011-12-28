@@ -80,7 +80,6 @@
 										<?php if (isset($userData) && !empty($userData)):?>
 											<li><?php echo $this->Html->link('Alterar / Imprimir Inscrição', array('candidato' => true, 'controller' => 'candidatos', 'action' => 'editar', $userData['Usuario']['candidato_id'])); ?></li>
 											<li><?php echo $this->Html->link('Processos Seletivos', array('candidato' => true, 'controller' => 'processo_seletivos', 'action' => 'listar')); ?></li>
-											<li><?php echo $this->Html->link('2ª Via Boleto', array('candidato' => true, 'controller' => 'candidatos', 'action' => 'candidato_gerar_boleto')); ?></li>
 											<li><?php echo $this->Html->link('Sair', array('candidato' => false, 'controller' => 'usuarios', 'action' => 'logout')); ?></li>
 										<?php else: ?>
 											<li><?php echo $this->Html->link('Nova Inscrição', array('candidato' => false, 'prefix' => false, 'controller' => 'candidatos', 'action' => 'cadastro')); ?></li>
