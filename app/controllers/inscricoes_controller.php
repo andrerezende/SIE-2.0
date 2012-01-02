@@ -82,7 +82,18 @@ class InscricoesController extends AppController {
 	public function candidato_inscrever($processo_seletivo_id = null, $selecao_id = null) {
 		if (!empty($this->data)) {
 			$this->Inscricao->create();
+			$this->Inscricao->begin();
 			if ($this->Inscricao->save($this->data)) {
+				$this->loadModel('Prova');
+				$provas = $this->Prova->find('list');
+				foreach ($provas as $id => $prova) {
+					debug($id);
+					if (!$this->Inscricao->Nota->save(array('Nota' => array('prova_id' => $id, 'inscricao_id' => $this->Inscricao->id)))) {
+						$this->Inscricao->rollback();
+					}
+					$this->Inscricao->Nota->id = null;
+				}
+				$this->Inscricao->commit();
 				$this->Session->setFlash(__('Inscrição realizada com sucesso', true));
 				$this->redirect(array('controller' => 'processo_seletivos', 'action' => 'listar'));
 			} else {
