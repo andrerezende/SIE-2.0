@@ -119,6 +119,7 @@ class CandidatosController extends AppController {
 	public function cadastro() {
 		if (!$this->Auth->user()) {
 			if (!empty($this->data)) {
+				$this->Candidato->begin();
 				$this->Candidato->create();
 				$this->data['Usuario']['login'] = $this->data['Candidato']['cpf'];
 				$this->data['Usuario']['nome'] = $this->data['Candidato']['nome'];
@@ -127,10 +128,12 @@ class CandidatosController extends AppController {
 					$this->data['Usuario']['candidato_id'] = $this->Candidato->id;
 					$this->data['Usuario']['grupo_id'] = 1;
 					if ($this->Candidato->Usuario->save($this->data['Usuario'])) {
+						$this->Candidato->commit();
 						$this->Session->setFlash(__('Inscrição concluída', true));
 						$this->redirect('/');
 					}
 				} else {
+					$this->Candidato->rollback();
 					$this->Session->setFlash(__('A inscrição não pôde ser efetuada. Por favor, tente novamente.', true));
 				}
 			}
@@ -182,6 +185,7 @@ class CandidatosController extends AppController {
 					'UnidadeFederativa',
 				),
 				'Inscricao' => array(
+					'conditions' => array('Inscricao.selecao_id' => $selecao_id),
 					'Selecao' => array(
 						'conditions' => array('Selecao.id' => $selecao_id),
 						'Campus',
@@ -197,13 +201,15 @@ class CandidatosController extends AppController {
 		));
 		$boleto = $this->Candidato->Inscricao->Selecao->Boleto->find('first', array('conditions' => array('Selecao.id' => $selecao_id)));
 		$boleto['Boleto']['sacado'] = $candidato['Candidato']['nome'];
+		$boleto['Boleto']['demonstrativo1'] .= $candidato['Inscricao'][0]['Selecao']['ProcessoSeletivo']['descricao'];
 		$boleto['Boleto']['demonstrativo2'] .= $candidato['Candidato']['cpf'];
+		$boleto['Boleto']['demonstrativo3'] .= $candidato['Candidato']['numero_inscricao'];
 		$boleto['Boleto']['endereco1'] = $candidato['Candidato']['endereco'];
 		$boleto['Boleto']['endereco2'] = $candidato['Municipio']['nome'] . ' / ' . $candidato['Municipio']['UnidadeFederativa']['sigla'];
 		$boleto['Boleto']['valor_cobrado'] = $boleto['Selecao']['valor_inscricao'];
 		$boleto['Boleto']['instrucoes1'] .= $boleto['Selecao']['Curso']['descricao'];
 		$boleto['Boleto']['instrucoes2'] .= $candidato['Inscricao'][0]['LocalProva']['descricao'];
-		$boleto['Boleto']['pedido']	= 5;
+		$boleto['Boleto']['pedido']	= $candidato['Candidato']['numero_inscricao'];
 		$this->BoletoBb->render($boleto['Boleto']);
 	}
 
@@ -219,6 +225,32 @@ class CandidatosController extends AppController {
 		$this->Candidato->recursive = 1;
 		$this->set('candidato', $this->Candidato->find('first', array('conditions' => array('Candidato.id' => $this->Auth->user('candidato_id')))));
 		
+	}
+
+	public function admin_lista_por_notas() {
+		$this->set('candidatos', $this->Candidato->find(
+			'all', array(
+				'contain' => array(
+					'Municipio' => array(
+						'UnidadeFederativa',
+					),
+					'Inscricao' => array(
+						'Selecao' => array(
+							'Campus',
+							'Curso',
+							'ProcessoSeletivo'
+						),
+						'Nota' => array(
+							'order' => array('Nota.valor'),
+							'Prova',
+						),
+						'LocalProva',
+					),
+					'Sexo',
+				),
+//				'order' => array('Nota.valor'),
+			)
+		));
 	}
 
 }
