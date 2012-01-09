@@ -15,4 +15,7 @@
 	url = https://github.com/jrbasso/cake_ptbr.git
 [submodule "app/plugins/boletos"]
 	path = app/plugins/boletos
-	url = http://github.com/Danielpk/boletos.git
+	url = https://vitorpc@bitbucket.org/vitorpc/boletos.git
+[submodule "app/plugins/meio_upload"]
+	path = app/plugins/meio_upload
+	url = https://github.com/jrbasso/MeioUpload.git
