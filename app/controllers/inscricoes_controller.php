@@ -86,8 +86,8 @@ class InscricoesController extends AppController {
 			if ($this->Inscricao->save($this->data)) {
 				$this->loadModel('Prova');
 				$provas = $this->Prova->find('list');
+				$this->Inscricao->saveField('numero_inscricao', $this->Inscricao->id);
 				foreach ($provas as $id => $prova) {
-					debug($id);
 					if (!$this->Inscricao->Nota->save(array('Nota' => array('prova_id' => $id, 'inscricao_id' => $this->Inscricao->id)))) {
 						$this->Inscricao->rollback();
 					}
@@ -104,6 +104,21 @@ class InscricoesController extends AppController {
 //		$selecoes = $this->Inscricao->Selecao->find('list', array('conditions' => array('Selecao.processo_seletivo_id' => $processo_seletivo_id)));
 //		$localProvas = $this->Inscricao->LocalProva->find('list');
 		$this->set(compact('candidatos', 'selecoes', 'selecao_id'));
+	}
+
+	public function admin_lista_por_notas() {
+		$this->set(
+			'inscricoes',
+			$this->Inscricao->Selecao->find('all', array(
+				'contain' => array(
+					'Campus',
+					'Curso',
+					'ProcessoSeletivo' => array('Prova'),
+					'Inscricao' => array('Candidato', 'Nota'),
+				),
+				'order' => array('Campus.nome', 'Curso.descricao'),
+			))
+		);
 	}
 
 }
