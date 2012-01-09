@@ -6,6 +6,11 @@
 			<?php echo $processoSeletivo['ProcessoSeletivo']['id']; ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Descrição'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $processoSeletivo['ProcessoSeletivo']['descricao']; ?>
+			&nbsp;
+		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Edital'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $this->Html->link($processoSeletivo['Edital']['id'], array('controller' => 'editais', 'action' => 'view', $processoSeletivo['Edital']['id'])); ?>

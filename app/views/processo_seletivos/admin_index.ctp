@@ -4,6 +4,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 		<th><?php echo $this->Paginator->sort('id');?></th>
+		<th><?php echo $this->Paginator->sort('descricao');?></th>
 		<th><?php echo $this->Paginator->sort('edital_id');?></th>
 		<th><?php echo $this->Paginator->sort('data_inicio_inscricoes');?></th>
 		<th><?php echo $this->Paginator->sort('data_fim_inscricoes');?></th>
@@ -20,6 +21,7 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $processoSeletivo['ProcessoSeletivo']['id']; ?>&nbsp;</td>
+		<td><?php echo $processoSeletivo['ProcessoSeletivo']['descricao']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($processoSeletivo['Edital']['id'], array('controller' => 'editais', 'action' => 'view', $processoSeletivo['Edital']['id'])); ?>
 		</td>

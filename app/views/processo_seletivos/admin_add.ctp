@@ -4,6 +4,7 @@
 		<legend><?php __('Adicionar Processo Seletivo'); ?></legend>
 	<?php
 		echo $this->Form->input('edital_id');
+		echo $this->Form->input('descricao');
 		echo $this->Form->input('data_inicio_inscricoes');
 		echo $this->Form->input('data_fim_inscricoes');
 		echo $this->Form->input('hora_inicio_inscricoes');
