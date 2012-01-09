@@ -1,3 +1,20 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		var oldClass = "";
+		$("td.actions").parent().mouseover(function() {
+			oldClass = $(this).attr("class");
+			$(this).removeClass(oldClass);
+			$(this).addClass("tr-over");
+		}).mouseout(function() {
+			$(this).addClass(oldClass);
+			$(this).removeClass("tr-over");
+		});
+		$("td.actions").parent().click(function() {
+			$(location).attr("href", $(this).children("td").children("a").attr("href"));
+		});
+	});
+</script>
+
 <div class="processoSeletivos index">
 	<h2><?php __('Processos Seletivos');?></h2>
 	<table cellpadding="0" cellspacing="0">
@@ -18,7 +35,7 @@
 		<td class="actions" style="white-space: normal;text-align: left;width: 60%;">
 			<?php
 			foreach ($processoSeletivo['Selecao'] as $selecao) {
-				echo $campus[$selecao['campus_id']] .' - '.$cursos[$selecao['curso_id']];
+				echo $processoSeletivo['ProcessoSeletivo']['descricao'];
 				if (!in_array($selecao['id'], $inscricoes)) {
 					echo $this->Html->link('Realizar Inscrição', array('controller' => 'inscricoes', 'action' => 'inscrever', $processoSeletivo['ProcessoSeletivo']['id'], $selecao['id']));
 				} else {
