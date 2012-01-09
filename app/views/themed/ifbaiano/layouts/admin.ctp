@@ -62,12 +62,13 @@
 
 									</ul>
 									<ul>
-																				<li><?php echo $this->Html->link('Cassificações', array('controller' => 'classificacoes', 'action' => 'index')); ?></li>
+										<li><?php echo $this->Html->link('Cassificações', array('controller' => 'classificacoes', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Classificações / Listas', array('controller' => 'classificacoes_listas', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Listas', array('controller' => 'listas', 'action' => 'index')); ?></li>
 									</ul>
 									<ul>
 										<li><?php echo $this->Html->link('Pagamentos', array('controller' => 'pagamentos', 'action' => 'index')); ?></li>
+										<li><?php echo $this->Html->link('Critérios de Desempate', array('controller' => 'criterio_desempates', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Candidatos', array('controller' => 'candidatos', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Notas', array('controller' => 'notas', 'action' => 'index')); ?></li>
 										<li><?php echo $this->Html->link('Inscrições', array('controller' => 'inscricoes', 'action' => 'index')); ?></li>
