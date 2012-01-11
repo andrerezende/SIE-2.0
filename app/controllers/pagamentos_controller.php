@@ -130,7 +130,7 @@ class PagamentosController extends AppController {
 					$dataArquivo = $anoArquivo . $mesArquivo . $diaArquivo;
 
 					$data = array('Pagamento' => array(
-						'inscricao_id' => 9,
+						'inscricao_id' => $inscritoId,
 						'arqretorno' => $fileName,
 						'data_pagamento' => $dataPagamento,
 						'data_retorno' => $dataArquivo,
