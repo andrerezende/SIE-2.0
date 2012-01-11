@@ -1,5 +1,5 @@
 <div class="pagamentos index">
-	<h4><?php echo $this->Html->link(__('Adicionar Pagamento', true), array('action' => 'add')); ?></h4>
+	<h4><?php echo $this->Html->link(__('Importar Pagamentos', true), array('action' => 'conciliacao')); ?></h4>
 	<h2><?php __('Pagamentos');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>

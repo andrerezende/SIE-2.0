@@ -34,6 +34,7 @@ class AppController extends Controller {
 		'Js' => 'Jquery',
 		'Session',
 		'Text',
+		'Time',
 		'Util',
 	);
 
