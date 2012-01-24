@@ -19,15 +19,37 @@
 
 		echo $scripts_for_layout;
 		?>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("div#menu ul li").hover(function() {
+					$(this).addClass("current_page_item");
+					$(this).find("span").show();
+				}, function() {
+					$(this).removeClass("current_page_item");
+					$(this).find("span").hide();
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<div id="wrapper">
 			<div id="menu">
 				<ul>
-					<li class="current_page_item"><?php echo $this->Html->link('Home', '/login'); ?></li>
-					<li><?php echo $this->Html->link('Relatórios', '/'); ?></li>
-					<li><?php echo $this->Html->link('Logout', array('admin' => false, 'controller' => 'usuarios', 'action' => 'logout')); ?></li>
+					<li><?php echo $this->Html->link('Home', '/login'); ?></li>
+					<li>
+						<?php echo $this->Html->link('Relatórios', '#'); ?>
+						<span>
+							<?php echo $this->Html->link('Lista por Notas', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'lista_por_notas'));?>
+							<?php echo $this->Html->link('Inscrições - Isentos Homologados', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'lista_por_notas'));?>
+							<?php echo $this->Html->link('Inscrições - Homologados sem Isentos', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'lista_por_notas'));?>
+							<?php echo $this->Html->link('Inscrições - Relação Geral de Homologados', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'lista_por_notas'));?>
+						</span>
+					</li>
 				</ul>
+				<div id="account">
+					<p>Olá <?php echo $userData['Usuario']['nome'];?></p>
+					<p><?php echo $this->Html->link('Sair', array('admin' => false, 'controller' => 'usuarios', 'action' => 'logout'));?></p>
+				</div>
 			</div>
 			<!-- end #menu -->
 			<div id="page">
