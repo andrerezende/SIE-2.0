@@ -50,3 +50,8 @@
  */
 
 require APP . 'plugins' . DS . 'cake_ptbr' . DS . 'config' . DS . 'bootstrap.php';
+
+Configure::write('CriteriosDesempate', array(
+	1 => 'Data de Nascimento',
+	2 => 'Nota de Português',
+));
