@@ -6,9 +6,9 @@
 			thousandsSeparator: '',
 			limit: 4
 		});
-		var focusables = $(":input").not("[type='image']").not("[type='submit']");
+		var focusables = $(":input.notas").not("[type='image']").not("[type='submit']");
 		$(":input").not("[type='image']").not("[type='submit']").bind("keydown", function(e) {
-			if (e.keyCode == 13) {
+			if (e.keyCode == 13 || e.keyCode == 9) {
 				e.preventDefault();
 				var postData = {
 					"data[Nota][id]": $(this).attr("id").substr(5),
@@ -28,7 +28,7 @@
 						}
 					}
 				});
-				var current = focusables.index(this),
+				var current = focusables.index(this);
 				next = focusables.eq(current + 1).length ? focusables.eq(current + 1) : focusables.eq(0);
 				next.focus();
 			}
@@ -36,7 +36,8 @@
 	});
 </script>
 <div class="inscricoes index">
-	<h4><?php echo $this->Html->link(__('Adicionar Inscrição', true), array('action' => 'add')); ?></h4>
+	<h4><?php echo $this->Html->link(__('Nova Inscrição', true), array('action' => 'add')); ?> |
+	<?php echo $this->Html->link(__('Homolagar Isentos', true), array('action' => 'homologar_isentos')); ?></h4>
 	<h2><?php __('Inscrições');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
@@ -45,9 +46,9 @@
 		<th><?php echo $this->Paginator->sort('data');?></th>
 		<th><?php echo $this->Paginator->sort('especial_prova');?></th>
 		<th><?php echo $this->Paginator->sort('isento');?></th>
-		<?php foreach ($provas as $prova):?>
-			<th class="actions"><?php echo $prova;?></th>
-		<?php endforeach;?>
+		<?php //foreach ($provas as $prova):?>
+			<th class="actions">Notas<?php //echo $prova;?></th>
+		<?php //endforeach;?>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -66,13 +67,16 @@
 		<td><?php echo $this->Formatacao->data($inscricao['Inscricao']['data']); ?>&nbsp;</td>
 		<td><?php echo $inscricao['Inscricao']['especial_prova']; ?>&nbsp;</td>
 		<td><?php echo $inscricao['Inscricao']['isento']; ?>&nbsp;</td>
-		<?php foreach ($inscricao['Nota'] as $nota): ?>
 		<td class="actions">
+		<?php foreach ($inscricao['Nota'] as $nota):?>
+		
 			<div class="nota">
-				<?php echo $this->Form->input('nota_' .$nota['id'], array('label' => false, 'value' => $nota['valor'], 'class' => 'notas'));?>
+				<?php echo $nota['Prova']['descricao'];?>
+				<?php echo $this->Form->input('nota_' .$nota['id'], array('label' => false, 'value' => $nota['valor'], 'class' => 'notas', 'div' => false));?>
 			</div>
-		</td>
+		
 		<?php endforeach;?>
+			</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $inscricao['Inscricao']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $inscricao['Inscricao']['id'])); ?>
