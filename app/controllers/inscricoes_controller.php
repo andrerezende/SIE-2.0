@@ -20,6 +20,31 @@ class InscricoesController extends AppController {
 		$this->set('inscricoes', $this->paginate());
 	}
 
+	public function admin_homologar_isentos() {
+		if (empty($this->data)) {
+			$this->data = array(
+				'Inscricao' => array('limite' => 100, 'homologado' => false, 'processo_seletivo_id' => null),
+			);
+		}
+		$this->paginate = array(
+			'conditions' => array('Inscricao.isento' => true, 'Inscricao.homologado' => $this->data['Inscricao']['homologado']),
+			'limit' => !$this->data['Inscricao']['limite'] ? $this->data['Inscricao']['limite'] : 100,
+			'contain' => array(
+				'Candidato' => array('fields' => array('Candidato.id', 'Candidato.nome')),
+				'Selecao' => array('ProcessoSeletivo' => array('conditions' => array('ProcessoSeletivo.id' => $this->data['Inscricao']['processo_seletivo_id'])))
+			),
+		);
+		if (!isset($this->data['Inscricao']['homologado']) || $this->data['Inscricao']['homologado'] == null) {
+			unset($this->paginate['conditions']['Inscricao.homologado']);
+		}
+		if (!isset($this->data['Inscricao']['processo_seletivo_id']) || $this->data['Inscricao']['processo_seletivo_id'] == null) {
+			unset($this->paginate['contain']['Selecao']['ProcessoSeletivo']['conditions']);
+		}
+		$processoSeletivos = $this->Inscricao->Selecao->ProcessoSeletivo->find('list');
+		$inscricoes = $this->paginate();
+		$this->set(compact('inscricoes', 'processoSeletivos'));
+	}
+
 	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid inscricao', true));
@@ -119,6 +144,19 @@ class InscricoesController extends AppController {
 				'order' => array('Campus.nome', 'Curso.descricao'),
 			))
 		);
+	}
+
+	public function admin_alterar_homologacao() {
+		$this->autoRender = false;
+		$this->layout = 'ajax';
+		Configure::write('debug', 0);
+		if ($this->RequestHandler->isAjax()) {
+			$this->Inscricao->id = $this->data['Inscricao']['id'];
+			if ($this->Inscricao->saveField('homologado', $this->data['Inscricao']['homologado'])) {
+				return json_encode($this->data['Inscricao']['homologado']);
+			}
+			return json_encode(false);
+		}
 	}
 
 }
