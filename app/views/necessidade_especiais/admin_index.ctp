@@ -3,8 +3,8 @@
 	<h2><?php __('Necessidades Especiais');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-		<th><?php echo $this->Paginator->sort('descricao');?></th>
 		<th><?php echo $this->Paginator->sort('id');?></th>
+		<th><?php echo $this->Paginator->sort('Descrição', 'descricao');?></th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -16,8 +16,8 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $necessidadeEspecial['NecessidadeEspecial']['descricao']; ?>&nbsp;</td>
 		<td><?php echo $necessidadeEspecial['NecessidadeEspecial']['id']; ?>&nbsp;</td>
+		<td><?php echo $necessidadeEspecial['NecessidadeEspecial']['descricao']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $necessidadeEspecial['NecessidadeEspecial']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $necessidadeEspecial['NecessidadeEspecial']['id'])); ?>
