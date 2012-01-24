@@ -329,6 +329,28 @@ input[type=submit] {
 #menu .current_page_item a {
 }
 
+#menu li span {
+	background: #85B700;
+	float: left;
+	padding: 10px 0;
+	position: absolute;
+	left: 0;
+	top: 34px;
+	width: 100%;
+	display: none;
+}
+
+#menu li span a {
+	display: inline-table;
+	height: 20px;
+	background: #85B700;
+	margin: 5px;
+}
+
+#account {
+	float: right;
+}
+
 /* Page */
 
 #page {
@@ -545,6 +567,7 @@ div.nota input {
 	width: 40px;
 	padding-top: 7px;
 	margin-top: 3px;
+	display: inline;
 }
 
 div.nota img {
@@ -641,4 +664,7 @@ p.error em {
 }
 .success {
 	color: #fff;
+}
+.homologacao:hover {
+	cursor: pointer;
 }
