@@ -39,7 +39,7 @@ $(document).ready(function() {
 		'inputDefaults' => array('div' => false, 'class' => false)
 	));?>
 	<tr>
-		<th><?php echo $this->Form->input('limite', array('options' => array(10 => 10, 30 => 30, 50 => 50, 100 => 100, 200 => 200), 'empty' => 'Ilimitado'));?></th>
+		<th><?php echo $this->Form->input('limite', array('options' => Configure::read('Query.limit'), 'empty' => 'Ilimitado'));?></th>
 		<th><?php echo $this->Form->input('homologado', array('options' => array(true => 'Sim', false => 'Não'), 'empty' => 'Todos'));?></th>
 		<th><?php echo $this->Form->input('processo_seletivo_id', array('options' => $processoSeletivos, 'empty' => 'Todos'));?></th>
 		<th><?php echo $this->Form->end('Filtrar');?></th>
