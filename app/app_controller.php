@@ -32,6 +32,7 @@ class AppController extends Controller {
 		'Form',
 		'Html',
 		'Js' => 'Jquery',
+		'Search.Prg',
 		'Session',
 		'Text',
 		'Time',
