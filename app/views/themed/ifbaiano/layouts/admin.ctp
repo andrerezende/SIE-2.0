@@ -40,7 +40,7 @@
 						<?php echo $this->Html->link('Relatórios', '#'); ?>
 						<span>
 							<?php echo $this->Html->link('Lista por Notas', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'lista_por_notas'));?>
-							<?php echo $this->Html->link('Inscrições - Isentos Homologados', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'lista_por_notas'));?>
+							<?php echo $this->Html->link('Inscrições - Isentos Homologados', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'isentos_homologados'));?>
 							<?php echo $this->Html->link('Inscrições - Homologados sem Isentos', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'lista_por_notas'));?>
 							<?php echo $this->Html->link('Inscrições - Relação Geral de Homologados', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'lista_por_notas'));?>
 						</span>
