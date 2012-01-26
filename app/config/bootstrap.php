@@ -55,3 +55,11 @@ Configure::write('CriteriosDesempate', array(
 	1 => 'Data de Nascimento',
 	2 => 'Nota de Português',
 ));
+
+Configure::write('Query.limit', array(
+	10 => 10,
+	30 => 30,
+	50 => 50,
+	100 => 100,
+	200 => 200,
+));
