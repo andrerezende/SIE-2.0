@@ -61,4 +61,18 @@ class Inscricao extends AppModel {
 		)
 	);
 
+	public $filterArgs = array(
+		array('name' => 'nome', 'type' => 'query', 'method' => 'iLikeCondition'),
+	);
+
+	public function iLikeCondition(array $data = array()) {
+		$filter = $data['nome'];
+		$cond = array(
+			'AND' => array(
+				'Candidato.nome ILIKE' => '%' . $filter . '%',
+			),
+		);
+		return $cond;
+	}
+
 }
