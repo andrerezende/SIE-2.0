@@ -40,6 +40,17 @@
 	<?php echo $this->Html->link(__('Homolagar Isentos', true), array('action' => 'homologar_isentos')); ?></h4>
 	<h2><?php __('Inscrições');?></h2>
 	<table cellpadding="0" cellspacing="0">
+		<?php echo $this->Form->create('Inscricao', array('url' => array_merge(array('action' => 'index'), $this->params['pass']),
+			'inputDefaults' => array('div' => false, 'class' => false)
+		));?>
+		<tr>
+			<th><?php echo $this->Form->input('nome');?></th>
+			<th><?php echo $this->Form->input('processo_seletivo', array('options' => $processoSeletivos, 'empty' => 'Todos', 'type' => 'select', 'value' => isset($this->params['named']['processo_seletivo']) ? $this->params['named']['processo_seletivo'] : null));?></th>
+			<th><?php echo $this->Form->input('limite', array('options' => Configure::read('Query.limit'), 'empty' => 'Ilimitado', 'value' => isset($this->params['named']['limite']) ? $this->params['named']['limite'] : null));?></th>
+			<th><?php echo $this->Form->end('Filtrar');?></th>
+		</tr>
+	</table>
+	<table cellpadding="0" cellspacing="0">
 	<tr>
 		<th><?php echo $this->Paginator->sort('id');?></th>
 		<th><?php echo $this->Paginator->sort('candidato_id');?></th>
@@ -54,6 +65,9 @@
 	<?php
 	$i = 0;
 	foreach ($inscricoes as $inscricao):
+		if (empty($inscricao['Selecao']['id'])) {
+			continue;
+		}
 		$class = null;
 		if ($i++ % 2 == 0) {
 			$class = ' class="altrow"';
@@ -65,8 +79,8 @@
 			<?php echo $this->Html->link($inscricao['Candidato']['nome'], array('controller' => 'candidatos', 'action' => 'view', $inscricao['Candidato']['id'])); ?>
 		</td>
 		<td><?php echo $this->Formatacao->data($inscricao['Inscricao']['data']); ?>&nbsp;</td>
-		<td><?php echo $inscricao['Inscricao']['especial_prova']; ?>&nbsp;</td>
-		<td><?php echo $inscricao['Inscricao']['isento']; ?>&nbsp;</td>
+		<td><?php echo $this->Util->boolean($inscricao['Inscricao']['especial_prova']); ?>&nbsp;</td>
+		<td><?php echo $this->Util->boolean($inscricao['Inscricao']['isento']); ?>&nbsp;</td>
 		<td class="actions">
 		<?php foreach ($inscricao['Nota'] as $nota):?>
 		
