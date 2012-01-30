@@ -137,6 +137,8 @@ class PagamentosController extends AppController {
 						'data_importacao' => date('Y-m-d')
 					));
 					if (!$this->Pagamento->save($data, false)) {
+						$this->Pagamento->Inscricao->id = $inscritoId;
+						$this->Pagamento->saveField('homologado', true);
 						$count++;
 						$error .= $inscritoId . '<br />';
 					}
