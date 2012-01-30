@@ -61,6 +61,17 @@ class Inscricao extends AppModel {
 		)
 	);
 
+	public $hasOne = array(
+		'Pagamento' => array(
+			'className' => 'Pagamento',
+			'foreignKey' => 'inscricao_id',
+			'fields' => '',
+			'conditionas' => '',
+			'order' => '',
+			'dependent' => true,
+		),
+	);
+
 	public $filterArgs = array(
 		array('name' => 'nome', 'type' => 'query', 'method' => 'iLikeCondition'),
 	);

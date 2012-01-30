@@ -85,6 +85,70 @@ class InscricoesController extends AppController {
 		$this->set(compact('inscricoes', 'processoSeletivos'));
 	}
 
+	public function admin_homologados_sem_isentos() {
+		$this->Prg->commonProcess();
+		$this->Inscricao->recursive = 0;
+		$conditionsSelecao = array();
+		if (isset($this->passedArgs['processo_seletivo'])) {
+			$conditionsSelecao = array('Selecao.processo_seletivo_id' => $this->passedArgs['processo_seletivo']);
+		}
+		$this->paginate = array(
+			'limit' => isset($this->passedArgs['limite']) ? $this->passedArgs['limite'] : 100,
+			'conditions' => array_merge($this->Inscricao->parseCriteria($this->passedArgs), array('Inscricao.homologado' => true, 'Inscricao.isento' => false)),
+			'contain' => array(
+				'Candidato' => array(
+					'fields' => array(
+						'Candidato.id',
+						'Candidato.nome',
+						'Candidato.rg',
+					)
+				),
+				'Selecao' => array(
+					'conditions' => $conditionsSelecao,
+					'ProcessoSeletivo',
+					'Campus',
+					'Curso'
+				),
+				'Pagamento',
+			),
+		);
+		$processoSeletivos = $this->Inscricao->Selecao->ProcessoSeletivo->find('list');
+		$inscricoes = $this->paginate();
+		$this->set(compact('inscricoes', 'processoSeletivos'));
+	}
+
+	public function admin_homologados_geral() {
+		$this->Prg->commonProcess();
+		$this->Inscricao->recursive = 0;
+		$conditionsSelecao = array();
+		if (isset($this->passedArgs['processo_seletivo'])) {
+			$conditionsSelecao = array('Selecao.processo_seletivo_id' => $this->passedArgs['processo_seletivo']);
+		}
+		$this->paginate = array(
+			'limit' => isset($this->passedArgs['limite']) ? $this->passedArgs['limite'] : 100,
+			'conditions' => array_merge($this->Inscricao->parseCriteria($this->passedArgs), array('Inscricao.homologado' => true)),
+			'contain' => array(
+				'Candidato' => array(
+					'fields' => array(
+						'Candidato.id',
+						'Candidato.nome',
+						'Candidato.rg',
+					)
+				),
+				'Selecao' => array(
+					'conditions' => $conditionsSelecao,
+					'ProcessoSeletivo',
+					'Campus',
+					'Curso'
+				),
+				'Pagamento',
+			),
+		);
+		$processoSeletivos = $this->Inscricao->Selecao->ProcessoSeletivo->find('list');
+		$inscricoes = $this->paginate();
+		$this->set(compact('inscricoes', 'processoSeletivos'));
+	}
+
 	public function admin_homologar_isentos() {
 		if (empty($this->data)) {
 			$this->data = array(

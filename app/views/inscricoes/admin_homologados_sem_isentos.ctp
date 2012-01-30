@@ -1,5 +1,5 @@
 <div class="inscricoes index">
-	<h2><?php __('Inscrições - Isentos Homologados');?></h2>
+	<h2><?php __('Inscrições - Homologados sem Isentos');?></h2>
 	<table cellpadding="0" cellspacing="0">
 		<?php echo $this->Form->create('Inscricao', array('url' => array_merge(array('action' => 'isentos_homologados'), $this->params['pass']),
 			'inputDefaults' => array('div' => false, 'class' => false)
