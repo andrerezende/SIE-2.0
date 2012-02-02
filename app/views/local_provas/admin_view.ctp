@@ -13,17 +13,6 @@
 		</dd>
 	</dl>
 </div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Local Prova', true), array('action' => 'edit', $localProva['LocalProva']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Delete Local Prova', true), array('action' => 'delete', $localProva['LocalProva']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $localProva['LocalProva']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Local Provas', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Local Prova', true), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Selecoes', true), array('controller' => 'selecoes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Selecao', true), array('controller' => 'selecoes', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
 <div class="related">
 	<h3><?php __('Related Selecoes');?></h3>
 	<?php if (!empty($localProva['Selecao'])):?>

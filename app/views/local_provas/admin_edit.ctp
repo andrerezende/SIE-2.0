@@ -4,8 +4,7 @@
 		<legend><?php __('Editar Local de Prova'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('descricao');
-		echo $this->Form->input('Selecao');
+		echo $this->Form->input('descricao', array('label' => 'Descrição'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
