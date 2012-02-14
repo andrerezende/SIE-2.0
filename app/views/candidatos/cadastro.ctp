@@ -49,8 +49,8 @@
 		echo $this->Form->input('data_nascimento', array('dateFormat' => 'DMY', 'separator' => '', 'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => '', 'value' => ''));
 		echo $this->Form->input('cpf');
 		echo $this->Form->input('rg');
-		echo $this->Form->input('Usuario.senha');
-		echo $this->Form->input('Usuario.confirmar_senha', array('label' => 'Confirmar Senha'));
+		echo $this->Form->input('Usuario.senha', array('type' => 'password'));
+		echo $this->Form->input('Usuario.confirmar_senha', array('type' => 'password', 'label' => 'Confirmar Senha'));
 		echo $this->Form->input('orgao_expedidor');
 		echo $this->Form->input('orgao_expedidor_unidade_federativa_id', array('empty' => 'Selecione o estado', 'options' => $unidadeFederativas));
 		echo $this->Form->input('data_expedicao', array('dateFormat' => 'DMY', 'separator' => '', 'minYear' => date('Y') - 100, 'maxYear' => date('Y'), 'empty' => '', 'value' => ''));
