@@ -4,7 +4,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 		<th><?php echo $this->Paginator->sort('id');?></th>
-		<th><?php echo $this->Paginator->sort('nome');?></th>
+		<th><?php echo $this->Paginator->sort('tipo');?></th>
 		<th><?php echo $this->Paginator->sort('campo');?></th>
 		<th><?php echo $this->Paginator->sort('processo_seletivo_id');?></th>
 		<th class="actions"><?php __('Actions');?></th>
@@ -20,8 +20,8 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $criterioDesempate['CriterioDesempate']['id']; ?>&nbsp;</td>
-		<td><?php echo $criterioDesempate['CriterioDesempate']['nome']; ?>&nbsp;</td>
-		<td><?php echo $criterios[$criterioDesempate['CriterioDesempate']['campo']]; ?>&nbsp;</td>
+		<td><?php echo $criterios[$criterioDesempate['CriterioDesempate']['tipo']]; ?>&nbsp;</td>
+		<td><?php echo $criterioDesempate['CriterioDesempate']['campo']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($criterioDesempate['ProcessoSeletivo']['descricao'], array('controller' => 'processo_seletivos', 'action' => 'view', $criterioDesempate['ProcessoSeletivo']['id'])); ?>
 		</td>

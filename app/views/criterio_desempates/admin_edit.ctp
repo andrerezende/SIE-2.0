@@ -4,7 +4,7 @@
 		<legend><?php __('Editar Critério de Desempate'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('nome');
+		echo $this->Form->input('tipo');
 		echo $this->Form->input('campo', array(
 			'type' => 'select',
 			'empty' => 'Selecione',

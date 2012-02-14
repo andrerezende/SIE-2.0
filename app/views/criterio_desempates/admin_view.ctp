@@ -6,14 +6,9 @@
 			<?php echo $criterioDesempate['CriterioDesempate']['id']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nome'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Tipo'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $criterioDesempate['CriterioDesempate']['nome']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nome'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $criterioDesempate['CriterioDesempate']['nome']; ?>
+			<?php echo $criterioDesempate['CriterioDesempate']['tipo']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Campo'); ?></dt>
