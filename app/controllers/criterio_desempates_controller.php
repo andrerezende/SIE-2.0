@@ -1,14 +1,17 @@
 <?php
 class CriterioDesempatesController extends AppController {
 
-	var $name = 'CriterioDesempates';
+	public $name = 'CriterioDesempates';
+	public $paginate = array(
+		'order' => array('CriterioDesempate.id'),
+	);
 
-	function admin_index() {
+	public function admin_index() {
 		$this->CriterioDesempate->recursive = 0;
 		$this->set('criterioDesempates', $this->paginate());
 	}
 
-	function admin_view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid criterio desempate', true));
 			$this->redirect(array('action' => 'index'));
@@ -16,7 +19,7 @@ class CriterioDesempatesController extends AppController {
 		$this->set('criterioDesempate', $this->CriterioDesempate->read(null, $id));
 	}
 
-	function admin_add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->CriterioDesempate->create();
 			if ($this->CriterioDesempate->save($this->data)) {
@@ -39,7 +42,7 @@ class CriterioDesempatesController extends AppController {
 		}
 	}
 
-	function admin_edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid criterio desempate', true));
 			$this->redirect(array('action' => 'index'));
@@ -59,7 +62,7 @@ class CriterioDesempatesController extends AppController {
 		$this->set(compact('processoSeletivos'));
 	}
 
-	function admin_delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for criterio desempate', true));
 			$this->redirect(array('action'=>'index'));
