@@ -1,9 +1,9 @@
 <?php
 class CriterioDesempate extends AppModel {
-	var $name = 'CriterioDesempate';
-	var $useTable = 'criterio_desempate';
-	var $displayField = 'nome';
-	var $validate = array(
+	public $name = 'CriterioDesempate';
+	public $useTable = 'criterio_desempate';
+	public $displayField = 'nome';
+	public $validate = array(
 		'processo_seletivo_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -15,9 +15,8 @@ class CriterioDesempate extends AppModel {
 			),
 		),
 	);
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-	var $belongsTo = array(
+	public $belongsTo = array(
 		'ProcessoSeletivo' => array(
 			'className' => 'ProcessoSeletivo',
 			'foreignKey' => 'processo_seletivo_id',
