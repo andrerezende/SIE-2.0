@@ -27,7 +27,16 @@ class CriterioDesempatesController extends AppController {
 			}
 		}
 		$processoSeletivos = $this->CriterioDesempate->ProcessoSeletivo->find('list');
-		$this->set(compact('processoSeletivos'));
+		$this->set(compact('processoSeletivos', 'provas'));
+	}
+
+	public function ajax_get_provas() {
+		Configure::write('debug', 0);
+		$this->layout = 'ajax';
+		if ($this->RequestHandler->isAjax()) {
+			$provas = $this->CriterioDesempate->ProcessoSeletivo->Prova->find('list', array('conditions' => array('processo_seletivo_id' => $this->data['processo_seletivo_id'])));
+			$this->set(compact('provas'));
+		}
 	}
 
 	function admin_edit($id = null) {
@@ -62,4 +71,5 @@ class CriterioDesempatesController extends AppController {
 		$this->Session->setFlash(__('Criterio desempate was not deleted', true));
 		$this->redirect(array('action' => 'index'));
 	}
+
 }
