@@ -24,8 +24,9 @@
 		echo $this->Form->input('selecao_id', array('type' => 'hidden', 'value' => $selecao_id));
 		echo $this->Form->input('local_prova_id', array('label' => 'Local de Prova', 'empty' => 'Carregando...'));
 		echo $this->Form->input('data', array('type' => 'hidden', 'value' => date('Y-m-d H:m:s')));
-		echo $this->Form->input('especial_prova', array('type' => 'checkbox', 'label' => 'Condições especiais para a realização de prova'));
+		echo $this->Form->input('especial_prova', array('label' => 'Condições especiais para a realização de prova'));
 		echo $this->Form->input('isento');
+		echo $this->Form->input('cota_id', array('label' => 'Cotas', 'empty' => 'Selecione'));
 		echo $this->Form->end(__('Submit', true));
 	?>
 	</div>
