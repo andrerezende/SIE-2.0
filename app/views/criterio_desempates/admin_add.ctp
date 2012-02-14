@@ -39,7 +39,7 @@
 			'disabled' => true,
 			'type' => 'select',
 			'empty' => 'Selecione',
-			'options' => Configure::ready('CriteriosDesempate'),
+			'options' => Configure::read('CriteriosDesempate'),
 		));?>
 		<div id="CriterioDesempateProvas" class="input select" style="display: none;"></div>
 		<?php echo $this->Form->input('campo', array('disabled' => true));?>
