@@ -39,7 +39,7 @@
 		echo $this->Form->input('selecao_id');
 		echo $this->Form->input('local_prova_id', array('empty' => 'Escolha a seleção primeiro'));
 		echo $this->Form->input('data');
-		echo $this->Form->input('especial_prova', array('type' => 'checkbox'));
+		echo $this->Form->input('especial_prova', array('label' => 'Condições especiais para a realização de prova'));
 		echo $this->Form->input('isento');
 		echo $this->Form->end(__('Submit', true));
 	?>

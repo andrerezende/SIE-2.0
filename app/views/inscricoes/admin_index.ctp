@@ -57,9 +57,7 @@
 		<th><?php echo $this->Paginator->sort('data');?></th>
 		<th><?php echo $this->Paginator->sort('especial_prova');?></th>
 		<th><?php echo $this->Paginator->sort('isento');?></th>
-		<?php //foreach ($provas as $prova):?>
-			<th class="actions">Notas<?php //echo $prova;?></th>
-		<?php //endforeach;?>
+		<th class="actions">Notas</th>
 		<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -99,13 +97,6 @@
 	</tr>
 <?php endforeach; ?>
 	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-	));
-	?>	</p>
-
 <?php if ($this->Paginator->numbers()):?>
 	<div class="paging">
 		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
