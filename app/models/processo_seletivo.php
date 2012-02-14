@@ -41,7 +41,25 @@ class ProcessoSeletivo extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
+		'CriterioDesempate' => array(
+			'className' => 'CriterioDesempate',
+			'foreignKey' => 'processo_seletivo_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 	);
+
+	public function getCriteriosDesempate($processo_seletivo_id) {
+		$this->CriterioDesempate->contain();
+		return $this->CriterioDesempate->find('all', array('conditions' => array('processo_seletivo_id' => $processo_seletivo_id)));
+	}
 
 }
