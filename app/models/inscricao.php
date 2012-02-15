@@ -1,13 +1,47 @@
 <?php
+/**
+ * Inscricao
+ *
+ * @property Candidato $Candidato
+ * @property Selecao $Selecao
+ * @property LocalProva $LocalProva
+ * @property Cota $Cota
+ * @property Nota $Nota
+ * @property Classificacao $Classificacao
+ * @property Pagamento $Pagamento
+ */
 class Inscricao extends AppModel {
 
+	/**
+	 * Nome do model
+	 *
+	 * @access public
+	 * @var string
+	 */
 	public $name = 'Inscricao';
+
+	/**
+	 * Tabela do model
+	 *
+	 * @access public
+	 * @var string
+	 */
 	public $useTable = 'inscricao';
-//	public $virtualFields = array(
-//		'nome' => 'Candidato.nome',
-//	);
+
+	/**
+	 * Campo de exibição
+	 *
+	 * @access public
+	 * @var string
+	 */
 	public $displayField = 'id';
 
+	/**
+	 * Relacionamentos belongsTo
+	 *
+	 * @access public
+	 * @var array
+	 */
 	public $belongsTo = array(
 		'Candidato' => array(
 			'className' => 'Candidato',
@@ -29,9 +63,22 @@ class Inscricao extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+		'Cota' => array(
+			'className' => 'Cota',
+			'foreignKey' => 'cota_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 	);
 
+	/**
+	 * Relacionamentos hasMany
+	 *
+	 * @access public
+	 * @var array
+	 */
 	public $hasMany = array(
 		'Nota' => array(
 			'className' => 'Nota',
@@ -61,6 +108,12 @@ class Inscricao extends AppModel {
 		)
 	);
 
+	/**
+	 * Relacionamentos hasOne
+	 *
+	 * @access public
+	 * @var array
+	 */
 	public $hasOne = array(
 		'Pagamento' => array(
 			'className' => 'Pagamento',
@@ -72,10 +125,25 @@ class Inscricao extends AppModel {
 		),
 	);
 
+	/**
+	 * Configurações do behavior Search.Searchable
+	 *
+	 * @access public
+	 * @var array
+	 */
 	public $filterArgs = array(
 		array('name' => 'nome', 'type' => 'query', 'method' => 'iLikeCondition'),
 	);
 
+	/**
+	 * iLikeCondition
+	 *
+	 * Cria condição utilizando o 'ILIKE' do PostgreSQL
+	 *
+	 * @access public
+	 * @param array $data
+	 * @return array
+	 */
 	public function iLikeCondition(array $data = array()) {
 		$filter = $data['nome'];
 		$cond = array(
