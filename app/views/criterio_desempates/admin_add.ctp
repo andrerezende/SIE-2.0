@@ -18,14 +18,18 @@
 		});
 		$("#CriterioDesempateTipo").change(function () {
 			if ($("option:selected", this).val() == 2) {
-				$("#CriterioDesempateCampo").attr("disabled", "disabled");
+				$("#CriterioDesempateCampo").attr("readonly", "readonly");
 				$("#CriterioDesempateProvas").empty();
 				provasLabel.prependTo("#CriterioDesempateProvas");
 				provas.appendTo("#CriterioDesempateProvas").parent().show();
 			} else {
-				$("#CriterioDesempateCampo").removeAttr("disabled");
+				$("#CriterioDesempateCampo").removeAttr("readonly");
 				$("#CriterioDesempateProvas").hide();
 			}
+		});
+		provas.change(function() {
+			$("#CriterioDesempateProvaId").val($("option:selected", this).val());
+			$("#CriterioDesempateCampo").val($("option:selected", this).text());
 		});
 	});
 </script>
@@ -40,9 +44,11 @@
 			'type' => 'select',
 			'empty' => 'Selecione',
 			'options' => Configure::read('CriteriosDesempate'),
-		));?>
+		));
+		echo $this->Form->input('prova_id', array('type' => 'hidden'));
+	?>
 		<div id="CriterioDesempateProvas" class="input select" style="display: none;"></div>
-		<?php echo $this->Form->input('campo', array('disabled' => true));?>
+		<?php echo $this->Form->input('campo', array('readonly' => true));?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>
 </div>
