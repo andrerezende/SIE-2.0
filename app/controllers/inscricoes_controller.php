@@ -1,4 +1,9 @@
 <?php
+/**
+ * InscricoesController
+ *
+ * @property Inscricao $Inscricao
+ */
 class InscricoesController extends AppController {
 
 	public $name = 'Inscricoes';
@@ -44,7 +49,8 @@ class InscricoesController extends AppController {
 				),
 				'LocalProva',
 				'Nota' => array(
-					'Prova'
+					'Prova',
+					'order' => array('Nota.prova_id'),
 				),
 			),
 		);
@@ -52,6 +58,64 @@ class InscricoesController extends AppController {
 		$processoSeletivos = $this->Inscricao->Selecao->ProcessoSeletivo->find('list');
 		$inscricoes = $this->paginate();
 		$this->set(compact('inscricoes', 'processoSeletivos', 'provas'));
+	}
+
+	public function admin_classificacoes() {
+		$selecoes = $this->Inscricao->Selecao->find('all', array('contain' => array('ProcessoSeletivo', 'Campus', 'Curso'), 'order' => array('ProcessoSeletivo.id')));
+		$this->set(compact('selecoes'));
+	}
+
+	public function admin_lista_por_notas($selecao_id = null, $processo_seletivo_id = null) {
+		$this->_CriterioDesempate($selecao_id, $processo_seletivo_id);
+		$this->Prg->commonProcess();
+		$this->Inscricao->recursive = 0;
+		$conditionsSelecao = array();
+		if (isset($this->passedArgs['processo_seletivo'])) {
+			$conditionsSelecao = array('Selecao.processo_seletivo_id' => $this->passedArgs['processo_seletivo']);
+		}
+		$cotas = $this->__getCotas($selecao_id);
+		$inscricoesCotas = $this->__getInscricoesCotas($selecao_id, $processo_seletivo_id, $cotas[0]);
+		$order = $this->__getOrderCriteriosDesempate($processo_seletivo_id);
+		$orderProvas = $this->__getOrderCriteriosDesempateProva($processo_seletivo_id);
+		$this->paginate = array(
+			'order' => $order,
+			'limit' => isset($this->passedArgs['limite']) ? $this->passedArgs['limite'] : 100,
+			'conditions' => array_merge($this->Inscricao->parseCriteria($this->passedArgs), array('Selecao.id' => $selecao_id, 'Selecao.processo_seletivo_id' => $processo_seletivo_id)),
+			'contain' => array(
+				'Candidato' => array(
+					'fields' => array(
+						'Candidato.id',
+						'Candidato.nome',
+						'Candidato.rg',
+					)
+				),
+				'Selecao' => array(
+					'conditions' => array('Selecao.processo_seletivo_id' => $processo_seletivo_id),
+					'ProcessoSeletivo' => array(
+						'conditions' => array('ProcessoSeletivo.id' => $processo_seletivo_id),
+					),
+					'Campus',
+					'Curso',
+				),
+				'Nota' => array('Prova' => array('order' => 'Prova.id'), 'order' => array('Nota.prova_id')),
+			),
+		);
+		$processoSeletivos = $this->Inscricao->Selecao->ProcessoSeletivo->find('list');
+		$inscricoes = $this->paginate();
+		$inscricoesClassificacao = array();
+		$classificacoes = array();
+		foreach ($inscricoes as $inscricao) {
+			foreach ($inscricao['Nota'] as $nota) {
+				if (isset($orderProvas[$nota['prova_id']]) || array_key_exists($nota['prova_id'], $orderProvas)) {
+					$inscricoesClassificacao['id' . $nota['inscricao_id']] = $nota['valor'];
+				}
+			}
+		}
+		array_multisort($inscricoesClassificacao, SORT_DESC);
+		foreach ($inscricoesClassificacao as $key => $val) {
+			$classificacoes[$key] = $this->array_key_index($inscricoesClassificacao, $key) + 1;
+		}
+		$this->set(compact('inscricoes', 'processoSeletivos', 'criterios', 'classificacoes', 'inscricoesCotas'));
 	}
 
 	public function admin_isentos_homologados() {
@@ -257,25 +321,8 @@ class InscricoesController extends AppController {
 				$this->Session->setFlash(__('A inscrição não pôde ser realizada. Tente novamente.', true));
 			}
 		}
-		$candidatos = $this->Inscricao->Candidato->find('list');
-//		$selecoes = $this->Inscricao->Selecao->find('list', array('conditions' => array('Selecao.processo_seletivo_id' => $processo_seletivo_id)));
-//		$localProvas = $this->Inscricao->LocalProva->find('list');
-		$this->set(compact('candidatos', 'selecoes', 'selecao_id'));
-	}
-
-	public function admin_lista_por_notas() {
-		$this->set(
-			'inscricoes',
-			$this->Inscricao->Selecao->find('all', array(
-				'contain' => array(
-					'Campus',
-					'Curso',
-					'ProcessoSeletivo' => array('Prova'),
-					'Inscricao' => array('Candidato', 'Nota'),
-				),
-				'order' => array('Campus.nome', 'Curso.descricao'),
-			))
-		);
+		$cotas = $this->Inscricao->Cota->find('list', array('conditions' => array('Cota.selecao_id' => $selecao_id)));
+		$this->set(compact('cotas', 'selecoes', 'selecao_id'));
 	}
 
 	public function admin_alterar_homologacao() {
@@ -289,6 +336,79 @@ class InscricoesController extends AppController {
 			}
 			return json_encode(false);
 		}
+	}
+
+	protected function __getCotas($selecao_id) {
+		return $this->Inscricao->Selecao->Cota->find(
+			'all',
+			array(
+				'conditions' => array(
+					'Cota.selecao_id' => $selecao_id
+				),
+				'contain' => array()
+			)
+		);
+	}
+
+	protected function __getInscricoesCotas($selecao_id, $processo_seletivo_id, $cota) {
+		return $this->Inscricao->find('all', array(
+			'conditions' => array_merge($this->Inscricao->parseCriteria($this->passedArgs), array('Selecao.id' => $selecao_id, 'NOT' => array('Candidato.necessidade_especial_id' => null))),
+			'contain' => array(
+				'Candidato' => array(
+					'fields' => array(
+						'Candidato.id',
+						'Candidato.nome',
+						'Candidato.rg',
+					),
+				),
+				'Selecao' => array(
+					'conditions' => array('Selecao.processo_seletivo_id' => $processo_seletivo_id),
+					'ProcessoSeletivo' => array(
+						'conditions' => array('ProcessoSeletivo.id' => $processo_seletivo_id),
+						'Prova'
+					),
+					'Campus',
+					'Curso',
+				),
+				'Nota' => array('Prova'),
+			),
+			'limit' => $cota['Cota']['quantidade'],
+			'order' => array('Candidato.data_nascimento'),
+		));
+	}
+
+	protected function __getOrderCriteriosDesempate($processo_seletivo_id) {
+		$criterios = $this->Inscricao->Selecao->ProcessoSeletivo->getCriteriosDesempate($processo_seletivo_id);
+		foreach ($criterios as $criterio) {
+			$order[] = $criterio['CriterioDesempate']['campo'];
+		}
+		return $order;
+	}
+
+	protected function __getOrderCriteriosDesempateProva($processo_seletivo_id) {
+		$criterios = $this->Inscricao->Selecao->ProcessoSeletivo->getCriteriosDesempateProva($processo_seletivo_id);
+		foreach ($criterios as $criterio) {
+			$order[$criterio['CriterioDesempate']['prova_id']] = $criterio['CriterioDesempate']['campo'];
+		}
+		return $order;
+	}
+
+	private function _CriterioDesempate($selecao_id = null, $processo_seletivo_id = null) {
+//		$dbo = $this->Inscricao->getDataSource();
+//		$subQuery = $dbo->buildStatement(array(
+//				'fields' => array(),
+//				'table' => $dbo->fullTableName($this->Inscricao),
+//				'alias' => 'Inscricao2',
+//				'limit' => null,
+//				'offset' => null,
+//				'joins' => array(),
+//				'conditions' => array('Selecao.id' => $selecao_id, 'ProcessoSeletivo.id' => $processo_seletivo_id),
+//				'order' => null,
+//				'group' => null,
+//			),
+//			$this->Inscricao
+//		);
+//		debug($subQuery);
 	}
 
 }
