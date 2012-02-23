@@ -148,4 +148,22 @@ class AppController extends Controller {
 		return false;
 	}
 
+	/**
+	 * Find numeric index of a key in an array.
+	 *
+	 * @access public
+	 * @param array $arr
+	 * @param mixed $key
+	 * @return int
+	 */
+	public function array_key_index(&$arr, $key) {
+		$i = 0;
+		$arr_keys = array_keys($arr);
+		foreach ($arr_keys as $k) {
+			if ($k == $key) {
+				return $i;
+			}
+			$i++;
+		}
+	}
 }
