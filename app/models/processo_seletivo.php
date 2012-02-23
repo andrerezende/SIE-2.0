@@ -59,7 +59,12 @@ class ProcessoSeletivo extends AppModel {
 
 	public function getCriteriosDesempate($processo_seletivo_id) {
 		$this->CriterioDesempate->contain();
-		return $this->CriterioDesempate->find('all', array('conditions' => array('processo_seletivo_id' => $processo_seletivo_id)));
+		return $this->CriterioDesempate->find('all', array('conditions' => array('processo_seletivo_id' => $processo_seletivo_id, 'prova_id' => null)));
+	}
+
+	public function getCriteriosDesempateProva($processo_seletivo_id) {
+		$this->CriterioDesempate->contain();
+		return $this->CriterioDesempate->find('all', array('conditions' => array('processo_seletivo_id' => $processo_seletivo_id, 'NOT' => array('prova_id' => null))));
 	}
 
 }
