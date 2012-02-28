@@ -13,9 +13,9 @@
 	</table>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th><?php echo $this->Paginator->sort('Campus');?></th>
-			<th><?php echo $this->Paginator->sort('Curso');?></th>
-			<th><?php echo $this->Paginator->sort('nome');?></th>
+			<th><?php echo $this->Paginator->sort('Campus.nome');?></th>
+			<th><?php echo $this->Paginator->sort('Curso.descricao');?></th>
+			<th><?php echo $this->Paginator->sort('Candidato.nome');?></th>
 			<th><?php echo $this->Paginator->sort('Nº Inscrição', 'numero_inscricao');?></th>
 			<th><?php echo $this->Paginator->sort('RG', 'rg');?></th>
 			<th><?php echo $this->Paginator->sort('Processo Seletivo', 'ProcessoSeletivo');?></th>
