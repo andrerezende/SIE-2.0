@@ -66,7 +66,6 @@ class InscricoesController extends AppController {
 	}
 
 	public function admin_lista_por_notas($selecao_id = null, $processo_seletivo_id = null) {
-		$this->_CriterioDesempate($selecao_id, $processo_seletivo_id);
 		$this->Prg->commonProcess();
 		$this->Inscricao->recursive = 0;
 		$conditionsSelecao = array();
@@ -379,36 +378,24 @@ class InscricoesController extends AppController {
 
 	protected function __getOrderCriteriosDesempate($processo_seletivo_id) {
 		$criterios = $this->Inscricao->Selecao->ProcessoSeletivo->getCriteriosDesempate($processo_seletivo_id);
-		foreach ($criterios as $criterio) {
-			$order[] = $criterio['CriterioDesempate']['campo'];
+		if (!empty($criterios)) {
+			foreach ($criterios as $criterio) {
+				$order[] = $criterio['CriterioDesempate']['campo'];
+			}
+			return $order;
 		}
-		return $order;
+		return null;
 	}
 
 	protected function __getOrderCriteriosDesempateProva($processo_seletivo_id) {
 		$criterios = $this->Inscricao->Selecao->ProcessoSeletivo->getCriteriosDesempateProva($processo_seletivo_id);
-		foreach ($criterios as $criterio) {
-			$order[$criterio['CriterioDesempate']['prova_id']] = $criterio['CriterioDesempate']['campo'];
+		if (!empty($criterios)) {
+			foreach ($criterios as $criterio) {
+				$order[$criterio['CriterioDesempate']['prova_id']] = $criterio['CriterioDesempate']['campo'];
+			}
+			return $order;
 		}
-		return $order;
-	}
-
-	private function _CriterioDesempate($selecao_id = null, $processo_seletivo_id = null) {
-//		$dbo = $this->Inscricao->getDataSource();
-//		$subQuery = $dbo->buildStatement(array(
-//				'fields' => array(),
-//				'table' => $dbo->fullTableName($this->Inscricao),
-//				'alias' => 'Inscricao2',
-//				'limit' => null,
-//				'offset' => null,
-//				'joins' => array(),
-//				'conditions' => array('Selecao.id' => $selecao_id, 'ProcessoSeletivo.id' => $processo_seletivo_id),
-//				'order' => null,
-//				'group' => null,
-//			),
-//			$this->Inscricao
-//		);
-//		debug($subQuery);
+		return null;
 	}
 
 }
