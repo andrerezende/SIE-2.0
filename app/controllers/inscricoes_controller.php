@@ -73,13 +73,21 @@ class InscricoesController extends AppController {
 			$conditionsSelecao = array('Selecao.processo_seletivo_id' => $this->passedArgs['processo_seletivo']);
 		}
 		$cotas = $this->__getCotas($selecao_id);
-		$inscricoesCotas = $this->__getInscricoesCotas($selecao_id, $processo_seletivo_id, $cotas[0]);
+		foreach ($cotas as $cota) {
+			$inscricoesCota = $this->__getInscricoesCotas($selecao_id, $processo_seletivo_id, $cota);
+			if (!empty($inscricoesCota)) {
+				foreach ($inscricoesCota as $inscritoCota) {
+					$idsCotas[] = $inscritoCota['Inscricao']['id'];
+				}
+				$inscricoesCotas[] = $inscricoesCota;
+			}
+		}
 		$order = $this->__getOrderCriteriosDesempate($processo_seletivo_id);
 		$orderProvas = $this->__getOrderCriteriosDesempateProva($processo_seletivo_id);
 		$this->paginate = array(
 			'order' => $order,
 			'limit' => isset($this->passedArgs['limite']) ? $this->passedArgs['limite'] : 100,
-			'conditions' => array_merge($this->Inscricao->parseCriteria($this->passedArgs), array('Selecao.id' => $selecao_id, 'Selecao.processo_seletivo_id' => $processo_seletivo_id)),
+			'conditions' => array_merge($this->Inscricao->parseCriteria($this->passedArgs), array('Selecao.id' => $selecao_id, 'Selecao.processo_seletivo_id' => $processo_seletivo_id, 'NOT' => array('Inscricao.id' => $idsCotas))),
 			'contain' => array(
 				'Candidato' => array(
 					'fields' => array(
@@ -100,7 +108,11 @@ class InscricoesController extends AppController {
 			),
 		);
 		$processoSeletivos = $this->Inscricao->Selecao->ProcessoSeletivo->find('list');
-		$inscricoes = $this->paginate();
+		$inscricoes = array();
+		foreach ($inscricoesCotas as $inscricoesCota) {
+			$inscricoes = array_merge($inscricoes, $inscricoesCota);
+		}
+		$inscricoes = array_merge($inscricoes, $this->paginate());
 		$inscricoesClassificacao = array();
 		$classificacoes = array();
 		foreach ($inscricoes as $inscricao) {
@@ -111,6 +123,7 @@ class InscricoesController extends AppController {
 			}
 		}
 		array_multisort($inscricoesClassificacao, SORT_DESC);
+		$qtdCotistas = count($idsCotas);
 		foreach ($inscricoesClassificacao as $key => $val) {
 			$classificacoes[$key] = $this->array_key_index($inscricoesClassificacao, $key) + 1;
 		}
@@ -351,7 +364,7 @@ class InscricoesController extends AppController {
 
 	protected function __getInscricoesCotas($selecao_id, $processo_seletivo_id, $cota) {
 		return $this->Inscricao->find('all', array(
-			'conditions' => array_merge($this->Inscricao->parseCriteria($this->passedArgs), array('Selecao.id' => $selecao_id, 'NOT' => array('Candidato.necessidade_especial_id' => null))),
+			'conditions' => array_merge($this->Inscricao->parseCriteria($this->passedArgs), array('Selecao.id' => $selecao_id, 'Inscricao.cota_id' => $cota['Cota']['id'])),
 			'contain' => array(
 				'Candidato' => array(
 					'fields' => array(
@@ -368,8 +381,9 @@ class InscricoesController extends AppController {
 					),
 					'Campus',
 					'Curso',
+					'Cota' => array('conditions' => array('Cota.id' => $cota['Cota']['id'])),
 				),
-				'Nota' => array('Prova'),
+				'Nota' => array('Prova' => array('order' => 'Prova.id'), 'order' => array('Nota.prova_id')),
 			),
 			'limit' => $cota['Cota']['quantidade'],
 			'order' => array('Candidato.data_nascimento'),
