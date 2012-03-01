@@ -22,6 +22,7 @@ $qtdProvas = count($inscricoes[0]['Nota']);
 			<th rowspan="2"><?php echo $this->Paginator->sort('RG', 'rg');?></th>
 			<th colspan="<?php echo $qtdProvas;?>">Notas</th>
 			<th rowspan="2">Classificação no Curso</th>
+			<th rowspan="2">Cota</th>
 		</tr>
 		<tr>
 			<?php foreach ($inscricoes[0]['Nota'] as $nota):?>
@@ -47,6 +48,7 @@ $qtdProvas = count($inscricoes[0]['Nota']);
 				<td><?php echo $nota['valor'];?>&nbsp;</td>
 			<?php endforeach;?>
 			<td><?php echo $classificacoes['id' . $inscricao['Inscricao']['id']];?>&nbsp;</td>
+			<td><?php echo isset($inscricao['Selecao']['Cota']) || array_key_exists('Cota', $inscricao['Selecao']) ? $inscricao['Selecao']['Cota'][0]['descricao'] : 'Não';?></td>
 		</tr>
 		<?php endforeach; ?>
 	</table>
