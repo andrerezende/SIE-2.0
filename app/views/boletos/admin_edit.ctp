@@ -4,6 +4,7 @@
 		<legend><?php __('Editar Boleto'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
+		echo $this->Form->input('descricao', array('label' => 'Descrição'));
 		echo $this->Form->input('agencia', array('label' => 'Agência'));
 		echo $this->Form->input('conta');
 		echo $this->Form->input('convenio', array('label' => 'Convênio'));
