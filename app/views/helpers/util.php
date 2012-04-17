@@ -23,9 +23,9 @@ class UtilHelper extends AppHelper {
 	 */
 	public function boolean($field) {
 		if ($field == 0 || $field == false) {
-			return 'Não';
+			return $this->Html->tag('span', 'Não', array('class' => 'label label-important'));
 		} else {
-			return 'Sim';
+			return $this->Html->tag('span', 'Sim', array('class' => 'label label-success'));
 		}
 	}
 
