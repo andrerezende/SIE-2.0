@@ -1,4 +1,13 @@
 <?php
+/**
+ * SelecoesController
+ *
+ * PHP version 5
+ *
+ * @author      Vitor Pacheco    <vitor.pacheco@ifbaiano.edu.br>
+ * @package     Controller
+ * @property    Selecao          $Selecao
+ */
 class SelecoesController extends AppController {
 
 	public $name = 'Selecoes';
@@ -10,7 +19,7 @@ class SelecoesController extends AppController {
 
 	public function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid selecao', true));
+			$this->Session->setFlash(__('Invalid selecao', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('selecao', $this->Selecao->read(null, $id));
@@ -20,10 +29,10 @@ class SelecoesController extends AppController {
 		if (!empty($this->data)) {
 			$this->Selecao->create();
 			if ($this->Selecao->save($this->data)) {
-				$this->Session->setFlash(__('Seleção salva', true));
+				$this->Session->setFlash(__('Seleção salva', true), 'flash');
 				$this->redirect(array('controller' => 'boletos', 'action' => 'add', $this->Selecao->id));
 			} else {
-				$this->Session->setFlash(__('The selecao could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The selecao could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		$campus = $this->Selecao->Campus->find('list');
@@ -35,15 +44,15 @@ class SelecoesController extends AppController {
 
 	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid selecao', true));
+			$this->Session->setFlash(__('Invalid selecao', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Selecao->save($this->data)) {
-				$this->Session->setFlash(__('The selecao has been saved', true));
+				$this->Session->setFlash(__('The selecao has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The selecao could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The selecao could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		if (empty($this->data)) {
@@ -58,14 +67,14 @@ class SelecoesController extends AppController {
 
 	public function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for selecao', true));
+			$this->Session->setFlash(__('Invalid id for selecao', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Selecao->delete($id)) {
-			$this->Session->setFlash(__('Selecao deleted', true));
+			$this->Session->setFlash(__('Selecao deleted', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('Selecao was not deleted', true));
+		$this->Session->setFlash(__('Selecao was not deleted', true), 'flash');
 		$this->redirect(array('action' => 'index'));
 	}
 

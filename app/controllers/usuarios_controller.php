@@ -1,9 +1,12 @@
 <?php
 /**
- * Usuarios controller.
+ * UsuariosController
  *
- * @property Usuario $Usuario
- * @property AuthComponent $Auth
+ * PHP version 5
+ *
+ * @author      Vitor Pacheco      <vitor.pacheco@ifbaiano.edu.br>
+ * @package     Controller
+ * @property    Usuario            $Usuario
  */
 class UsuariosController extends AppController {
 
@@ -21,7 +24,7 @@ class UsuariosController extends AppController {
 
 	public function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid usuario', true));
+			$this->Session->setFlash(__('Invalid usuario', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('usuario', $this->Usuario->read(null, $id));
@@ -31,10 +34,10 @@ class UsuariosController extends AppController {
 		if (!empty($this->data)) {
 			$this->Usuario->create();
 			if ($this->Usuario->save($this->data)) {
-				$this->Session->setFlash(__('The usuario has been saved', true));
+				$this->Session->setFlash(__('The usuario has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The usuario could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The usuario could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		$grupos = $this->Usuario->Grupo->find('list');
@@ -43,15 +46,15 @@ class UsuariosController extends AppController {
 
 	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid usuario', true));
+			$this->Session->setFlash(__('Invalid usuario', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Usuario->save($this->data)) {
-				$this->Session->setFlash(__('The usuario has been saved', true));
+				$this->Session->setFlash(__('The usuario has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The usuario could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The usuario could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		if (empty($this->data)) {
@@ -63,34 +66,36 @@ class UsuariosController extends AppController {
 
 	public function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for usuario', true));
+			$this->Session->setFlash(__('Invalid id for usuario', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Usuario->delete($id)) {
-			$this->Session->setFlash(__('Usuario deleted', true));
+			$this->Session->setFlash(__('Usuario deleted', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('Usuario was not deleted', true));
+		$this->Session->setFlash(__('Usuario was not deleted', true), 'flash');
 		$this->redirect(array('action' => 'index'));
 	}
 
 	public function login() {
-		if ($this->Auth->user()) {
-			if ($this->Auth->user('grupo_id') == 1) {
-				$this->redirect($this->Auth->redirect(array(
-					'candidato' => true,
-					'controller' => 'candidatos',
-					'action' => 'editar',
-					$this->Auth->user('candidato_id')
-				)));
-				$this->set('isCandidato', true);
-			} elseif ($this->Auth->user('grupo_id') == 2) {
-				$this->redirect($this->Auth->redirect(array(
-					'admin' => true,
-					'controller' => 'usuarios',
-					'action' => 'index'
-				)));
-				$this->set('isCandidato', false);
+		if (!empty($this->data)) {
+			if ($this->Auth->user()) {
+				if ($this->Auth->user('grupo_id') == 1) {
+					$this->redirect($this->Auth->redirect(array(
+						'candidato' => true,
+						'controller' => 'candidatos',
+						'action' => 'editar',
+						$this->Auth->user('candidato_id')
+					)));
+					$this->set('isCandidato', true);
+				} elseif ($this->Auth->user('grupo_id') == 2) {
+					$this->redirect($this->Auth->redirect(array(
+						'admin' => true,
+						'controller' => 'usuarios',
+						'action' => 'index'
+					)));
+					$this->set('isCandidato', false);
+				}
 			}
 		}
 		$this->set('isCandidato', false);
@@ -135,14 +140,14 @@ class UsuariosController extends AppController {
 				$this->Email->template = $options['template'];
 				$this->Email->send();
 				if ($admin) {
-					$this->Session->setFlash('Um email foi enviado com instruções para a alteração de senha');
+					$this->Session->setFlash('Um email foi enviado com instruções para a alteração de senha', 'flash');
 					$this->redirect(array('action' => 'index', 'admin' => true));
 				} else {
-					$this->Session->setFlash('Você deve receber um email com novas instruções em breve');
+					$this->Session->setFlash('Você deve receber um email com novas instruções em breve', 'flash');
 					$this->redirect(array('action' => 'login'));
 				}
 			} else {
-				$this->Session->setFlash('Nenhum usuário foi encontrado com esse e-mail');
+				$this->Session->setFlash('Nenhum usuário foi encontrado com esse e-mail', 'flash');
 				$this->redirect($this->referer('/'));
 			}
 		}
@@ -152,15 +157,16 @@ class UsuariosController extends AppController {
 	private function __resetPassword($token) {
 		$usuario = $this->Usuario->checkPasswordToken($token);
 		if (empty($usuario)) {
-			$this->Session->setFlash('Token inválido. Por favor, tente novamente.');
+			$this->Session->setFlash('Token inválido. Por favor, tente novamente.', 'flash');
 			$this->redirect(array('action' => 'recuperar_senha'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Usuario->resetPassword(Set::merge($usuario, $this->data))) {
-				$this->Session->setFlash(__d('users', 'Senha alterada, agora você pode logar com sua nova senha.', true));
+				$this->Session->setFlash(__('Senha alterada, agora você pode logar com sua nova senha.', true), 'flash');
 				$this->redirect($this->Auth->loginAction);
 			}
 		}
 		$this->set('token', $token);
 	}
+
 }

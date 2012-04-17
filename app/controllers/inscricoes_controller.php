@@ -2,7 +2,11 @@
 /**
  * InscricoesController
  *
- * @property Inscricao $Inscricao
+ * PHP version 5
+ *
+ * @author      Vitor Pacheco    <vitor.pacheco@ifbaiano.edu.br>
+ * @package     Controller
+ * @property    Inscricao        $Inscricao
  */
 class InscricoesController extends AppController {
 
@@ -255,7 +259,7 @@ class InscricoesController extends AppController {
 
 	public function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid inscricao', true));
+			$this->Session->setFlash(__('Invalid inscricao', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('inscricao', $this->Inscricao->read(null, $id));
@@ -265,10 +269,10 @@ class InscricoesController extends AppController {
 		if (!empty($this->data)) {
 			$this->Inscricao->create();
 			if ($this->Inscricao->save($this->data)) {
-				$this->Session->setFlash(__('The inscricao has been saved', true));
+				$this->Session->setFlash(__('The inscricao has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The inscricao could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The inscricao could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		$candidatos = $this->Inscricao->Candidato->find('list');
@@ -279,15 +283,15 @@ class InscricoesController extends AppController {
 
 	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid inscricao', true));
+			$this->Session->setFlash(__('Invalid inscricao', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Inscricao->save($this->data)) {
-				$this->Session->setFlash(__('The inscricao has been saved', true));
+				$this->Session->setFlash(__('The inscricao has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The inscricao could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The inscricao could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		if (empty($this->data)) {
@@ -301,14 +305,14 @@ class InscricoesController extends AppController {
 
 	public function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for inscricao', true));
+			$this->Session->setFlash(__('Invalid id for inscricao', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Inscricao->delete($id)) {
-			$this->Session->setFlash(__('Inscricao deleted', true));
+			$this->Session->setFlash(__('Inscricao deleted', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('Inscricao was not deleted', true));
+		$this->Session->setFlash(__('Inscricao was not deleted', true), 'flash');
 		$this->redirect(array('action' => 'index'));
 	}
 
@@ -327,10 +331,10 @@ class InscricoesController extends AppController {
 					$this->Inscricao->Nota->id = null;
 				}
 				$this->Inscricao->commit();
-				$this->Session->setFlash(__('Inscrição realizada com sucesso', true));
+				$this->Session->setFlash(__('Inscrição realizada com sucesso', true), 'flash');
 				$this->redirect(array('controller' => 'processo_seletivos', 'action' => 'listar'));
 			} else {
-				$this->Session->setFlash(__('A inscrição não pôde ser realizada. Tente novamente.', true));
+				$this->Session->setFlash(__('A inscrição não pôde ser realizada. Tente novamente.', true), 'flash');
 			}
 		}
 		$cotas = $this->Inscricao->Cota->find('list', array('conditions' => array('Cota.selecao_id' => $selecao_id)));

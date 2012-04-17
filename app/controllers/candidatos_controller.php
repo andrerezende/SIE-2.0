@@ -1,8 +1,12 @@
 <?php
 /**
- * Candidatos controller.
+ * CandidatosController
  *
- * @property Candidato $Candidato
+ * PHP version 5
+ *
+ * @author      Vitor Pacheco    <vitor.pacheco@ifbaiano.edu.br>
+ * @package     Controller
+ * @property    Candidato        $Candidato
  */
 class CandidatosController extends AppController {
 
@@ -27,7 +31,7 @@ class CandidatosController extends AppController {
 
 	public function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid candidato', true));
+			$this->Session->setFlash(__('Invalid candidato', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('candidato', $this->Candidato->read(null, $id));
@@ -37,17 +41,14 @@ class CandidatosController extends AppController {
 		if (!empty($this->data)) {
 			$this->Candidato->create();
 			if ($this->Candidato->save($this->data)) {
-				$this->Session->setFlash(__('The candidato has been saved', true));
+				$this->Session->setFlash(__('The candidato has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The candidato could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The candidato could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		$unidadeFederativas = $this->Candidato->UnidadeFederativa->find('list');
-		//$municipios = $this->Candidato->Municipio->find('list');
 		$paises = $this->Candidato->Pais->find('list');
-		//$naturalidadeMunicipios = $this->Candidato->NaturalidadeMunicipio->find('list');
-		//$orgaoExpedidorUnidadeFederativas = $this->Candidato->OrgaoExpedidorUnidadeFederativa->find('list');
 		$sexos = $this->Candidato->Sexo->find('list');
 		$nacionalidadePaises = $this->Candidato->NacionalidadePais->find('list');
 		$necessidadeEspeciais = $this->Candidato->NecessidadeEspecial->find('list');
@@ -57,15 +58,15 @@ class CandidatosController extends AppController {
 
 	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid candidato', true));
+			$this->Session->setFlash(__('Invalid candidato', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Candidato->save($this->data)) {
-				$this->Session->setFlash(__('The candidato has been saved', true));
+				$this->Session->setFlash(__('The candidato has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The candidato could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The candidato could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		if (empty($this->data)) {
@@ -85,14 +86,14 @@ class CandidatosController extends AppController {
 
 	public function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for candidato', true));
+			$this->Session->setFlash(__('Invalid id for candidato', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Candidato->delete($id)) {
-			$this->Session->setFlash(__('Candidato deleted', true));
+			$this->Session->setFlash(__('Candidato deleted', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('Candidato was not deleted', true));
+		$this->Session->setFlash(__('Candidato was not deleted', true), 'flash');
 		$this->redirect(array('action' => 'index'));
 	}
 
@@ -129,12 +130,12 @@ class CandidatosController extends AppController {
 					$this->data['Usuario']['grupo_id'] = 1;
 					if ($this->Candidato->Usuario->save($this->data['Usuario'])) {
 						$this->Candidato->commit();
-						$this->Session->setFlash(__('Inscrição concluída', true));
+						$this->Session->setFlash(__('Inscrição concluída', true), 'flash');
 						$this->redirect('/');
 					}
 				} else {
 					$this->Candidato->rollback();
-					$this->Session->setFlash(__('A inscrição não pôde ser efetuada. Por favor, tente novamente.', true));
+					$this->Session->setFlash(__('A inscrição não pôde ser efetuada. Por favor, tente novamente.', true), 'flash');
 				}
 			}
 			$sexos = $this->Candidato->Sexo->find('list');
@@ -150,15 +151,15 @@ class CandidatosController extends AppController {
 
 	public function candidato_editar($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Candidato inválido', true));
+			$this->Session->setFlash(__('Candidato inválido', true), 'flash');
 			$this->redirect(array('/'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Candidato->save($this->data)) {
-				$this->Session->setFlash(__('The candidato has been saved', true));
+				$this->Session->setFlash(__('The candidato has been saved', true), 'flash');
 				$this->redirect(array('/'));
 			} else {
-				$this->Session->setFlash(__('The candidato could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The candidato could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		if (empty($this->data)) {

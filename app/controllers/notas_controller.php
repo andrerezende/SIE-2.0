@@ -1,7 +1,17 @@
 <?php
+/**
+ * NotasController
+ *
+ * PHP version 5
+ *
+ * @author      Vitor Pacheco    <vitor.pacheco@ifbaiano.edu.br>
+ * @package     Controller
+ * @property    Nota             $Nota
+ */
 class NotasController extends AppController {
 
 	public $name = 'Notas';
+
 	public $paginate = array(
 		'contain' => array(
 			'Prova',
@@ -16,7 +26,7 @@ class NotasController extends AppController {
 
 	public function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid nota', true));
+			$this->Session->setFlash(__('Invalid nota', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('nota', $this->Nota->read(null, $id));
@@ -26,14 +36,14 @@ class NotasController extends AppController {
 		if (!empty($this->data)) {
 			$this->Nota->create();
 			if ($this->Nota->save($this->data)) {
-				$this->Session->setFlash(__('The nota has been saved', true));
+				$this->Session->setFlash(__('The nota has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The nota could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The nota could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		$provas = $this->Nota->Prova->find('list');
-		$inscricoes = $this->Nota->Inscricao->find('all', array('fields' => array('Inscricao.id', 'Inscricao.nome'), 'recursive' => 0));
+		$inscricoes = $this->Nota->Inscricao->find('all', array('fields' => array('Inscricao.id', 'Inscricao.nome'), 'recursive' => 0), 'flash');
 		$inscricoes = Set::combine($inscricoes, '{n}.Inscricao.id', '{n}.Inscricao.nome');
 	
 		$this->set(compact('provas', 'inscricoes'));
@@ -41,15 +51,15 @@ class NotasController extends AppController {
 
 	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid nota', true));
+			$this->Session->setFlash(__('Invalid nota', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Nota->save($this->data)) {
-				$this->Session->setFlash(__('The nota has been saved', true));
+				$this->Session->setFlash(__('The nota has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The nota could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The nota could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		if (empty($this->data)) {
@@ -62,11 +72,11 @@ class NotasController extends AppController {
 
 	public function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for nota', true));
+			$this->Session->setFlash(__('Invalid id for nota', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Nota->delete($id)) {
-			$this->Session->setFlash(__('Nota deleted', true));
+			$this->Session->setFlash(__('Nota deleted', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->Session->setFlash(__('Nota was not deleted', true));
