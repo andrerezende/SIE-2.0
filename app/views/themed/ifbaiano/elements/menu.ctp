@@ -21,7 +21,7 @@
 			<li><?php echo $this->Html->link('Notas', array('controller' => 'notas', 'action' => 'index')); ?></li>
 			<li><?php echo $this->Html->link('Inscrições', array('controller' => 'inscricoes', 'action' => 'index')); ?></li>
 			<li><?php echo $this->Html->link('Processos Seletivos', array('controller' => 'processo_seletivos', 'action' => 'index')); ?></li>
-			<li><?php echo $this->Html->link('Boletos', array('controller' => 'boletos', 'action' => 'index')); ?></li>
+			<li><?php echo $this->Html->link('Boletos', array('admin' => true, 'plugin' => false, 'controller' => 'boletos', 'action' => 'index')); ?></li>
 			<li><?php echo $this->Html->link('Provas', array('controller' => 'provas', 'action' => 'index')); ?></li>
 			<li><?php echo $this->Html->link('Editais', array('controller' => 'editais', 'action' => 'index')); ?></li>
 			<li><?php echo $this->Html->link('Seleções', array('controller' => 'selecoes', 'action' => 'index')); ?></li>
