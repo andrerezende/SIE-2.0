@@ -47,7 +47,7 @@ class AppController extends Controller {
 	 */
 	public $components = array(
 		'Auth',
-		'Boletos.BoletoBb',
+		'BoletosBb.BoletoBb',
 		'Email',
 		'RequestHandler',
 		'Search.Prg',
