@@ -1,7 +1,19 @@
-<div class="boletos form">
-<?php echo $this->Form->create('Boleto');?>
+<div class="span9">
+		<div class="page-header">
+		<h2>Configurações do Boleto</h2>
+		<small><?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar boletos', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?></small>
+	</div>
+<?php echo $this->Form->create('Boleto', array(
+	'inputDefaults' => array(
+		'class' => 'span4',
+		'div' => 'control-group',
+		'label' => array('class' => 'control-label'),
+		'between' => '<div class="controls">',
+		'after' => '</div>',
+		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'alert alert-error'))
+	)
+));?>
 	<fieldset>
-		<legend><?php __('Configurações do Boleto'); ?></legend>
 	<?php
 		echo $this->Form->input('descricao', array('label' => 'Descrição'));
 		echo $this->Form->input('agencia', array('label' => 'Agência'));

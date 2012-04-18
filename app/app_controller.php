@@ -36,6 +36,7 @@ class AppController extends Controller {
 		'Text',
 		'Time',
 		'Util',
+		'MyPaginator',
 	);
 
 	/**
