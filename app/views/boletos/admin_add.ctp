@@ -1,5 +1,5 @@
 <div class="span9">
-		<div class="page-header">
+	<div class="page-header">
 		<h2>Configurações do Boleto</h2>
 		<small><?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar boletos', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?></small>
 	</div>
