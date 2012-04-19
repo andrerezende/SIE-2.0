@@ -23,25 +23,38 @@
 	  updateId: null
 	};
 	$(document).ready(function() {
+		$(".date").datepicker();
 		$("#InscricaoSelecaoId").ufChangeHandler({
 			url: "/local_provas/ajax_get_local_prova",
 			updateId: "#InscricaoLocalProvaId"
 		});
 	});
 </script>
-<div class="inscricoes form container container_2">
-	<h2 class="title"><?php __('Nova Inscrição'); ?></h2>
-	<div style="clear: both;">&nbsp;</div>
-	<div clas="entry">
-	<?php
-		echo $this->Form->create('Inscricao');
+<div class="span9">
+	<div class="page-header">
+		<h2>Nova Inscrição</h2>
+		<small><?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar inscrições', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?></small>
+	</div>
+
+<?php echo $this->Form->create('Inscricao', array(
+	'inputDefaults' => array(
+		'class' => 'span4',
+		'div' => 'control-group',
+		'label' => array('class' => 'control-label'),
+		'between' => '<div class="controls">',
+		'after' => '</div>',
+		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'alert alert-error'))
+	)
+));?>
+	<fieldset>
+		<?php
 		echo $this->Form->input('candidato_id', array('type' => 'hidden', 'value' => $userData['Usuario']['id']));
 		echo $this->Form->input('selecao_id');
 		echo $this->Form->input('local_prova_id', array('empty' => 'Escolha a seleção primeiro'));
-		echo $this->Form->input('data');
-		echo $this->Form->input('especial_prova', array('label' => 'Condições especiais para a realização de prova'));
-		echo $this->Form->input('isento');
+		echo $this->Form->input('data', array('type' => 'text', 'class' => 'date'));
+		echo $this->Form->input('especial_prova', array('type' => 'checkbox', 'label' => false, 'class' => 'null', 'before' => '<label class="checkbox">', 'after' => 'Condições especiais para a realização de prova</div>', 'format' => array('label', 'between', 'before', 'input', 'after', 'error')));
+		echo $this->Form->input('isento', array('type' => 'checkbox', 'label' => false, 'class' => 'null', 'before' => '<label class="checkbox">', 'after' => 'Isento</div>', 'format' => array('label', 'between', 'before', 'input', 'after', 'error')));
 		echo $this->Form->end(__('Submit', true));
-	?>
-	</div>
+		?>
+	</fieldset>
 </div>
