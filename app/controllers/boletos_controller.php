@@ -19,7 +19,7 @@ class BoletosController extends AppController {
 
 	public function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid boleto', true), 'flash');
+			$this->Session->setFlash('Boleto inválido', 'flash', array('class' => 'error'));
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('boleto', $this->Boleto->read(null, $id));
@@ -32,7 +32,7 @@ class BoletosController extends AppController {
 				$this->Session->setFlash(__('O boleto foi salvo', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('O boleto não pôde ser salvo. Tente novamente.', true), 'flash');
+				$this->Session->setFlash('Não foi possível salvar, tente novamente.', 'flash', array('class' => 'error'));
 			}
 		}
 		$this->data = $this->Boleto->find('first', array('order' => array('Boleto.id DESC')));
@@ -41,7 +41,7 @@ class BoletosController extends AppController {
 
 	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid boleto', true), 'flash');
+			$this->Session->setFlash('Boleto inválido', 'flash', array('class' => 'error'));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
@@ -49,7 +49,7 @@ class BoletosController extends AppController {
 				$this->Session->setFlash(__('The boleto has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The boleto could not be saved. Please, try again.', true), 'flash');
+				$this->Session->setFlash('Não foi possível salvar, tente novamente.', 'flash', array('class' => 'error'));
 			}
 		}
 		if (empty($this->data)) {
@@ -61,14 +61,14 @@ class BoletosController extends AppController {
 
 	public function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for boleto', true), 'flash');
+			$this->Session->setFlash('Boleto inválido', 'flash', array('class' => 'error'));
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Boleto->delete($id)) {
-			$this->Session->setFlash(__('Boleto deleted', true), 'flash');
+			$this->Session->setFlash(__('Boleto excluído', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Boleto was not deleted', true), 'flash');
+		$this->Session->setFlash(__('Boleto não foi excluído', true), 'flash');
 		$this->redirect(array('action' => 'index'));
 	}
 

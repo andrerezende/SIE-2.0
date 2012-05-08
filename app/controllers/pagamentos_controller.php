@@ -39,26 +39,6 @@ class PagamentosController extends AppController {
 		$this->set(compact('inscricoes'));
 	}
 
-	public function admin_edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid pagamento', true), 'flash');
-			$this->redirect(array('action' => 'index'));
-		}
-		if (!empty($this->data)) {
-			if ($this->Pagamento->save($this->data)) {
-				$this->Session->setFlash(__('The pagamento has been saved', true), 'flash');
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The pagamento could not be saved. Please, try again.', true), 'flash');
-			}
-		}
-		if (empty($this->data)) {
-			$this->data = $this->Pagamento->read(null, $id);
-		}
-		$inscricoes = $this->Pagamento->Inscricao->find('list');
-		$this->set(compact('inscricoes'));
-	}
-
 	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for pagamento', true), 'flash');
