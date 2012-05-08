@@ -5,7 +5,6 @@ class Usuario extends AppModel {
 	public $useTable = 'usuario';
 	public $displayField = 'nome';
 	public $validate = array(
-
 		'senha' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -88,11 +87,10 @@ class Usuario extends AppModel {
 		);
 	}
 
-	public function afterValidate($options = array()) {
-		if (isset($this->data['Usuario']['candidato_id']) && !empty($this->data['Usuario']['candidato_id'])) {
-			if (isset($this->data['Usuario']['senha']) && !empty($this->data['Usuario']['senha'])) {
-				$this->data['Usuario']['senha'] = AuthComponent::password($this->data['Usuario']['senha']);
-			}
+	public function beforeSave() {
+		App::import('Core', 'Security');
+		if ($this->data[$this->alias]['senha'] == Security::hash('', null, true)) {
+			unset($this->data[$this->alias]['senha']);
 		}
 		return true;
 	}
