@@ -4,6 +4,9 @@ class Candidato extends AppModel {
 	public $name = 'Candidato';
 	public $useTable = 'candidato';
 	public $displayField = 'nome';
+	public $actsAs = array(
+		'CakePtbr.AjusteData' => array('data_nascimento', 'data_expedicao'),
+	);
 	public $validate = array(
 		'nome' => array(
 			'notempty' => array(
@@ -38,26 +41,6 @@ class Candidato extends AppModel {
 		'endereco' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'data_expedicao' => array(
-			'date' => array(
-				'rule' => array('date'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'data_nascimento' => array(
-			'date' => array(
-				'rule' => array('date'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -323,11 +306,6 @@ class Candidato extends AppModel {
 		)
 	);
 
-	public function beforeSave($options = array()) {
-		$this->_removeMascaras();
-		return true;
-	}
-
 	protected function _removeMascaras() {
 		if (isset($this->data['Candidato']['cep'])) {
 			$this->data['Candidato']['cep'] = $this->_removeMascaraCep($this->data['Candidato']['cep']);
@@ -346,6 +324,29 @@ class Candidato extends AppModel {
 
 	protected function _removeMascaraTel($telefone) {
 		return str_replace(array('(', ')', '-', ' '), '', $telefone);
+	}
+
+	public function afterFind($results, $primary = false) {
+		if (array_key_exists(0, $results)) {
+			foreach ($results as &$candidato) {
+				if (isset($candidato[$this->name]) && !empty($candidato[$this->name])) {
+					foreach ($candidato[$this->name] as $key => $field) {
+						if (isset($candidato[$this->name][$key]) && preg_match('/\d{2,4}\-\d{1,2}\-\d{1,2}/', $candidato[$this->name][$key])) {
+							list($year, $month, $day) = explode('-', $candidato[$this->name][$key]);
+							if (strlen($year) == 2) {
+								if ($year > 50) {
+									$year += 1900;
+								} else {
+									$year += 2000;
+								}
+							}
+							$candidato[$this->name][$key] = "$day/$month/$year";
+						}
+					}
+				}
+			}
+		}
+		return $results;
 	}
 
 }
