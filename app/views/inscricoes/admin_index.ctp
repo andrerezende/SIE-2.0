@@ -44,67 +44,66 @@
 
 	<table class="table table-condensed">
 		<thead>
-		<?php echo $this->Form->create('Inscricao', array('url' => array_merge(array('action' => 'index'), $this->params['pass']),
-			'inputDefaults' => array('div' => false, 'class' => 'span3')
-		));?>
-		<tr>
-			<th><?php echo $this->Form->input('nome');?></th>
-			<th><?php echo $this->Form->input('processo_seletivo', array('options' => $processoSeletivos, 'empty' => 'Todos', 'type' => 'select', 'value' => isset($this->params['named']['processo_seletivo']) ? $this->params['named']['processo_seletivo'] : null));?></th>
-			<th><?php echo $this->Form->input('limite', array('options' => Configure::read('Query.limit'), 'empty' => 'Ilimitado', 'value' => isset($this->params['named']['limite']) ? $this->params['named']['limite'] : null));?></th>
-			<th><?php echo $this->Form->end('Filtrar');?></th>
-		</tr>
+			<?php echo $this->Form->create('Inscricao', array('url' => array_merge(array('action' => 'index'), $this->params['pass']),
+				'inputDefaults' => array('div' => false, 'class' => 'span3')
+			));?>
+			<tr>
+				<th><?php echo $this->Form->input('nome');?></th>
+				<th><?php echo $this->Form->input('processo_seletivo', array('options' => $processoSeletivos, 'empty' => 'Todos', 'type' => 'select', 'value' => isset($this->params['named']['processo_seletivo']) ? $this->params['named']['processo_seletivo'] : null));?></th>
+				<th><?php echo $this->Form->input('limite', array('options' => Configure::read('Query.limit'), 'empty' => 'Ilimitado', 'value' => isset($this->params['named']['limite']) ? $this->params['named']['limite'] : null));?></th>
+				<th><?php echo $this->Form->end('Filtrar');?></th>
+			</tr>
 		</thead>
 	</table>
 
 	<table class="table table-striped table-bordered table-condensed">
-	<thead>
-		<tr>
-			<th><?php echo $this->MyPaginator->sort('Inscrição', 'numero_inscricao');?></th>
-			<th><?php echo $this->MyPaginator->sort('candidato_id');?></th>
-			<th><?php echo $this->MyPaginator->sort('data');?></th>
-			<th><?php echo $this->MyPaginator->sort('especial_prova');?></th>
-			<th><?php echo $this->MyPaginator->sort('isento');?></th>
-			<th>Processo Seletivo</th>
-			<th>Notas</th>
-			<th>Ações</th>
-		</tr>
-	</thead>
-	<tbody>
-	<?php 
-		foreach ($inscricoes as $inscricao):
-		if (empty($inscricao['Selecao']['id'])) {
-			continue;
-		}
-	?>
-	<tr>
-		<td><?php echo $inscricao['Inscricao']['numero_inscricao']; ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($inscricao['Candidato']['nome'], array('controller' => 'candidatos', 'action' => 'view', $inscricao['Candidato']['id'])); ?>
-		</td>
-		<td><?php echo $this->Formatacao->data($inscricao['Inscricao']['data']); ?>&nbsp;</td>
-		<td><?php echo $this->Util->boolean($inscricao['Inscricao']['especial_prova']); ?>&nbsp;</td>
-		<td><?php echo $this->Util->boolean($inscricao['Inscricao']['isento']); ?>&nbsp;</td>
-		<td><?php echo $inscricao['Selecao']['ProcessoSeletivo']['descricao']; ?>&nbsp;</td>
-		<td>
-		<?php foreach ($inscricao['Nota'] as $nota):?>
-			<div class="nota">
-				<?php echo $nota['Prova']['descricao'];?>
-				<?php echo $this->Form->input('nota_' .$nota['id'], array('label' => false, 'value' => $nota['valor'], 'class' => 'notas input-mini', 'div' => false));?>
-			</div>
-		
-		<?php endforeach;?>
-			</td>
-		<td>
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $inscricao['Inscricao']['id']), array('class' => 'btn')); ?>
-			<br />
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $inscricao['Inscricao']['id']), array('class' => 'btn')); ?>
-			<br />
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $inscricao['Inscricao']['id']), array('class' => 'btn'), 'Você tem certeza?'); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-</tbody>
-	</table>
+		<thead>
+			<tr>
+				<th><?php echo $this->MyPaginator->sort('Inscrição', 'numero_inscricao');?></th>
+				<th><?php echo $this->MyPaginator->sort('candidato_id');?></th>
+				<th><?php echo $this->MyPaginator->sort('data');?></th>
+				<th><?php echo $this->MyPaginator->sort('especial_prova');?></th>
+				<th><?php echo $this->MyPaginator->sort('isento');?></th>
+				<th>Processo Seletivo</th>
+				<th>Notas</th>
+				<th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+			foreach ($inscricoes as $inscricao):
+			if (empty($inscricao['Selecao']['id'])) {
+				continue;
+			}
+			?>
+				<tr>
+					<td><?php echo $inscricao['Inscricao']['numero_inscricao']; ?>&nbsp;</td>
+					<td>
+						<?php echo $this->Html->link($inscricao['Candidato']['nome'], array('controller' => 'candidatos', 'action' => 'view', $inscricao['Candidato']['id'])); ?>
+					</td>
+					<td><?php echo $this->Formatacao->data($inscricao['Inscricao']['data']); ?>&nbsp;</td>
+					<td><?php echo $this->Util->boolean($inscricao['Inscricao']['especial_prova']); ?>&nbsp;</td>
+					<td><?php echo $this->Util->boolean($inscricao['Inscricao']['isento']); ?>&nbsp;</td>
+					<td><?php echo $inscricao['Selecao']['ProcessoSeletivo']['descricao']; ?>&nbsp;</td>
+					<td>
+						<?php foreach ($inscricao['Nota'] as $nota):?>
+							<div class="nota">
+								<?php echo $nota['Prova']['descricao'];?>
+								<?php echo $this->Form->input('nota_' .$nota['id'], array('label' => false, 'value' => $nota['valor'], 'class' => 'notas input-mini', 'div' => false));?>
+							</div>
 
+						<?php endforeach;?>
+					</td>
+					<td>
+						<?php echo $this->Html->link(__('View', true), array('action' => 'view', $inscricao['Inscricao']['id']), array('class' => 'btn')); ?>
+						<br />
+						<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $inscricao['Inscricao']['id']), array('class' => 'btn')); ?>
+						<br />
+						<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $inscricao['Inscricao']['id']), array('class' => 'btn'), 'Você tem certeza?'); ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
 	<?php echo $this->element('pagination');?>
 </div>

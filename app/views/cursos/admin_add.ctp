@@ -3,6 +3,7 @@
 		<h2>Adicionar Curso</h2>
 		<small><?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar cursos', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?></small>
 	</div>
+
 <?php echo $this->Form->create('Curso', array(
 	'inputDefaults' => array(
 		'class' => 'span4',
@@ -19,5 +20,5 @@
 		echo $this->Form->input('sigla');
 		?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
+<?php echo $this->Form->end('Enviar');?>
 </div>

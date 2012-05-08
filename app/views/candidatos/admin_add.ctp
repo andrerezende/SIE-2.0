@@ -32,25 +32,40 @@
 			url: "/municipios/ajax_get_municipios",
 			updateId: "#CandidatoNaturalidadeMunicipioId"
 		});
-		$("#CandidatoTelefone").mask("(99) 9999-9999");
-		$("#CandidatoCelular").mask("(99) 9999-9999");
-		$("#CandidatoCpf").mask("999.999.999-99");
-		$("#CandidatoCep").mask("99999-999");
-		$("#CandidatoRg").mask("?99999999999999999999",{placeholder:" "});
+		$("#CandidatoTelefone").mask("(99) 9999-9999")
+		$("#CandidatoCelular").mask("(99) 9999-9999")
+		$("#CandidatoCpf").mask("999.999.999-99")
+		$("#CandidatoCep").mask("99999-999")
+		$("#CandidatoRg").mask("?99999999999999999999",{placeholder:" "})
+		$(".date").datepicker()
 	});
 </script>
-<div class="candidatos form container container_2">
-<?php echo $this->Form->create('Candidato');?>
+
+<div class="span9">
+	<div class="page-header">
+		<h2>Adicionar Candidato</h2>
+		<small><?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar candidatos', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?></small>
+	</div>
+
+<?php echo $this->Form->create('Candidato', array(
+	'inputDefaults' => array(
+		'class' => 'span4',
+		'div' => 'control-group',
+		'label' => array('class' => 'control-label'),
+		'between' => '<div class="controls">',
+		'after' => '</div>',
+		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'alert alert-error'))
+	)
+));?>
 	<fieldset>
-		<legend><?php __('Adicionar Candidato'); ?></legend>
-	<?php
+		<?php
 		echo $this->Form->input('nome');
-		echo $this->Form->input('data_nascimento', array('dateFormat' => 'DMY', 'separator' => '', 'minYear' => date('Y') - 100, 'empty' => '', 'value' => ''));
-		echo $this->Form->input('cpf');
-		echo $this->Form->input('rg');
-		echo $this->Form->input('orgao_expedidor');
-		echo $this->Form->input('orgao_expedidor_unidade_federativa_id', array('empty' => 'Selecione o estado', 'options' => $unidadeFederativas));
-		echo $this->Form->input('data_expedicao', array('dateFormat' => 'DMY', 'separator' => '', 'minYear' => date('Y') - 100, 'empty' => '', 'value' => ''));
+		echo $this->Form->input('data_nascimento', array('type' => 'text', 'class' => 'date', 'label' => 'Data de Nascimento'));
+		echo $this->Form->input('cpf', array('label' => 'CPF'));
+		echo $this->Form->input('rg', array('label' => 'RG'));
+		echo $this->Form->input('orgao_expedidor', array('label' => 'Órgão Expedidor'));
+		echo $this->Form->input('orgao_expedidor_unidade_federativa_id', array('empty' => 'Selecione o estado', 'options' => $unidadeFederativas, 'label' => 'UF Órgão Expedidor'));
+		echo $this->Form->input('data_expedicao', array('type' => 'text', 'class' => 'date', 'label' => 'Data de Expedição'));
 		echo $this->Form->input('nacionalidade_pais_id');
 		echo $this->Form->input('naturalidade_unidade_federativa_id', array('empty' => 'Selecione o estado', 'options' => $unidadeFederativas));
 		echo $this->Form->input('naturalidade_municipio_id', array('empty' => 'Escolha um estado primeiro', 'disabled' => true));
@@ -59,14 +74,14 @@
 		echo $this->Form->input('unidade_federativa_id', array('empty' => 'Selecione o estado'));
 		echo $this->Form->input('municipio_id', array('empty' => 'Escolha um estado primeiro', 'disabled' => true));
 		echo $this->Form->input('bairro');
-		echo $this->Form->input('cep');
-		echo $this->Form->input('endereco');
+		echo $this->Form->input('cep', array('label' => 'CEP'));
+		echo $this->Form->input('endereco', array('label' => 'Endereço'));
 		echo $this->Form->input('telefone');
 		echo $this->Form->input('celular');
 		echo $this->Form->input('email');
 		echo $this->Form->input('estado_civil_id');
 		echo $this->Form->input('necessidade_especial_id', array('empty' => 'Nenhuma'));
-	?>
+		?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
+<?php echo $this->Form->end('Enviar');?>
 </div>

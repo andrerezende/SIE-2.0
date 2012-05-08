@@ -1,5 +1,5 @@
 <div class="provas index">
-	<h4><?php echo $this->Html->link(__('Adicionar Prova', true), array('action' => 'add')); ?></h4>
+	<?php echo $this->Html->link(__('Adicionar Prova', true), array('action' => 'add'), array('class' => 'btn btn-success')); ?>
 	<h2><?php __('Provas');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>

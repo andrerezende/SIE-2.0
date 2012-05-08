@@ -1,6 +1,17 @@
 <script type="text/javascript">
 $(document).ready(function() {
+	$("img.homologacao").hover(function() {
+		img = $(this);
+		img.css({
+			"cursor": "pointer"
+		});
+	}, function() {
+		img.css({
+			"cursor": "auto"
+		});
+	});
 	$("img.homologacao").click(function (e) {
+		e.preventDefault();
 		img = $(this);
 		td = $(this).parent();
 		valor = 0;
@@ -21,9 +32,9 @@ $(document).ready(function() {
 			success: function(data, textStatus, jqXHR) {
 				img.attr("val", data);
 				if (data == 1) {
-					img.attr("src", "<?php echo $this->Html->url(DS . 'theme' . DS . $this->theme . DS . 'img' . DS . 'icons' . DS . 'onebit_34.png');?>");
+					img.attr("src", "<?php echo $this->Html->url(DS . 'theme' . DS . $this->theme . DS . 'img' . DS . 'icons' . DS . 'accept.png');?>");
 				} else if (data == 0) {
-					img.attr("src", "<?php echo $this->Html->url(DS . 'theme' . DS . $this->theme . DS . 'img' . DS . 'icons' . DS . 'onebit_33.png');?>");
+					img.attr("src", "<?php echo $this->Html->url(DS . 'theme' . DS . $this->theme . DS . 'img' . DS . 'icons' . DS . 'exclamation.png');?>");
 				}
 				img.fadeIn();
 			}
@@ -31,62 +42,56 @@ $(document).ready(function() {
 	});
 });
 </script>
-<div class="inscricoes index">
-	<h2><?php __('Isentos');?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<?php echo $this->Form->create(null, array(
-		'url' => array('controller' => 'inscricoes', 'action' => 'homologar_isentos'),
-		'inputDefaults' => array('div' => false, 'class' => false)
-	));?>
-	<tr>
-		<th><?php echo $this->Form->input('limite', array('options' => Configure::read('Query.limit'), 'empty' => 'Ilimitado'));?></th>
-		<th><?php echo $this->Form->input('homologado', array('options' => array(true => 'Sim', false => 'Não'), 'empty' => 'Todos'));?></th>
-		<th><?php echo $this->Form->input('processo_seletivo_id', array('options' => $processoSeletivos, 'empty' => 'Todos'));?></th>
-		<th><?php echo $this->Form->end('Filtrar');?></th>
-	</tr>
-	</table>
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-		<th><?php echo $this->Paginator->sort('id');?></th>
-		<th><?php echo $this->Paginator->sort('candidato_id');?></th>
-		<th><?php echo $this->Paginator->sort('isento');?></th>
-		<th>Processo Seletivo</th>
-		<th><?php echo $this->Paginator->sort('homologado');?></th>
-	</tr>
-	<?php
-	$i = 0;
-	foreach ($inscricoes as $inscricao):
-		if (empty($inscricao['Selecao']['ProcessoSeletivo'])) {
-			continue;
-		}
-		$class = null;
-		if ($i++ % 2 == 0) {
-			$class = ' class="altrow"';
-		}
-	?>
-	<tr<?php echo $class;?>>
-		<td><?php echo $inscricao['Inscricao']['id']; ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($inscricao['Candidato']['nome'], array('controller' => 'candidatos', 'action' => 'view', $inscricao['Candidato']['id'])); ?>
-		</td>
-		<td><?php echo $inscricao['Inscricao']['isento']; ?>&nbsp;</td>
-		<td><?php echo $inscricao['Selecao']['ProcessoSeletivo']['descricao']; ?>&nbsp;</td>
-		<td><?php echo $this->Util->imgFromBoolean($inscricao['Inscricao']['homologado'], array('inscrito_id' => $inscricao['Inscricao']['id'])); ?>&nbsp;</td>
-	</tr>
-<?php endforeach; ?>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-	));
-	?>	</p>
-
-<?php if ($this->Paginator->numbers()):?>
-	<div class="paging">
-		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
-		<?php echo $this->Paginator->numbers();?>
-		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
+<div class="span9">
+	<div class="page-header">
+		<h2>Homologar Isentos</h2>
+		<?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar Inscrições', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?>
+		<?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Nova Inscrição', array('action' => 'add'), array('class' => 'btn btn-success', 'escape' => false)); ?>
 	</div>
-<?php endif;?>
+
+	<table class="table table-condensed">
+		<thead>
+			<?php echo $this->Form->create(null, array(
+				'url' => array('controller' => 'inscricoes', 'action' => 'homologar_isentos'),
+				'inputDefaults' => array('div' => false, 'class' => 'span3')
+			));?>
+			<tr>
+				<th><?php echo $this->Form->input('limite', array('options' => Configure::read('Query.limit'), 'empty' => 'Ilimitado'));?></th>
+				<th><?php echo $this->Form->input('homologado', array('options' => array(true => 'Sim', false => 'Não'), 'empty' => 'Todos'));?></th>
+				<th><?php echo $this->Form->input('processo_seletivo_id', array('options' => $processoSeletivos, 'empty' => 'Todos'));?></th>
+				<th><?php echo $this->Form->end('Filtrar');?></th>
+			</tr>
+		</thead>
+	</table>
+
+	<table class="table table-striped table-bordered table-condensed">
+		<thead>
+			<tr>
+				<th><?php echo $this->MyPaginator->sort('#', 'id');?></th>
+				<th><?php echo $this->MyPaginator->sort('candidato_id');?></th>
+				<th><?php echo $this->MyPaginator->sort('isento');?></th>
+				<th>Processo Seletivo</th>
+				<th><?php echo $this->MyPaginator->sort('homologado');?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+			foreach ($inscricoes as $inscricao):
+				if (empty($inscricao['Selecao']['ProcessoSeletivo'])) {
+					continue;
+				}
+			?>
+				<tr>
+					<td><?php echo $inscricao['Inscricao']['id']; ?>&nbsp;</td>
+					<td>
+						<?php echo $this->Html->link($inscricao['Candidato']['nome'], array('controller' => 'candidatos', 'action' => 'view', $inscricao['Candidato']['id'])); ?>
+					</td>
+					<td><?php echo $this->Util->boolean($inscricao['Inscricao']['isento']); ?>&nbsp;</td>
+					<td><?php echo $inscricao['Selecao']['ProcessoSeletivo']['descricao']; ?>&nbsp;</td>
+					<td><?php echo $this->Util->imgFromBoolean($inscricao['Inscricao']['homologado'], array('inscrito_id' => $inscricao['Inscricao']['id'])); ?>&nbsp;</td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	<?php echo $this->element('pagination');?>
 </div>

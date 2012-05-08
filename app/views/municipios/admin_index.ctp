@@ -21,7 +21,7 @@
 						<?php echo $this->Html->link($municipio['UnidadeFederativa']['descricao'], array('controller' => 'unidade_federativas', 'action' => 'view', $municipio['UnidadeFederativa']['id'])); ?>
 					</td>
 					<td><?php echo $municipio['Municipio']['nome']; ?>&nbsp;</td>
-					<td class="actions">
+					<td>
 						<?php echo $this->Html->link('Visualizar', array('action' => 'view', $municipio['Municipio']['id']), array('class' => 'btn')); ?>
 						<?php echo $this->Html->link('Editar', array('action' => 'edit', $municipio['Municipio']['id']), array('class' => 'btn')); ?>
 						<?php echo $this->Html->link('Excluir', array('action' => 'delete', $municipio['Municipio']['id']), array('class' => 'btn'), 'Você tem certeza?'); ?>

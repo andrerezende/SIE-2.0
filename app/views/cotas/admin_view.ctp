@@ -1,78 +1,45 @@
-<div class="cotas view">
-<h2><?php  __('Cota');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $cota['Cota']['id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Descricao'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $cota['Cota']['descricao']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Quantidade'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $cota['Cota']['quantidade']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Selecao'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($cota['Selecao']['id'], array('controller' => 'selecoes', 'action' => 'view', $cota['Selecao']['id'])); ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Cota', true), array('action' => 'edit', $cota['Cota']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Delete Cota', true), array('action' => 'delete', $cota['Cota']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $cota['Cota']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Cotas', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cota', true), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Selecoes', true), array('controller' => 'selecoes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Selecao', true), array('controller' => 'selecoes', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Classificacoes', true), array('controller' => 'classificacoes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Classificacao', true), array('controller' => 'classificacoes', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="related">
-	<h3><?php __('Related Classificacoes');?></h3>
-	<?php if (!empty($cota['Classificacao'])):?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php __('Id'); ?></th>
-		<th><?php __('Ordem'); ?></th>
-		<th><?php __('Inscricao Id'); ?></th>
-		<th><?php __('Cota Id'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($cota['Classificacao'] as $classificacao):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
-		<tr<?php echo $class;?>>
-			<td><?php echo $classificacao['id'];?></td>
-			<td><?php echo $classificacao['ordem'];?></td>
-			<td><?php echo $classificacao['inscricao_id'];?></td>
-			<td><?php echo $classificacao['cota_id'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View', true), array('controller' => 'classificacoes', 'action' => 'view', $classificacao['id'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'classificacoes', 'action' => 'edit', $classificacao['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'classificacoes', 'action' => 'delete', $classificacao['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $classificacao['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
+<div class="span9">
+	<div class="page-header">
+		<h2>Cota: <?php echo $cota['Cota']['descricao']; ?></h2>
+		<?php echo $this->Html->link('<i class="icon-edit icon-white"></i> Editar', array('action' => 'edit', $cota['Cota']['id']), array('class' => 'btn btn-success', 'escape' => false)); ?>
+		<?php echo $this->Html->link('<i class="icon-trash icon-white"></i> Excluir', array('action' => 'delete', $cota['Cota']['id']), array('class' => 'btn btn-danger', 'escape' => false), 'Você tem certeza?'); ?>
+	</div>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Classificacao', true), array('controller' => 'classificacoes', 'action' => 'add'));?> </li>
-		</ul>
+	<dl class="dl-horizontal">
+		<dt><?php __('Quantidade'); ?></dt>
+		<dd><?php echo $cota['Cota']['quantidade']; ?>&nbsp;</dd>
+		<dt><?php __('Seleção'); ?></dt>
+		<dd><?php echo $this->Html->link($cota['Selecao']['id'], array('controller' => 'selecoes', 'action' => 'view', $cota['Selecao']['id'])); ?>&nbsp;</dd>
+	</dl>
+
+	<div>
+		<h3>Classificações</h3>
+		<?php if (!empty($cota['Classificacao'])):?>
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Ordem</th>
+						<th>Inscrição</th>
+						<th>Cota</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($cota['Classificacao'] as $classificacao):?>
+						<tr>
+							<td><?php echo $classificacao['id'];?></td>
+							<td><?php echo $classificacao['ordem'];?></td>
+							<td><?php echo $classificacao['inscricao_id'];?></td>
+							<td><?php echo $classificacao['cota_id'];?></td>
+							<td>
+								<?php echo $this->Html->link('Visualizar', array('controller' => 'classificacoes', 'action' => 'view', $classificacao['id']), array('class' => 'btn')); ?>
+								<?php echo $this->Html->link('Editar', array('controller' => 'classificacoes', 'action' => 'edit', $classificacao['id']), array('class' => 'btn')); ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		<?php endif; ?>
 	</div>
 </div>

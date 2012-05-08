@@ -636,7 +636,7 @@ class MyPaginatorHelper extends AppHelper {
 					. $separator;
 			}
 
-			$out .= $this->Html->tag($tag, $params['page'], array('class' => $current));
+			$out .= $this->Html->tag($tag, $this->link($params['page'], '#'), array('class' => $current));
 			if ($i != $params['pageCount']) {
 				$out .= $separator;
 			}

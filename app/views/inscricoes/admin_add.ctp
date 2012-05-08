@@ -32,8 +32,8 @@
 </script>
 <div class="span9">
 	<div class="page-header">
-		<h2>Nova Inscrição</h2>
-		<small><?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar inscrições', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?></small>
+		<h2>Adicionar Inscrição</h2>
+		<?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar Inscrições', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?>
 	</div>
 
 <?php echo $this->Form->create('Inscricao', array(

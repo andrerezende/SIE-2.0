@@ -9,15 +9,31 @@
 			<?php echo $this->Html->link('Sistema de Inscrição Eletrônica 2.0', '/login', array('class' => 'brand'));?>
 			<div class="nav-collapse">
 				<div class="nav-collapse">
+					<ul class="nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuários <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><?php echo $this->Html->link('Listar', array('controller' => 'usuarios', 'action' => 'index')); ?></li>
+								<li><?php echo $this->Html->link('Adicionar', array('controller' => 'usuarios', 'action' => 'add')); ?></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Grupos <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><?php echo $this->Html->link('Listar', array('controller' => 'grupos', 'action' => 'index')); ?></li>
+								<li><?php echo $this->Html->link('Adicionar', array('controller' => 'grupos', 'action' => 'add')); ?></li>
+							</ul>
+						</li>
+					</ul>
 					<ul class="nav pull-right">
 						<?php if (isset($userData) && !empty($userData)) :?>
 							<li>
 								<p class="navbar-text">
-									Logado como <?php echo $this->Html->link($userData['Usuario']['login'], array('controller' => 'usuarios', 'action' => 'edit', $userData['Usuario']['id']));?>
+									<?php echo $this->Html->link('<i class="icon-user icon-white"></i> ' . $userData['Usuario']['nome'], array('controller' => 'usuarios', 'action' => 'edit', $userData['Usuario']['id']), array('escape' => false));?>
 								</p>
 							</li>
 							<li class="divider-vertical"></li>
-							<li><?php echo $this->Html->link('Sair', array('admin' => false, 'controller' => 'usuarios', 'action' => 'logout'));?></li>
+							<li><?php echo $this->Html->link('Sair <i class="icon-off icon-white"></i>', array('admin' => false, 'controller' => 'usuarios', 'action' => 'logout'), array('escape' => false));?></li>
 						<?php else:?>
 							<li class="divider-vertical"></li>
 							<li><?php echo $this->Html->link('Entrar', array('controller' => 'usuarios', 'action' => 'login'));?></li>
@@ -28,24 +44,3 @@
 		</div>
 	</div>
 </div>
-
-
-
-<!--<div id="menu">
-				<ul>
-					<li><?php //echo $this->Html->link('Home', '/login'); ?></li>
-					<li>
-						<?php //echo $this->Html->link('Relatórios', '#'); ?>
-						<span>
-							<?php //echo $this->Html->link('Classificação', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'classificacoes'));?>
-							<?php //echo $this->Html->link('Inscrições - Isentos Homologados', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'isentos_homologados'));?>
-							<?php //echo $this->Html->link('Inscrições - Homologados sem Isentos', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'homologados_sem_isentos'));?>
-							<?php //echo $this->Html->link('Inscrições - Relação Geral de Homologados', array('admin' => true, 'controller' => 'inscricoes', 'action' => 'homologados_geral'));?>
-						</span>
-					</li>
-				</ul>
-				<div id="account">
-					<p>Olá <?php //echo $userData['Usuario']['nome'];?></p>
-					<p><?php //echo $this->Html->link('Sair', array('admin' => false, 'controller' => 'usuarios', 'action' => 'logout'));?></p>
-				</div>
-			</div>-->

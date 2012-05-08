@@ -1,7 +1,7 @@
 <div class="span9">
 	<div class="page-header">
 		<h2>Editar Usuário</h2>
-		<?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar usuários', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?>
+		<?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar Usuários', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?>
 		<?php echo $this->Html->link('<i class="icon-trash icon-white"></i> Excluir', array('action' => 'delete', $this->data['Usuario']['id']), array('class' => 'btn btn-danger', 'escape' => false), 'Você tem certeza?'); ?>
 	</div>
 

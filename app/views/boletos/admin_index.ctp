@@ -26,9 +26,9 @@
 					<td><?php echo $boleto['Boleto']['cpf_cnpj']; ?>&nbsp;</td>
 					<td><?php echo $boleto['Boleto']['selecao_id']; ?>&nbsp;</td>
 					<td>
-						<?php echo $this->Html->link(__('View', true), array('action' => 'view', $boleto['Boleto']['id']), array('class' => 'btn')); ?>
-						<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $boleto['Boleto']['id']), array('class' => 'btn')); ?>
-						<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $boleto['Boleto']['id']), array('class' => 'btn'), sprintf(__('Are you sure you want to delete # %s?', true), $boleto['Boleto']['id'])); ?>
+						<?php echo $this->Html->link('Visualizar', array('action' => 'view', $boleto['Boleto']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Html->link('Editar', array('action' => 'edit', $boleto['Boleto']['id']), array('class' => 'btn')); ?>
+						<?php echo $this->Html->link('Excluir', array('action' => 'delete', $boleto['Boleto']['id']), array('class' => 'btn'), 'Você tem certeza?'); ?>
 					</td>
 				</tr>
 			<?php endforeach; ?>

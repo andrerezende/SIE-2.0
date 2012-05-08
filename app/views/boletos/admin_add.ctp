@@ -1,8 +1,9 @@
 <div class="span9">
 	<div class="page-header">
 		<h2>Configurações do Boleto</h2>
-		<small><?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar boletos', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?></small>
+		<?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar Boletos', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?>
 	</div>
+
 <?php echo $this->Form->create('Boleto', array(
 	'inputDefaults' => array(
 		'class' => 'span4',
@@ -14,7 +15,7 @@
 	)
 ));?>
 	<fieldset>
-	<?php
+		<?php
 		echo $this->Form->input('descricao', array('label' => 'Descrição'));
 		echo $this->Form->input('agencia', array('label' => 'Agência'));
 		echo $this->Form->input('conta');
@@ -44,7 +45,7 @@
 		echo $this->Form->input('especie', array('label' => 'Espécie'));
 		echo $this->Form->input('especie_doc', array('label' => 'Espécie DOC'));
 		echo $this->Form->input('selecao_id', array('type' => 'hidden', 'value' => $selecao_id));
-	?>
+		?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
+<?php echo $this->Form->end('Enviar');?>
 </div>

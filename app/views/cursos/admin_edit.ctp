@@ -4,6 +4,7 @@
 		<?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar cursos', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?>
 		<?php echo $this->Html->link('<i class="icon-trash icon-white"></i> Excluir', array('action' => 'delete', $this->data['Curso']['id']), array('class' => 'btn btn-danger', 'escape' => false), 'Você tem certeza?'); ?>
 	</div>
+
 <?php echo $this->Form->create('Curso', array(
 	'inputDefaults' => array(
 		'class' => 'span4',
@@ -21,5 +22,5 @@
 		echo $this->Form->input('sigla');
 		?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
+<?php echo $this->Form->end('Enviar');?>
 </div>

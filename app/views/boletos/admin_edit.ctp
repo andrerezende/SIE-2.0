@@ -2,8 +2,9 @@
 	<div class="page-header">
 		<h2>Configurações do Boleto</h2>
 		<?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar boletos', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?>
-		<?php echo $this->Html->link('<i class="icon-trash icon-white"></i> Excluir', array('action' => 'delete', $this->data['Boleto']['id']), array('class' => 'btn btn-danger', 'escape' => false), sprintf(__('Are you sure you want to delete # %s?', true), $this->data['Boleto']['id'])); ?>
+		<?php echo $this->Html->link('<i class="icon-trash icon-white"></i> Excluir', array('action' => 'delete', $this->data['Boleto']['id']), array('class' => 'btn btn-danger', 'escape' => false), 'Você tem certeza?'); ?>
 	</div>
+
 <?php echo $this->Form->create('Boleto', array(
 	'inputDefaults' => array(
 		'class' => 'span4',
@@ -48,5 +49,5 @@
 		echo $this->Form->input('selecao_id', array('label' => 'Seleção'));
 		?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
+<?php echo $this->Form->end('Enviar');?>
 </div>

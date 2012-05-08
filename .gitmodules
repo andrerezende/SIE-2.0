@@ -19,3 +19,6 @@
 [submodule "app/plugins/meio_upload"]
 	path = app/plugins/meio_upload
 	url = https://github.com/jrbasso/MeioUpload.git
+[submodule "app/plugins/locale"]
+	path = app/plugins/locale
+	url = https://github.com/radig/locale.git

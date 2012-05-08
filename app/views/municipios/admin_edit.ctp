@@ -1,7 +1,7 @@
 <div class="span9">
 	<div class="page-header">
 		<h2>Editar Município</h2>
-		<?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar municípios', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?>
+		<?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar Municípios', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?>
 		<?php echo $this->Html->link('<i class="icon-trash icon-white"></i> Excluir', array('action' => 'delete', $this->data['Municipio']['id']), array('class' => 'btn btn-danger', 'escape' => false), 'Você tem certeza?'); ?>
 	</div>
 

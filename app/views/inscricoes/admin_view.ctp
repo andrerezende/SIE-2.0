@@ -11,7 +11,7 @@
 		<dt>Selecao</dt>
 		<dd><?php echo $this->Html->link($inscricao['Selecao']['id'], array('controller' => 'selecoes', 'action' => 'view', $inscricao['Selecao']['id'])); ?>&nbsp;</dd>
 		<dt>Data</dt>
-		<dd><?php echo $this->Formatacao->data($inscricao['Inscricao']['data']); ?>&nbsp;</dd>
+		<dd><?php echo $inscricao['Inscricao']['data']; ?>&nbsp;</dd>
 		<dt>Especial Prova</dt>
 		<dd><?php echo $inscricao['Inscricao']['especial_prova']; ?>&nbsp;</dd>
 		<dt>Isento</dt>
