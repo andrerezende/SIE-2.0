@@ -1,53 +1,42 @@
-<div class="processoSeletivos index">
-	<h4><?php echo $this->Html->link(__('Adicionar Processo Seletivo', true), array('action' => 'add')); ?></h4>
-	<h2><?php __('Processos Seletivos');?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-		<th><?php echo $this->Paginator->sort('id');?></th>
-		<th><?php echo $this->Paginator->sort('descricao');?></th>
-		<th><?php echo $this->Paginator->sort('edital_id');?></th>
-		<th><?php echo $this->Paginator->sort('data_inicio_inscricoes');?></th>
-		<th><?php echo $this->Paginator->sort('data_fim_inscricoes');?></th>
-		<th><?php echo $this->Paginator->sort('ativo_web');?></th>
-		<th class="actions"><?php __('Actions');?></th>
-	</tr>
-	<?php
-	$i = 0;
-	foreach ($processoSeletivos as $processoSeletivo):
-		$class = null;
-		if ($i++ % 2 == 0) {
-			$class = ' class="altrow"';
-		}
-	?>
-	<tr<?php echo $class;?>>
-		<td><?php echo $processoSeletivo['ProcessoSeletivo']['id']; ?>&nbsp;</td>
-		<td><?php echo $processoSeletivo['ProcessoSeletivo']['descricao']; ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($processoSeletivo['Edital']['id'], array('controller' => 'editais', 'action' => 'view', $processoSeletivo['Edital']['id'])); ?>
-		</td>
-		<td><?php echo $processoSeletivo['ProcessoSeletivo']['data_inicio_inscricoes']; ?>&nbsp;</td>
-		<td><?php echo $processoSeletivo['ProcessoSeletivo']['data_fim_inscricoes']; ?>&nbsp;</td>
-		<td><?php echo $processoSeletivo['ProcessoSeletivo']['ativo_web']; ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $processoSeletivo['ProcessoSeletivo']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $processoSeletivo['ProcessoSeletivo']['id'])); ?>
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $processoSeletivo['ProcessoSeletivo']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $processoSeletivo['ProcessoSeletivo']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-	));
-	?>	</p>
-
-<?php if ($this->Paginator->numbers()):?>
-	<div class="paging">
-		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
-		<?php echo $this->Paginator->numbers();?>
-		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
+<div class="span9">
+	<div class="page-header">
+		<h2>Processos Seletivos</h2>
+		<?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Adicionar Processo Seletivo', array('action' => 'add'), array('class' => 'btn btn-success', 'escape' => false)); ?>
 	</div>
-<?php endif;?>
+
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th><?php echo $this->MyPaginator->sort('#', 'id');?></th>
+				<th><?php echo $this->MyPaginator->sort('Descrição', 'descricao');?></th>
+				<th><?php echo $this->MyPaginator->sort('edital_id');?></th>
+				<th><?php echo $this->MyPaginator->sort('Início das Inscrições', 'data_inicio_inscricoes');?></th>
+				<th><?php echo $this->MyPaginator->sort('Fim das Inscrições', 'data_fim_inscricoes');?></th>
+				<th><?php echo $this->MyPaginator->sort('Ativo', 'ativo_web');?></th>
+				<th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($processoSeletivos as $processoSeletivo):?>
+				<tr>
+					<td><?php echo $processoSeletivo['ProcessoSeletivo']['id']; ?>&nbsp;</td>
+					<td><?php echo $processoSeletivo['ProcessoSeletivo']['descricao']; ?>&nbsp;</td>
+					<td>
+						<?php echo $this->Html->link($processoSeletivo['Edital']['descricao'], array('controller' => 'editais', 'action' => 'view', $processoSeletivo['Edital']['id'])); ?>
+					</td>
+					<td><?php echo $this->Formatacao->dataHora($processoSeletivo['ProcessoSeletivo']['data_inicio_inscricoes']); ?>&nbsp;</td>
+					<td><?php echo $this->Formatacao->dataHora($processoSeletivo['ProcessoSeletivo']['data_fim_inscricoes']); ?>&nbsp;</td>
+					<td><?php echo $this->Util->boolean($processoSeletivo['ProcessoSeletivo']['ativo_web']); ?>&nbsp;</td>
+					<td>
+						<?php echo $this->Html->link('Visualizar', array('action' => 'view', $processoSeletivo['ProcessoSeletivo']['id']), array('class' => 'btn')); ?>
+						<br />
+						<?php echo $this->Html->link('Editar', array('action' => 'edit', $processoSeletivo['ProcessoSeletivo']['id']), array('class' => 'btn')); ?>
+						<br />
+						<?php echo $this->Html->link('Excluir', array('action' => 'delete', $processoSeletivo['ProcessoSeletivo']['id']), array('class' => 'btn'), 'Você tem certeza?'); ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	<?php echo $this->element('pagination');?>
 </div>

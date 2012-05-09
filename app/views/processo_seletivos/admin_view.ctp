@@ -1,82 +1,57 @@
-<div class="processoSeletivos view">
-<h2><?php  __('Processo Seletivo');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $processoSeletivo['ProcessoSeletivo']['id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Descrição'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $processoSeletivo['ProcessoSeletivo']['descricao']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Edital'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $this->Html->link($processoSeletivo['Edital']['id'], array('controller' => 'editais', 'action' => 'view', $processoSeletivo['Edital']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Data Inicio Inscricoes'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $processoSeletivo['ProcessoSeletivo']['data_inicio_inscricoes']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Data Fim Inscricoes'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $processoSeletivo['ProcessoSeletivo']['data_fim_inscricoes']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Ativo Web'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $processoSeletivo['ProcessoSeletivo']['ativo_web']; ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="related">
-	<h3><?php __('Selecões');?></h3>
-	<h5><?php echo $this->Html->link(__('Adicionar Seleção', true), array('controller' => 'selecoes', 'action' => 'add', $processoSeletivo['ProcessoSeletivo']['id']));?></h5>
-	<?php if (!empty($processoSeletivo['Selecao'])):?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php __('Id'); ?></th>
-		<th><?php __('Campus Id'); ?></th>
-		<th><?php __('Curso Id'); ?></th>
-		<th><?php __('Processo Seletivo Id'); ?></th>
-		<th><?php __('Ativo Web'); ?></th>
-		<th><?php __('Vagas'); ?></th>
-		<th><?php __('Encerrado'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($processoSeletivo['Selecao'] as $selecao):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
-		<tr<?php echo $class;?>>
-			<td><?php echo $selecao['id'];?></td>
-			<td><?php echo $selecao['campus_id'];?></td>
-			<td><?php echo $selecao['curso_id'];?></td>
-			<td><?php echo $selecao['processo_seletivo_id'];?></td>
-			<td><?php echo $selecao['ativo_web'];?></td>
-			<td><?php echo $selecao['vagas'];?></td>
-			<td><?php echo $selecao['encerrado'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View', true), array('controller' => 'selecoes', 'action' => 'view', $selecao['id'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'selecoes', 'action' => 'edit', $selecao['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'selecoes', 'action' => 'delete', $selecao['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $selecao['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
+<div class="span9">
+	<div class="page-header">
+		<h2>Processo Seletivo: <?php echo $processoSeletivo['ProcessoSeletivo']['descricao']; ?></h2>
+		<?php echo $this->Html->link('<i class="icon-edit icon-white"></i> Editar', array('action' => 'edit', $processoSeletivo['ProcessoSeletivo']['id']), array('class' => 'btn btn-success', 'escape' => false)); ?>
+		<?php echo $this->Html->link('<i class="icon-trash icon-white"></i> Excluir', array('action' => 'delete', $processoSeletivo['ProcessoSeletivo']['id']), array('class' => 'btn btn-danger', 'escape' => false), 'Você tem certeza?'); ?>
+	</div>
 
-	<div class="actions">
-		<ul>
-			<li> </li>
-		</ul>
+	<dl class="dl-horizontal">
+		<dt>Descrição</dt>
+		<dd><?php echo $processoSeletivo['ProcessoSeletivo']['descricao']; ?>&nbsp;</dd>
+		<dt>Edital</dt>
+		<dd><?php echo $this->Html->link($processoSeletivo['Edital']['descricao'], array('controller' => 'editais', 'action' => 'view', $processoSeletivo['Edital']['id'])); ?>&nbsp;</dd>
+		<dt>Início das Inscrições</dt>
+		<dd><?php echo $this->Formatacao->dataHora($processoSeletivo['ProcessoSeletivo']['data_inicio_inscricoes']); ?>&nbsp;</dd>
+		<dt>Fim das Inscrições</dt>
+		<dd><?php echo $this->Formatacao->dataHora($processoSeletivo['ProcessoSeletivo']['data_fim_inscricoes']); ?>&nbsp;</dd>
+		<dt>Ativo</dt>
+		<dd><?php echo $this->Util->boolean($processoSeletivo['ProcessoSeletivo']['ativo_web']); ?>&nbsp;</dd>
+	</dl>
+
+	<div>
+		<h3>Selecões</h3>
+		<?php if (!empty($processoSeletivo['Selecao'])):?>
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Campus Id</th>
+						<th>Curso Id</th>
+						<th>Processo Seletivo Id</th>
+						<th>Ativo Web</th>
+						<th>Vagas</th>
+						<th>Encerrado</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($processoSeletivo['Selecao'] as $selecao):?>
+						<tr>
+							<td><?php echo $selecao['id'];?></td>
+							<td><?php echo $selecao['campus_id'];?></td>
+							<td><?php echo $selecao['curso_id'];?></td>
+							<td><?php echo $selecao['processo_seletivo_id'];?></td>
+							<td><?php echo $selecao['ativo_web'];?></td>
+							<td><?php echo $selecao['vagas'];?></td>
+							<td><?php echo $selecao['encerrado'];?></td>
+							<td>
+								<?php echo $this->Html->link('Visualizar', array('controller' => 'selecoes', 'action' => 'view', $selecao['id']), array('class' => 'btn')); ?>
+								<?php echo $this->Html->link('Editar', array('controller' => 'selecoes', 'action' => 'edit', $selecao['id']), array('class' => 'btn')); ?>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		<?php endif; ?>
 	</div>
 </div>

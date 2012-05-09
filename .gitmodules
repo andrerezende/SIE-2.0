@@ -13,9 +13,12 @@
 [submodule "app/plugins/cake_ptbr"]
 	path = app/plugins/cake_ptbr
 	url = https://github.com/jrbasso/cake_ptbr.git
-[submodule "app/plugins/boletos"]
+[submodule "app/plugins/boletos_bb"]
 	path = app/plugins/boletos
 	url = https://vitorpc@bitbucket.org/vitorpc/boletos.git
 [submodule "app/plugins/meio_upload"]
 	path = app/plugins/meio_upload
 	url = https://github.com/jrbasso/MeioUpload.git
+[submodule "app/plugins/locale"]
+	path = app/plugins/locale
+	url = https://github.com/radig/locale.git

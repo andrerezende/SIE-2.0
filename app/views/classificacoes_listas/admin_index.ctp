@@ -1,5 +1,5 @@
 <div class="classificacoesListas index">
-	<h4><?php echo $this->Html->link(__('Adicionar Classificação/Lista', true), array('action' => 'add')); ?></h4>
+	<?php echo $this->Html->link(__('Adicionar Classificação/Lista', true), array('action' => 'add'), array('class' => 'btn btn-success')); ?>
 	<h2><?php __('Classificacçõs/Listas');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>

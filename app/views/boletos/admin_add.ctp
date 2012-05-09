@@ -1,8 +1,21 @@
-<div class="boletos form">
-<?php echo $this->Form->create('Boleto');?>
+<div class="span9">
+	<div class="page-header">
+		<h2>Configurações do Boleto</h2>
+		<?php echo $this->Html->link('<i class="icon-th-list icon-white"></i> Listar Boletos', array('action' => 'index'), array('class' => 'btn btn-success', 'escape' => false)); ?>
+	</div>
+
+<?php echo $this->Form->create('Boleto', array(
+	'inputDefaults' => array(
+		'class' => 'span4',
+		'div' => 'control-group',
+		'label' => array('class' => 'control-label'),
+		'between' => '<div class="controls">',
+		'after' => '</div>',
+		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'alert alert-error'))
+	)
+));?>
 	<fieldset>
-		<legend><?php __('Configurações do Boleto'); ?></legend>
-	<?php
+		<?php
 		echo $this->Form->input('descricao', array('label' => 'Descrição'));
 		echo $this->Form->input('agencia', array('label' => 'Agência'));
 		echo $this->Form->input('conta');
@@ -32,7 +45,7 @@
 		echo $this->Form->input('especie', array('label' => 'Espécie'));
 		echo $this->Form->input('especie_doc', array('label' => 'Espécie DOC'));
 		echo $this->Form->input('selecao_id', array('type' => 'hidden', 'value' => $selecao_id));
-	?>
+		?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
+<?php echo $this->Form->end('Enviar');?>
 </div>

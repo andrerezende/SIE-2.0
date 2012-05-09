@@ -36,6 +36,10 @@ class Inscricao extends AppModel {
 	 */
 	public $displayField = 'id';
 
+	public $actsAs = array(
+		'CakePtbr.AjusteData' => array('data'),
+	);
+
 	/**
 	 * Relacionamentos belongsTo
 	 *
@@ -152,6 +156,25 @@ class Inscricao extends AppModel {
 			),
 		);
 		return $cond;
+	}
+
+	public function afterFind($results, $primary = false) {
+		if (array_key_exists(0, $results)) {
+			foreach ($results as &$inscricao) {
+				if (isset($inscricao[$this->alias]['data']) && preg_match('/\d{2,4}\-\d{1,2}\-\d{1,2}/', $inscricao[$this->alias]['data'])) {
+					list($year, $month, $day) = explode('-', $inscricao[$this->alias]['data']);
+					if (strlen($year) == 2) {
+						if ($year > 50) {
+							$year += 1900;
+						} else {
+							$year += 2000;
+						}
+					}
+					$inscricao[$this->alias]['data'] = "$day/$month/$year";
+				}
+			}
+		}
+		return $results;
 	}
 
 }

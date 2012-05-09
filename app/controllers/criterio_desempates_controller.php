@@ -1,7 +1,17 @@
 <?php
+/**
+ * CriterioDesempatesController
+ *
+ * PHP version 5
+ *
+ * @author      Vitor Pacheco        <vitor.pacheco@ifbaiano.edu.br>
+ * @package     Controller
+ * @property    CriterioDesempate    $CriterioDesempate
+ */
 class CriterioDesempatesController extends AppController {
 
 	public $name = 'CriterioDesempates';
+
 	public $paginate = array(
 		'order' => array('CriterioDesempate.id'),
 	);
@@ -13,7 +23,7 @@ class CriterioDesempatesController extends AppController {
 
 	public function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid criterio desempate', true));
+			$this->Session->setFlash(__('Invalid criterio desempate', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('criterioDesempate', $this->CriterioDesempate->read(null, $id));
@@ -23,10 +33,10 @@ class CriterioDesempatesController extends AppController {
 		if (!empty($this->data)) {
 			$this->CriterioDesempate->create();
 			if ($this->CriterioDesempate->save($this->data)) {
-				$this->Session->setFlash(__('The criterio desempate has been saved', true));
+				$this->Session->setFlash(__('The criterio desempate has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The criterio desempate could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The criterio desempate could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		$processoSeletivos = $this->CriterioDesempate->ProcessoSeletivo->find('list');
@@ -44,15 +54,15 @@ class CriterioDesempatesController extends AppController {
 
 	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid criterio desempate', true));
+			$this->Session->setFlash(__('Invalid criterio desempate', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->CriterioDesempate->save($this->data)) {
-				$this->Session->setFlash(__('The criterio desempate has been saved', true));
+				$this->Session->setFlash(__('The criterio desempate has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The criterio desempate could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The criterio desempate could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		if (empty($this->data)) {
@@ -64,14 +74,14 @@ class CriterioDesempatesController extends AppController {
 
 	public function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for criterio desempate', true));
+			$this->Session->setFlash(__('Invalid id for criterio desempate', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->CriterioDesempate->delete($id)) {
-			$this->Session->setFlash(__('Criterio desempate deleted', true));
+			$this->Session->setFlash(__('Criterio desempate deleted', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('Criterio desempate was not deleted', true));
+		$this->Session->setFlash(__('Criterio desempate was not deleted', true), 'flash');
 		$this->redirect(array('action' => 'index'));
 	}
 

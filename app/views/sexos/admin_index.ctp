@@ -1,5 +1,5 @@
 <div class="sexos index">
-	<h4><?php echo $this->Html->link(__('Adicionar Sexo', true), array('action' => 'add')); ?></h4>
+	<?php echo $this->Html->link(__('Adicionar Sexo', true), array('action' => 'add'), array('class' => 'btn btn-success')); ?>
 	<h2><?php __('Sexos');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>

@@ -1,4 +1,13 @@
 <?php
+/**
+ * ProcessoSeletivosController
+ *
+ * PHP version 5
+ *
+ * @author      Vitor Pacheco       <vitor.pacheco@ifbaiano.edu.br>
+ * @package     Controller
+ * @property    ProcessoSeletivo    $ProcessoSeletivo
+ */
 class ProcessoSeletivosController extends AppController {
 
 	public $name = 'ProcessoSeletivos';
@@ -10,7 +19,7 @@ class ProcessoSeletivosController extends AppController {
 
 	public function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid processo seletivo', true));
+			$this->Session->setFlash(__('Invalid processo seletivo', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('processoSeletivo', $this->ProcessoSeletivo->read(null, $id));
@@ -20,10 +29,10 @@ class ProcessoSeletivosController extends AppController {
 		if (!empty($this->data)) {
 			$this->ProcessoSeletivo->create();
 			if ($this->ProcessoSeletivo->save($this->data)) {
-				$this->Session->setFlash(__('The processo seletivo has been saved', true));
+				$this->Session->setFlash(__('The processo seletivo has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The processo seletivo could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The processo seletivo could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		$editais = $this->ProcessoSeletivo->Edital->find('list');
@@ -32,15 +41,15 @@ class ProcessoSeletivosController extends AppController {
 
 	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid processo seletivo', true));
+			$this->Session->setFlash(__('Invalid processo seletivo', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->ProcessoSeletivo->save($this->data)) {
-				$this->Session->setFlash(__('The processo seletivo has been saved', true));
+				$this->Session->setFlash(__('The processo seletivo has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The processo seletivo could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The processo seletivo could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		if (empty($this->data)) {
@@ -52,14 +61,14 @@ class ProcessoSeletivosController extends AppController {
 
 	public function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for processo seletivo', true));
+			$this->Session->setFlash(__('Invalid id for processo seletivo', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->ProcessoSeletivo->delete($id)) {
-			$this->Session->setFlash(__('Processo seletivo deleted', true));
+			$this->Session->setFlash(__('Processo seletivo deleted', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('Processo seletivo was not deleted', true));
+		$this->Session->setFlash(__('Processo seletivo was not deleted', true), 'flash');
 		$this->redirect(array('action' => 'index'));
 	}
 
@@ -76,7 +85,10 @@ class ProcessoSeletivosController extends AppController {
 		$campus = $this->ProcessoSeletivo->Selecao->Campus->find('list');
 		$cursos = $this->ProcessoSeletivo->Selecao->Curso->find('list');
 		$this->Candidato->Inscricao->recursive = 0;
-		$inscricoes = $this->Candidato->Inscricao->find('all', array('fields' => array('Inscricao.selecao_id'), 'conditions' => array('Candidato.id' => $this->Auth->user('candidato_id'))));
+		$inscricoes = $this->Candidato->Inscricao->find('all', array(
+			'fields' => array('Inscricao.selecao_id'),
+			'conditions' => array('Candidato.id' => $this->Auth->user('candidato_id'))
+		));
 		$inscricoes = Set::extract('/Inscricao/selecao_id', $inscricoes);
 		$this->set(compact('processoSeletivos', 'campus', 'cursos', 'inscricoes'));
 	}

@@ -1,4 +1,13 @@
 <?php
+/**
+ * LocalProvasController
+ *
+ * PHP version 5
+ *
+ * @author      Vitor Pacheco    <vitor.pacheco@ifbaiano.edu.br>
+ * @package     Controller
+ * @property    LocalProva       $LocalProva
+ */
 class LocalProvasController extends AppController {
 
 	public $name = 'LocalProvas';
@@ -10,7 +19,7 @@ class LocalProvasController extends AppController {
 
 	public function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid local prova', true));
+			$this->Session->setFlash(__('Invalid local prova', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('localProva', $this->LocalProva->read(null, $id));
@@ -20,10 +29,10 @@ class LocalProvasController extends AppController {
 		if (!empty($this->data)) {
 			$this->LocalProva->create();
 			if ($this->LocalProva->save($this->data)) {
-				$this->Session->setFlash(__('The local prova has been saved', true));
+				$this->Session->setFlash(__('The local prova has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The local prova could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The local prova could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		$selecoes = $this->LocalProva->Selecao->find('list');
@@ -32,15 +41,15 @@ class LocalProvasController extends AppController {
 
 	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid local prova', true));
+			$this->Session->setFlash(__('Invalid local prova', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->LocalProva->save($this->data)) {
-				$this->Session->setFlash(__('The local prova has been saved', true));
+				$this->Session->setFlash(__('The local prova has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The local prova could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The local prova could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		if (empty($this->data)) {
@@ -52,14 +61,14 @@ class LocalProvasController extends AppController {
 
 	public function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for local prova', true));
+			$this->Session->setFlash(__('Invalid id for local prova', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->LocalProva->delete($id)) {
-			$this->Session->setFlash(__('Local prova deleted', true));
+			$this->Session->setFlash(__('Local prova deleted', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('Local prova was not deleted', true));
+		$this->Session->setFlash(__('Local prova was not deleted', true), 'flash');
 		$this->redirect(array('action' => 'index'));
 	}
 

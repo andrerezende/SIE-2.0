@@ -1,4 +1,13 @@
 <?php
+/**
+ * ClassificacoesController
+ *
+ * PHP version 5
+ *
+ * @author      Vitor Pacheco    <vitor.pacheco@ifbaiano.edu.br>
+ * @package     Controller
+ * @property    Classificacao    $Classificacao
+ */
 class ClassificacoesController extends AppController {
 
 	public $name = 'Classificacoes';
@@ -10,7 +19,7 @@ class ClassificacoesController extends AppController {
 
 	public function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid classificacao', true));
+			$this->Session->setFlash(__('Invalid classificacao', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('classificacao', $this->Classificacao->read(null, $id));
@@ -20,10 +29,10 @@ class ClassificacoesController extends AppController {
 		if (!empty($this->data)) {
 			$this->Classificacao->create();
 			if ($this->Classificacao->save($this->data)) {
-				$this->Session->setFlash(__('The classificacao has been saved', true));
+				$this->Session->setFlash(__('The classificacao has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The classificacao could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The classificacao could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		$inscricoes = $this->Classificacao->Inscricao->find('list');
@@ -34,15 +43,15 @@ class ClassificacoesController extends AppController {
 
 	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid classificacao', true));
+			$this->Session->setFlash(__('Invalid classificacao', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Classificacao->save($this->data)) {
-				$this->Session->setFlash(__('The classificacao has been saved', true));
+				$this->Session->setFlash(__('The classificacao has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The classificacao could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The classificacao could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		if (empty($this->data)) {
@@ -56,14 +65,15 @@ class ClassificacoesController extends AppController {
 
 	public function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for classificacao', true));
+			$this->Session->setFlash(__('Invalid id for classificacao', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Classificacao->delete($id)) {
-			$this->Session->setFlash(__('Classificacao deleted', true));
+			$this->Session->setFlash(__('Classificacao deleted', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('Classificacao was not deleted', true));
+		$this->Session->setFlash(__('Classificacao was not deleted', true), 'flash');
 		$this->redirect(array('action' => 'index'));
 	}
+
 }

@@ -6,13 +6,18 @@
 		<?php
 		echo $this->Html->css(array(
 //			'grid',
-			'admin',
+//			'admin',
+			'cupertino/jquery.ui',
 			'bootstrap',
 			'bootstrap-responsive',
 		));
 
 		echo $this->Html->script(array(
 			'jquery',
+			'jquery.price_format',
+			'jquery.ui.min',
+			'jquery.ui.datepicker.pt-BR',
+			'jquery.ui.timepicker',
 			'bootstrap',
 		));
 
@@ -22,14 +27,10 @@
 	<body>
 		<?php echo $this->element('nav');?>
 		<div id="container">
-			<div id="content">
-				<?php echo $this->Session->flash(); ?>
-				<?php echo $this->Session->flash('auth'); ?>
-
-				<?php echo $content_for_layout; ?>
-
-				<?php echo $this->element('menu');?>
-			</div>
+			<?php echo $this->Session->flash(); ?>
+			<?php echo $this->Session->flash('auth'); ?>
+			<?php echo $this->element('menu');?>
+			<?php echo $content_for_layout; ?>
 			<?php echo $this->element('footer');?>
 		</div>
 	</body>

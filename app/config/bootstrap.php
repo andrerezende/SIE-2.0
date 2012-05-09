@@ -26,6 +26,9 @@
  * Inflector::rules('plural', array('rules' => array(), 'irregular' => array(), 'uninflected' => array()));
  *
  */
+ 
+Configure::write('Language.default', 'pt-br');
+setlocale(LC_ALL, 'pt_BR.utf-8', 'pt_BR', 'pt-br');
 
 require APP . 'plugins' . DS . 'cake_ptbr' . DS . 'config' . DS . 'bootstrap.php';
 
