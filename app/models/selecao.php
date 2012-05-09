@@ -3,7 +3,9 @@ class Selecao extends AppModel {
 
 	public $name = 'Selecao';
 	public $useTable = 'selecao';
-	public $displayField = 'id';
+	public $displayField = 'descricao';
+
+	public $hasOne = 'Boleto';
 
 	public $belongsTo = array(
 		'Campus' => array(

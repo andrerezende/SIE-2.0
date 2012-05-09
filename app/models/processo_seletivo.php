@@ -3,7 +3,7 @@ class ProcessoSeletivo extends AppModel {
 
 	public $name = 'ProcessoSeletivo';
 	public $useTable = 'processo_seletivo';
-	public $displayField = 'data_inicio_inscricoes';
+	public $displayField = 'descricao';
 
 	public $belongsTo = array(
 		'Edital' => array(
@@ -28,7 +28,43 @@ class ProcessoSeletivo extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
+		'Prova' => array(
+			'className' => 'Prova',
+			'foreignKey' => 'processo_seletivo_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'CriterioDesempate' => array(
+			'className' => 'CriterioDesempate',
+			'foreignKey' => 'processo_seletivo_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 	);
+
+	public function getCriteriosDesempate($processo_seletivo_id) {
+		$this->CriterioDesempate->contain();
+		return $this->CriterioDesempate->find('all', array('conditions' => array('processo_seletivo_id' => $processo_seletivo_id, 'prova_id' => null)));
+	}
+
+	public function getCriteriosDesempateProva($processo_seletivo_id) {
+		$this->CriterioDesempate->contain();
+		return $this->CriterioDesempate->find('all', array('conditions' => array('processo_seletivo_id' => $processo_seletivo_id, 'NOT' => array('prova_id' => null))));
+	}
 
 }

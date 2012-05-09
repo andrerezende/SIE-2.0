@@ -9,7 +9,7 @@
 		echo $this->Html->css(
 			array(
 				'grid',
-				'style',
+				'publico',
 			), null, array('media' => 'screen'
 		));
 
@@ -19,19 +19,52 @@
 
 		echo $scripts_for_layout;
 		?>
+		<script type="text/javascript">
+			/*
+			 *  jquery.currentpage.js
+			 *  Adds a class to current page for navigation links.
+			 *  Chad Jolly http://www.jollycomputers.com/
+			 */
+			jQuery.fn.currentPage = function(){
+
+				/* Default Settings */
+				var settings = {
+					loc : location.pathname,
+					sel : '',
+					currentClass : 'current_page_item'
+				}
+
+				/* break location down to the controller, no trailing slash */
+				if (settings.loc != '/') {
+					controller = settings.loc.split('/',2);
+					settings.loc = '/'+ controller[1];
+					settings.sel = '^';
+				}
+
+				var selector = 'a[href'+settings.sel+'="'+settings.loc+'"]';
+
+				/* attach settings.currentClass to appropriate link */
+				return this.each(function(){
+					jQuery(this).find(selector).parent().addClass(settings.currentClass);
+				});
+			};
+
+			$(document).ready(function() {
+				$('#menu').currentPage();
+			})
+		</script>
 	</head>
 	<body>
 		<div id="wrapper">
-			<div id="menu">
-				<ul>
-					<li class="current_page_item"><?php echo $this->Html->link("Home", '/'); ?></li>
-				</ul>
+			<div id="header">
+				<h1><?php echo $this->Html->image('topo-ifbaiano.png');?></h1>
 			</div>
 			<!-- end #menu -->
 			<div id="page">
 				<div id="page-bgtop">
 					<div id="page-bgbtm">
 						<div id="content">
+							<?php echo $this->Session->flash();?>
 							<div class="post">
 								<?php echo $content_for_layout; ?>
 							</div>
@@ -41,32 +74,18 @@
 						<div id="sidebar">
 							<ul>
 								<li>
-									<h2>Menu</h2>
 									<ul>
-										<li><?php echo $this->Html->link('Campus', array('controller' => 'campus', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Candidatos', array('controller' => 'candidatos', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Cassificações', array('controller' => 'classificacoes', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Classificações / Listas', array('controller' => 'classificacoes_listas', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Cotas', array('controller' => 'cotas', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Cursos', array('controller' => 'cursos', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Editais', array('controller' => 'editais', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Estados Civis', array('controller' => 'estado_civis', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Grupos', array('controller' => 'grupos', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Inscrições', array('controller' => 'inscricoes', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Listas', array('controller' => 'listas', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Locais de Prova', array('controller' => 'local_provas', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Logs', array('controller' => 'logs', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Municípios', array('controller' => 'municipios', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Necessidades Especiais', array('controller' => 'necessidade_especiais', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Notas', array('controller' => 'notas', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Pagamentos', array('controller' => 'pagamentos', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Países', array('controller' => 'paises', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Processos Seletivos', array('controller' => 'Processo Seletivos', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Provas', array('controller' => 'provas', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Seleções', array('controller' => 'selecoes', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Sexos', array('controller' => 'sexos', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Unidades Federativas', array('controller' => 'unidade_federativas', 'action' => 'index')); ?></li>
-										<li><?php echo $this->Html->link('Usuários', array('controller' => 'usuarios', 'action' => 'index')); ?></li>
+										<li><?php echo $this->Html->link('Página Inicial', '/'); ?></li>
+										<li><?php echo $this->Html->link('Página do Concurso', '#'); ?></li>
+										<?php if (isset($userData) && !empty($userData)):?>
+											<li><?php echo $this->Html->link('Alterar / Imprimir Inscrição', array('candidato' => true, 'controller' => 'candidatos', 'action' => 'editar', $userData['Usuario']['candidato_id'])); ?></li>
+											<li><?php echo $this->Html->link('Processos Seletivos', array('candidato' => true, 'controller' => 'processo_seletivos', 'action' => 'listar')); ?></li>
+											<li><?php echo $this->Html->link('Sair', array('candidato' => false, 'controller' => 'usuarios', 'action' => 'logout')); ?></li>
+										<?php else: ?>
+											<li><?php echo $this->Html->link('Nova Inscrição', array('candidato' => false, 'prefix' => false, 'controller' => 'candidatos', 'action' => 'cadastro')); ?></li>
+											<li><?php echo $this->Html->link('Alterar / Imprimir Inscrição', array('candidato' => true, 'controller' => 'candidatos', 'action' => 'editar')); ?></li>
+											<li><?php echo $this->Html->link('Recuperar Senha', array('controller' => 'usuarios', 'action' => 'recuperar_senha')); ?></li>
+										<?php endif;?>
 									</ul>
 								</li>
 							</ul>

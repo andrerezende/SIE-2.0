@@ -3,6 +3,7 @@ class Cota extends AppModel {
 
 	public $name = 'Cota';
 	public $useTable = 'cota';
+	public $displayField = 'descricao';
 
 	public $belongsTo = array(
 		'Selecao' => array(

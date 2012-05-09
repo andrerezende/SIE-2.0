@@ -1,4 +1,8 @@
-/app/config
+/app/config/database.php
+/app/conciliacao
 /app/tmp
 /plugins
 /vendors
+/.settings/
+.buildpath
+.project

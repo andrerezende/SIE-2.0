@@ -27,7 +27,18 @@
  * to use (in this case, /app/views/pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	Router::connect('/admin', array('controller' => 'usuarios', 'action' => 'login'));
+	//Router::connect('/admin/:controller/:action/*', array('admin' => true));
+	Router::connect('/candidato/:controller/:action/*', array('candidato' => true));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+
+//	$prefixes = Configure::read('Routing.prefixes');
+//	foreach($prefixes as $prefix) {
+//		Router::connect("/{$prefix}/:plugin/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));
+//		Router::connect("/{$prefix}/:plugin/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
+//		Router::connect("/{$prefix}/:controller", array('action' => 'index', 'prefix' => $prefix, $prefix => true));
+//		Router::connect("/{$prefix}/:controller/:action/*", array('prefix' => $prefix, $prefix => true));
+//	}

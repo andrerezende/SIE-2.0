@@ -1,44 +1,53 @@
 <?php
+/**
+ * SexosController
+ *
+ * PHP version 5
+ *
+ * @author      Vitor Pacheco    <vitor.pacheco@ifbaiano.edu.br>
+ * @package     Controller
+ * @property    Sexo             $Sexo
+ */
 class SexosController extends AppController {
 
-	var $name = 'Sexos';
+	public $name = 'Sexos';
 
-	function index() {
+	public function admin_index() {
 		$this->Sexo->recursive = 0;
 		$this->set('sexos', $this->paginate());
 	}
 
-	function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid sexo', true));
+			$this->Session->setFlash(__('Invalid sexo', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('sexo', $this->Sexo->read(null, $id));
 	}
 
-	function add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->Sexo->create();
 			if ($this->Sexo->save($this->data)) {
-				$this->Session->setFlash(__('The sexo has been saved', true));
+				$this->Session->setFlash(__('The sexo has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The sexo could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The sexo could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 	}
 
-	function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid sexo', true));
+			$this->Session->setFlash(__('Invalid sexo', true), 'flash');
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Sexo->save($this->data)) {
-				$this->Session->setFlash(__('The sexo has been saved', true));
+				$this->Session->setFlash(__('The sexo has been saved', true), 'flash');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The sexo could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The sexo could not be saved. Please, try again.', true), 'flash');
 			}
 		}
 		if (empty($this->data)) {
@@ -46,16 +55,17 @@ class SexosController extends AppController {
 		}
 	}
 
-	function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for sexo', true));
+			$this->Session->setFlash(__('Invalid id for sexo', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Sexo->delete($id)) {
-			$this->Session->setFlash(__('Sexo deleted', true));
+			$this->Session->setFlash(__('Sexo deleted', true), 'flash');
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->Session->setFlash(__('Sexo was not deleted', true));
+		$this->Session->setFlash(__('Sexo was not deleted', true), 'flash');
 		$this->redirect(array('action' => 'index'));
 	}
+
 }

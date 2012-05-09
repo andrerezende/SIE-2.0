@@ -30,4 +30,24 @@ class AppModel extends LazyModel {
 		'Search.Searchable',
 	);
 
+	public function __construct($id = false, $table = null, $ds = null) {
+		parent::__construct($id, $table, $ds);
+		$this->order = array($this->alias . '.id ASC');
+	}
+
+	public function begin() {
+		$db =& ConnectionManager::getDataSource($this->useDbConfig);
+		$db->begin($this);
+	}
+
+	public function commit() {
+		$db =& ConnectionManager::getDataSource($this->useDbConfig);
+		$db->commit($this);
+	}
+
+	public function rollback() {
+		$db =& ConnectionManager::getDataSource($this->useDbConfig);
+		$db->rollback($this);
+	}
+
 }

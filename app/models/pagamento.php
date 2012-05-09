@@ -14,6 +14,11 @@ class Pagamento extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'arqretorno' => array(
+			'uploadExtension' => array(
+				'rule' => array('uploadExtension', array('ret'))
+			),
+		),
 	);
 
 	public $belongsTo = array(
@@ -25,4 +30,5 @@ class Pagamento extends AppModel {
 			'order' => ''
 		)
 	);
+
 }
